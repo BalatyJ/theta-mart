@@ -1,0 +1,82 @@
+<!-- index.hbs -->
+<h1>Products</h1>
+<nav>
+    <a href="/#">HomePage</a>   <a href="/customers">Customers</a>
+    <a href="/drivers">Drivers</a>   <a href="/orders">Orders</a>
+    <a href="/orderproducts">Order Products</a>   <a href="/products">Products</a>  
+    <a href="/orderstatuses">Order Statuses</a>
+  </nav>
+
+  <br></br>
+{{!-- Create a table --}}
+
+    {{!-- Header section --}}
+    <thead>
+        <form id="search-product-html" method='GET' action='/products'>
+        <fieldset>
+            <legend>Search Product</legend>
+        <form id="search-product-html" method='GET' action='/products'>
+        <label for="input-name">Search by Product Name: </label>
+        <input type="text" name="name" id="input-name-html-search">
+        <input type="submit">
+        <a href='/products'><button>Reset</button></a>
+        </fieldset>
+    </form>
+        <br></br>
+
+    <table>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>        
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the information in order --}}
+        {{#each data}}
+        <tr>
+          <td>{{this.product_id}}</td>
+          <td>{{this.name}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.price}}</td>
+          <td>{{this.stock}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- /views/index.hbs -->
+
+
+
+<br></br>
+{{!-- Form to add a record to the table  --}}
+<form id="add-product-form-ajax">
+    <fieldset>
+    <legend>Add Product</legend>
+    <p>To add a new driver, please enter their information below and click 'Submit'!</p>
+    <label for="input-name">Product Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-desciption">Description: </label>
+    <input type="text" name="input-desciption" id="input-desciption">
+
+    <label for="input-price">Price: </label>
+    <input type="number" min="0.00" max="999999.99" step="0.01" name="input-price" id="input-price">
+
+    <label for="input-stock">Stock: </label>
+    <input type="number" name="input-stock" id="input-stock">
+
+    <input type="submit">
+    </fieldset>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_product.js"></script>

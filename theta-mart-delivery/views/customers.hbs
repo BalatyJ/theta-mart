@@ -1,0 +1,104 @@
+<!-- index.hbs -->
+<h1>Customers</h1>
+<nav>
+    <a href="/#">HomePage</a>   <a href="/customers">Customers</a>
+    <a href="/drivers">Drivers</a>   <a href="/orders">Orders</a>
+    <a href="/orderproducts">Order Products</a>   <a href="/products">Products</a>  
+    <a href="/orderstatuses">Order Statuses</a>
+  </nav>
+
+  <br></br>
+{{!-- Create a table --}}
+
+    {{!-- Header section --}}
+    <thead>
+        <form id="search-person-html" method='GET' action='/customers'>
+        <fieldset>
+            <legend>Search Customer</legend>
+        <p>Search by last name using the field below. Partial last names are OK too!</p>
+        <form id="search-person-html" method='GET' action='/customers'>
+        <label for="input-lname">Search by Last Name: </label>
+        <input type="text" name="lname" id="input-lname-html-search">
+        <input type="submit">
+        <a href='/customers'><button>Reset</button></a>
+        </fieldset>
+    </form>
+        <br></br>
+
+    <table>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Street</th>
+            <th>Unit</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the information in order --}}
+        {{#each data}}
+        <tr>
+          <td>{{this.customer_id}}</td>
+          <td>{{this.fname}}</td>
+          <td>{{this.lname}}</td>
+          <td>{{this.phone}}</td>
+          <td>{{this.address1}}</td>
+          <td>{{this.address2}}</td>
+          <td>{{this.city}}</td>
+          <td>{{this.state}}</td>
+          <td>{{this.zipcode}}</td>
+          <td>{{this.country}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<form id="add-customer-form-ajax">
+    <fieldset>
+    <legend>Add Customer</legend>
+    <label for="input-fname">First Name: </label>
+    <input type="text" name="input-fname" id="input-fname">
+    
+    <label for="input-lname">Last Name: </label>
+    <input type="text" name="input-lname" id="input-lname">
+
+    <label for="input-phone">Phone: </label>
+    <input type="text" name="input-phone" id="input-phone">
+
+    <label for="input-address1">Street: </label>
+    <input type="text" name="input-address1" id="input-address1">
+
+    <label for="input-address2">Unit: </label>
+    <input type="text" name="input-address2" id="input-address2">
+
+    <label for="input-city">City: </label>
+    <input type="text" name="input-city" id="input-city">
+
+    <label for="input-state">State: </label>
+    <input type="text" name="input-state" id="input-state">
+
+    <label for="input-zipcode">Zip Code: </label>
+    <input type="text" name="input-zipcode" id="input-zipcode">
+
+    <label for="input-country">Country: </label>
+    <input type="text" name="input-country" id="input-country">
+
+    <input type="submit">
+    </fieldset>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_customer.js"></script>

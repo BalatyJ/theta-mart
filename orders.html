@@ -1,0 +1,129 @@
+<html>
+
+<head>
+  <title>Orders</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Orders</h1>
+
+  <a href="index.html">HomePage</a> <a href="customers.html">Customers</a>
+  <a href="drivers.html">Drivers</a> <a href="orders.html">Orders</a>
+  <a href="orderproducts.html">Order Products</a> <a href="products.html">Products</a>
+  <a href="orderstatuses.html">Order Statuses</a>
+
+  <div id="browse" style="display: block">
+    <p><strong>Browse Orders</strong></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th></th>
+        <th>Order ID</th>
+        <th>Order Date</th>
+        <th>Street</th>
+        <th>Unit</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip Code</th>
+        <th>Country</th>
+        <th>Total</th>
+        <th>Order Status</th>
+        <th>Driver</th>
+        <th>Customer</th>
+      </tr>
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="right">1</td>
+        <td>2022-10-16</td>
+        <td>123 Easy St</td>
+        <td> </td>
+        <td>Las Vegas</td>
+        <td>NV</td>
+        <td>88901</td>
+        <td>US</td>
+        <td>80.00</td>
+        <td>Preparing Order</td>
+        <td align="right">Amil Forenso</td>
+        <td align="right">George Burger</td>
+      </tr>
+
+    </table>
+    <p>&nbsp;</p>
+  </div> <!-- browse -->
+  <div id="insert" style="display: block">
+    <form id="addOrder">
+      <legend><strong>Add Order</strong></legend>
+      <fieldset class="fields">
+        <label> Order Date </label> <input type="text" name="name">
+        <br>
+        <fieldset>
+          <legend>Delivery Address</legend>
+          <label> Street </label> <input type="text" name="language">
+          <label> Unit </label> <input type="text" name="language">
+          <label> City </label> <input type="text" name="language">
+          <label> State </label> <input type="text" name="language">
+          <label> Zip Code </label> <input type="text" name="language">
+          <label> Country </label> <input type="text" name="language">
+        </fieldset>
+        <br>
+        <label> Total </label> <input type="text" name="language">
+        <label for="symbol"> Order Status </label> <select name="referrer" id="symbol">
+        <option value="Order Status">Order Status</option>
+        <option value="In Transit">In Transit</option>
+        <option value="Pending">Pending</option>
+        <option value="Preparing Order">Preparing Order</option>
+        </select>
+        <label for="drivers">Drivers</label>
+        <select for="drivers" name="drivers" id="select-options">
+        </select>
+        <br>
+        <label> Customer </label>
+        <select for="customers" name="customers" id="select-options">
+        </select>
+      </fieldset>
+      <input class="btn" type="submit" id="addOrder" value="Add Order">
+    </form>
+    <!--add new Order-->
+  </div><!-- insert -->
+
+  <p>&nbsp;</p>
+  <div id="update" style="display: block">
+    <form id="updateOrder">
+      <legend><strong>Update Order</strong></legend>
+      <fieldset class="fields">
+        <label>Order ID:</label>
+        <br><br>
+        <label> Order Date </label> <input type="text" name="name">
+        <br>
+        <fieldset>
+          <legend>Delivery Address</legend>
+          <label> Street </label> <input type="text" name="language">
+          <label> Unit </label> <input type="text" name="language">
+          <label> City </label> <input type="text" name="language">
+          <label> State </label> <input type="text" name="language">
+          <label> Zip Code </label> <input type="text" name="language">
+          <label> Country </label> <input type="text" name="language">
+        </fieldset>
+        <br>
+        <label> Total </label> <input type="text" name="language">
+        <label for="symbol"> Order Status </label> <select name="referrer" id="symbol">
+        <option value="Order Status">Order Status</option>
+        <option value="In Transit">In Transit</option>
+        <option value="Pending">Pending</option>
+        <option value="Preparing Order">Preparing Order</option>
+        </select>
+        <label for="drivers">Drivers</label>
+        <select for="drivers" name="drivers" id="select-options">
+        </select>
+        <br>
+        <label> Customer </label>
+        <select for="customers" name="customers" id="select-options">
+        </select>
+      </fieldset>
+
+      <input class="btn" type="submit" id="UpdateSaveOrder" value="Update Order">
+    </form>
+
+</body>
+
+</html>

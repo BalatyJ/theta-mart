@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <title>Orderstatuses</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Order Statuses</h1>
+
+  <a href="index.html">HomePage</a> <a href="customers.html">Customers</a>
+  <a href="drivers.html">Drivers</a> <a href="orders.html">Orders</a>
+  <a href="orderproducts.html">Order Products</a> <a href="products.html">Products</a>
+  <a href="orderstatuses.html">Order Statuses</a>
+
+  <div id="browse" style="display: block">
+    <p><strong>Browse Order Statuses</strong></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th></th>
+        <th>OrderStatus ID</th>
+        <th>Description</th>
+      </tr>
+
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="left">Delivered</td>
+        <td>Driver has successfully delivered the order at the customer's address</td>
+
+      </tr>
+
+    </table>
+    <p>&nbsp;</p>
+  </div> <!-- browse -->
+  <div id="insert" style="display: block">
+    <form id="addorderstatus">
+      <legend><strong>Add OrderStatus</strong></legend>
+      <fieldset class="fields">
+        <label> OrderStatus ID</label> <input type="text" name="name">
+        <label> Description</label> <input type="text" name="name">
+
+      </fieldset>
+      <input class="btn" type="submit" id="addorderstatus" value="Add OrderStatus">
+    </form>
+    <!--add new orderstatu-->
+  </div><!-- insert -->
+
+  <p>&nbsp;</p>
+  <div id="update" style="display: block">
+    <form id="updateorderstatus">
+      <legend><strong>Update OrderStatus</strong></legend>
+      <fieldset class="orderstatus_fields">
+        <p>OrderStatus ID:</p>
+        <label> Description </label> <input type="text" name="name" class="description">
+
+      </fieldset>
+      <input class="btn" type="submit" id="UpdateSaveorderstatus" value="Update OrderStatus">
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<html>
+
+<head>
+  <title>Customers</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <script language="JavaScript">
+		function showform(dowhat) {
+
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newCustomer() { showform('insert'); }
+    function updateCustomer(pid) { showform('update'); }
+    function deleteCustomer(pid) { showform ('delete'); }
+    function browseCustomer() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
+</head>
+
+<body onload="browseCustomer()">
+
+  <h1>Customers</h1>
+
+  [<a href="index.html">HomePage</a> | <a href="customers.html">Customers</a> | 
+  <a href="drivers.html">Drivers</a> | <a href="orders.html">Orders</a> | 
+  <a href="orderproducts.html">Order Products</a> | <a href="products.html">Products</a> | 
+  <a href="orderstatuses.html">Order Statuses</a> ]
+  
+  <div id="browse" style="display: block">
+    <div id="browse">
+    <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+    <p><strong>Customer</strong></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th><a href="#">New</a></th>
+        <th>customer_id</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>phone</th>
+        <th>address1</th>
+        <th>address2</th>
+        <th>city</th>
+        <th>state</th>
+        <th>zipcode</th>
+        <th>country</th>
+      </tr>
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="right">1</td>
+        <td>George</td>
+        <td>Burger</td>
+        <td>7257491236</td>
+        <td>123 Easy St</td>
+        <td> </td>
+        <td>Las Vegas</td>
+        <td>NV</td>
+        <td>88901</td>
+        <td>US</td>
+      </tr>
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="right">2</td>
+        <td>Alice</td>
+        <td>Hill</td>
+        <td>7025673216</td>
+        <td>8793 Dirac Ln</td>
+        <td>Apt 12</td>
+        <td>Las Vegas</td>
+        <td>NV</td>
+        <td>88901</td>
+        <td>US</td>
+      </tr>
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="right">3</td>
+        <td>Fred</td>
+        <td>Flintstone</td>
+        <td>7759019123</td>
+        <td>2910 Singularity Dr</td>
+        <td>Unit 3</td>
+        <td>Las Vegas</td>
+        <td>NV</td>
+        <td>88901</td>
+        <td>US</td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+  </div> <!-- browse -->
+  <div id="insert" style="display: block">
+    <form id="addCustomer">
+      <legend><strong>Add new Customer</strong></legend>
+      <fieldset class="fields">
+        <label> First Name </label> <input type="text" name="name">
+        <label> Last Name </label> <input type="text" name="name">
+        <label> Phone </label> <input type="text" name="language">
+        <label> Street </label> <input type="text" name="language">
+        <label> Unit </label> <input type="text" name="language">
+        <label> City </label> <input type="text" name="language">
+        <label> State </label> <input type="text" name="language">
+        <label> Zip Code </label> <input type="text" name="language">
+        <label> Country </label> <input type="text" name="language">
+      </fieldset>
+      <input class="btn" type="submit" id="addCustomer" value="Add a Customer">
+      <input class="btn" type="button" value="cancel">
+    </form>
+    <!--add new Customer-->
+  </div><!-- insert -->
+
+  <p>&nbsp;</p>
+  <div id="update" style="display: block">
+    <form id="updateCustomer">
+      <legend><strong>Update Customer</strong></legend>
+      <fieldset class="fields">
+        <label>ID</label> 
+        <label> First Name </label> <input type="text" name="name">
+        <label> Last Name </label> <input type="text" name="name">
+        <label> Phone </label> <input type="text" name="language">
+        <label> Street </label> <input type="text" name="language">
+        <label> Unit </label> <input type="text" name="language">
+        <label> City </label> <input type="text" name="language">
+        <label> State </label> <input type="text" name="language">
+        <label> Zip Code </label> <input type="text" name="language">
+        <label> Country </label> <input type="text" name="language">
+      </fieldset>
+      <input class="btn" type="submit" id="UpdateSaveCustomer" value="Save Update Customer">
+      <input class="btn" type="button" value="cancel">
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <title>Products</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Products</h1>
+
+  <a href="index.html">HomePage</a> <a href="customers.html">Customers</a>
+  <a href="drivers.html">Drivers</a> <a href="orders.html">Orders</a>
+  <a href="orderproducts.html">Order Products</a> <a href="products.html">Products</a>
+  <a href="orderstatuses.html">Order Statuses</a>
+
+  <div>
+    <p><strong>Browse Products</strong></p>
+
+    <p>Search for different products:
+      <input type="text">
+      <button value="">Search</button>
+    </p>
+
+    <table border="1" cellpadding="5">
+      <tr>
+        <th></th>
+        <th>Product ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock</th>
+      </tr>
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="right">1</td>
+        <td>Transdimensional Window Cleaner</td>
+        <td>Removes stains and sends them into the void.</td>
+        <td>5.00</td>
+        <td>80</td>
+      </tr>
+
+    </table>
+    <p>&nbsp;</p>
+  </div>
+  <div id="insert" style="display: block">
+    <form id="addproduct">
+      <legend><strong>Add Product</strong></legend>
+      <fieldset class="fields">
+        <label> Name</label> <input type="text">
+        <label> Description </label> <input type="text">
+        <label> Price </label> <input type="number">
+        <label> Stock </label> <input type="number">
+
+      </fieldset>
+      <input class="btn" type="submit" id="addproduct" value="Add Product">
+    </form>
+    <!--add new product-->
+  </div><!-- insert -->
+
+  <p>&nbsp;</p>
+  <div id="update" style="display: block">
+    <form id="updateproduct">
+      <legend><strong>Update Product</strong></legend>
+      <fieldset class="fields">
+        <p>Product ID: </p>
+        <label for="products">Name</label>
+        <input type="text" name="description" value="Transdimensional Window Cleaner">
+        <label> Description </label> <input type="text" name="description"
+          value="Removes stains and sends them into the void." class="description">
+        <label> Price </label> <input type="number" value="5.00">
+        <label> Stock </label> <input type="number" value="80">
+
+      </fieldset>
+      <input class="btn" type="submit" id="UpdateSaveproduct" value="Update Product">
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<html>
+
+<head>
+  <title>Orderstatuses</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Order Status</h1>
+
+  [<a href="index.html">HomePage</a> | <a href="customers.html">Customers</a> | 
+  <a href="drivers.html">Drivers</a> | <a href="orders.html">Orders</a> | 
+  <a href="orderproducts.html">Order Products</a> | <a href="products.html">Products</a> | 
+  <a href="orderstatuses.html">Order Statuses</a> ]
+  <div id="browse" style="display: block">
+    <p><strong>orderstatus</strong></p>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th><a href="#">New</a></th>
+        <th>orderstatu_id</th>
+        <th>description</th>
+
+      </tr>
+      <tr>
+        <td><a href="#">Edit</a></td>
+        <td align="left" >Delivered</td>
+        <td >Driver has successfully delivered the order at the customer's address</td>
+
+      </tr>
+
+    </table>
+    <p>&nbsp;</p>
+  </div> <!-- browse -->
+  <div id="insert" style="display: block">
+    <form id="addorderstatu">
+      <legend><strong>Add new order status</strong></legend>
+      <fieldset class="fields">
+        <label> orderstatu_id</label> <input type="text" name="name">
+        <label> description</label> <input type="text" name="name">
+
+      </fieldset>
+      <input class="btn" type="submit" id="addorderstatu" value="Add a orderstatu">
+      <input class="btn" type="button" value="cancel">
+    </form>
+    <!--add new orderstatu-->
+  </div><!-- insert -->
+
+  <p>&nbsp;</p>
+  <div id="update" style="display: block">
+    <form id="updateorderstatu">
+      <legend><strong>Update order status</strong></legend>
+      <fieldset class="fields">
+        <label> orderstatu_id</label> <input type="text" name="name">
+        <label> description </label> <input type="text" name="name">
+
+      </fieldset>
+      <input class="btn" type="submit" id="UpdateSaveorderstatu" value="Save Update orderstatu">
+      <input class="btn" type="button" value="cancel">
+    </form>
+
+</body>
+
+</html>

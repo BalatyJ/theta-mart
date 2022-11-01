@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Drivers</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Drivers</h1>
+
+  <a href="index.html">HomePage</a> <a href="customers.html">Customers</a>
+  <a href="drivers.html">Drivers</a> <a href="orders.html">Orders</a>
+  <a href="orderproducts.html">Order Products</a> <a href="products.html">Products</a>
+  <a href="orderstatuses.html">Order Statuses</a>
+
+
+  <p><strong>Browse Drivers</strong></p>
+  <table border="1" cellpadding="5">
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Driver ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Availability</th>
+    </tr>
+    <tr>
+      <td><a href="#">Edit</a></td>
+      <td><a href="#">Delete</a></td>
+      <td align="right">1</td>
+      <td>Amil</td>
+      <td>Forenso</td>
+      <td>7026789212</td>
+      <td align="right">Yes</td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  </div> <!-- browse -->
+  <div id="insert" style="display: block">
+    <form id="adddriver">
+      <legend><strong>Add Driver</strong></legend>
+      <fieldset class="fields">
+        <label> Last Name </label> <input type="text" name="name">
+        <label> First Name </label> <input type="text" name="population">
+        <label> Phone </label> <input type="text" name="language">
+        <label> Availability </label> <input type="text" name="language">
+      </fieldset>
+      <input class="btn" type="submit" id="adddriver" value="Add Driver">
+    </form>
+    <!--add new driver-->
+  </div><!-- insert -->
+
+  <p>&nbsp;</p>
+  <div id="update" style="display: block">
+    <form id="updatedriver">
+      <legend><strong>Update Driver</strong></legend>
+      <fieldset class="fields">
+        <label>ID:</label>
+        <br><br>
+        <label> Last Name </label> <input type="text" name="name">
+        <label> First Name </label> <input type="text" name="population">
+        <label> Phone </label> <input type="text" name="language">
+        <label> Availability </label> <input type="text" name="language">
+      </fieldset>
+      <input class="btn" type="submit" id="UpdateSavedriver" value="Update Driver">
+    </form>
+  </div><!-- update -->
+  <p>&nbsp;</p>
+  <div id="delete" style="display: block">
+    <form id="deletedriver">
+      <legend><strong>Delete Driver</strong></legend>
+      <fieldset class="fields">
+        <p>Are you sure you wish to delete the following?</p>
+        <label>Driver ID:</label>
+        <br><br>
+        <label> Name: </label>
+
+      </fieldset>
+      <input class="btn" type="submit" id="Deletedriver" value="Delete Driver">
+    </form>
+  </div><!-- delete -->
+</body>
+
+</html>

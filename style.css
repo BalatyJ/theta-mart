@@ -1,0 +1,16 @@
+/* CSS Document */
+
+
+.description {
+    width: 300px;
+}
+
+#select-options {
+    width: 100px;
+}
+
+form input {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}

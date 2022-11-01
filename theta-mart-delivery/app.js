@@ -168,21 +168,21 @@ app.post('/drivers/:add-person-ajax', function(req, res){
 app.get('/products', function(req, res)
     {  
         // Declare Query 1 - Customers
-        let query1;
+        let query5;
 
         if (req.query.name === undefined)
 
         {
-            query1 = "SELECT * FROM Products;";               // Define our query
+            query5 = "SELECT * FROM Products;";               // Define our query
         }
         
         else 
         {
-            query1 = `SELECT * FROM Products WHERE name LIKE "${req.query.name}%"`
+            query5 = `SELECT * FROM Products WHERE name LIKE "${req.query.name}%"`
         }
 
         // Run the 1st query
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+        db.pool.query(query5, function(error, rows, fields){    // Execute the query
 
             let product = rows;
 
@@ -190,6 +190,42 @@ app.get('/products', function(req, res)
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query                                  
 
+app.post('/products/:add-product-ajax', function(req, res){
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+    
+        // Create the query and run it on the database
+        query5 = `INSERT INTO Products (name, description, price, stock) VALUES ('${data.name}', '${data.description}', '${data.price}', '${data.stock}')`;
+        db.pool.query(query5, function(error, rows, fields){
+            // Check to see if there was an error
+            if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+            else
+            {
+                // If there was no error, perform a SELECT * on Customers
+                query6 = `SELECT * FROM Products;`;
+                db.pool.query(query6, function(error, rows, fields){
+    
+                    // If there was an error on the second query, send a 400
+                    if (error) {
+                        
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    // If all went well, send the results of the query back.
+                    else
+                    {
+                        res.send(rows);
+                    }
+                })
+            }
+        })
+    });
 
 
 app.listen(PORT, function(){

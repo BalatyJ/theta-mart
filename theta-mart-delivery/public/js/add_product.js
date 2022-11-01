@@ -2,7 +2,7 @@
 let addProductForm = document.getElementById('add-product-form-ajax');
 
 // Modify the objects we need
-addDriverForm.addEventListener("submit", function (e) {
+addProductForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
@@ -14,22 +14,22 @@ addDriverForm.addEventListener("submit", function (e) {
     let inputStock = document.getElementById("input-stock");
 
     // Get the values from the form fields
-    let nameValue = inputFirstName.value;
-    let descriptionValue = inputLastName.value;
-    let priceValue = inputPhone.value;
+    let NameValue = inputName.value;
+    let descriptionValue = inputDescription.value;
+    let priceValue = inputPrice.value;
     let stockValue = inputStock.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        fname: firstNameValue,
-        lname: lastNameValue,
-        phone: phoneValue,
-        available: availableValue,
+        name: NameValue,
+        description: descriptionValue,
+        price: priceValue,
+        stock: stockValue,
     }
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/drivers/:add-person-ajax", true);
+    xhttp.open("POST", "/products/:add-product-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -40,10 +40,10 @@ addDriverForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputFirstName.value = '';
-            inputLastName.value = '';
-            inputPhone.value = '';
-            inputAvailable.value = '';
+            inputName.value = '';
+            inputDescription.value = '';
+            inputPrice.value = '';
+            inputStock.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -73,25 +73,25 @@ addRowToTable = (data) => {
     // Create a row and 9 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
-    let firstNameCell = document.createElement("TD");
-    let lastNameCell = document.createElement("TD");
-    let phoneCell = document.createElement("TD");
-    let availableCell = document.createElement("TD");
+    let NameCell = document.createElement("TD");
+    let descriptionCell = document.createElement("TD");
+    let priceCell = document.createElement("TD");
+    let stockCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.id;
-    firstNameCell.innerText = newRow.first_name;
-    lastNameCell.innerText = newRow.last_name;
-    phoneCell.innerText = newRow.phone;
-    availableCell.innerText = newRow.available;
+    idCell.innerText = newRow.product_id;
+    NameCell.innerText = newRow.name;
+    descriptionCell.innerText = newRow.description;
+    priceCell.innerText = newRow.price;
+    stockCell.innerText = newRow.stock;
 
 
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(firstNameCell);
-    row.appendChild(lastNameCell);
-    row.appendChild(phoneCell);
-    row.appendChild(availableCell);
+    row.appendChild(NameCell);
+    row.appendChild(descriptionCell);
+    row.appendChild(priceCell);
+    row.appendChild(stockCell);
 
 
     // Add the row to the table

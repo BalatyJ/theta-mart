@@ -1,22 +1,22 @@
 <!-- index.hbs -->
 <h1>Order Status</h1>
 <nav>
-    <a href="/#">HomePage</a>   <a href="/customers">Customers</a>
-    <a href="/drivers">Drivers</a>   <a href="/orders">Orders</a>
-    <a href="/orderproducts">Order Products</a>   <a href="/products">Products</a>  
+    <a href="/#">HomePage</a> <a href="/customers">Customers</a>
+    <a href="/drivers">Drivers</a> <a href="/orders">Orders</a>
+    <a href="/orderproducts">Order Products</a> <a href="/products">Products</a>
     <a href="/orderStatuses">Order Statuses</a>
-  </nav>
+</nav>
 
-  <br></br>
+<br></br>
 {{!-- Create a table --}}
 
-    <table>
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            <th>Order Status</th>
-            <th>Description</th>      
-        </tr>
+<table>
+    {{!-- For just the first row, we print each key of the row object as a header cell so we
+    know what each column means when the page renders --}}
+    <tr>
+        <th>Order Status</th>
+        <th>Description</th>
+    </tr>
     </thead>
 
     {{!-- Body section --}}
@@ -25,8 +25,8 @@
         {{!-- For each row, print the information in order --}}
         {{#each data}}
         <tr>
-          <td>{{this.orderstatus_id}}</td>
-          <td>{{this.description}}</td>
+            <td>{{this.orderstatus_id}}</td>
+            <td>{{this.description}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -34,21 +34,19 @@
 
 <!-- /views/index.hbs -->
 
-
-
 <br></br>
-{{!-- Form to add a record to the table  --}}
-<form id="add-product-form-ajax">
+{{!-- Form to add a record to the table --}}
+<form id="add-orderStatus-form-ajax">
     <fieldset>
-    <legend>Add Order Status</legend>
-    <p>To add new order status , please enter their information below and click 'Submit'!</p>
-    <label for="input-name">Order Status: </label>
-    <input type="text" name="input-orderStatus" id="input-orderStatus">
-    
-    <label for="input-description">Description: </label>
-    <input type="text" name="input-description" id="input-description">
+        <legend>Add Order Status</legend>
+        <p>To add new order status , please enter their information below and click 'Submit'!</p>
+        <label for="input-orderStatus">Order Status: </label>
+        <input type="text" name="input-orderStatus" id="input-orderStatus">
 
-    <input type="submit">
+        <label for="input-description-o">Description: </label>
+        <input type="text" name="input-description-o" id="input-description-o">
+
+        <input type="submit">
     </fieldset>
 </form>
 

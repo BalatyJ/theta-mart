@@ -1,35 +1,30 @@
 // Get the objects we need to modify
-let addProductForm = document.getElementById('add-product-form-ajax');
+let addorderStatusForm = document.getElementById('add-orderStatus-form-ajax');
 
 // Modify the objects we need
-addProductForm.addEventListener("submit", function (e) {
+addorderStatusForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputName = document.getElementById("input-name");
-    let inputDescription = document.getElementById("input-description");
-    let inputPrice = document.getElementById("input-price");
-    let inputStock = document.getElementById("input-stock");
+    let inputorderStatus = document.getElementById("input-orderStatus");
+    let inputDescription = document.getElementById("input-description-o");
 
     // Get the values from the form fields
-    let NameValue = inputName.value;
+    let orderStatusValue = inputorderStatus.value;
     let descriptionValue = inputDescription.value;
-    let priceValue = inputPrice.value;
-    let stockValue = inputStock.value;
+
 
     // Put our data we want to send in a javascript object
     let data = {
-        name: NameValue,
+        orderstatus_id: orderStatusValue,
         description: descriptionValue,
-        price: priceValue,
-        stock: stockValue,
     }
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/products/:add-product-ajax", true);
+    xhttp.open("POST", "/orderStatuses/:add-orderStatus-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -40,10 +35,8 @@ addProductForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputName.value = '';
+            inputorderStatus.value = '';
             inputDescription.value = '';
-            inputPrice.value = '';
-            inputStock.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -72,26 +65,19 @@ addRowToTable = (data) => {
 
     // Create a row and 9 cells
     let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
-    let NameCell = document.createElement("TD");
+    let orderStatusCell = document.createElement("TD");
     let descriptionCell = document.createElement("TD");
-    let priceCell = document.createElement("TD");
-    let stockCell = document.createElement("TD");
+
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.product_id;
-    NameCell.innerText = newRow.name;
+    orderStatusCell.innerText = newRow.orderstatus_id;
     descriptionCell.innerText = newRow.description;
-    priceCell.innerText = newRow.price;
-    stockCell.innerText = newRow.stock;
 
 
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(NameCell);
+    row.appendChild(orderStatusCell);
     row.appendChild(descriptionCell);
-    row.appendChild(priceCell);
-    row.appendChild(stockCell);
 
 
     // Add the row to the table

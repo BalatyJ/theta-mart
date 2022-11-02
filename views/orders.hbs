@@ -10,60 +10,105 @@
 <br></br>
 {{!-- Create a table --}}
 
-<table>
-    {{!-- For just the first row, we print each key of the row object as a header cell so we
-    know what each column means when the page renders --}}
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>{{@key}}</th>
+
+{{!-- Header section --}}
+<thead>
+    <form id="search-order-html" method='GET' action='/orders'>
+    <fieldset>
+        <legend>Search Order</legend>
+    <p>Search by last name using the field below. Partial last names are OK too!</p>
+    <form id="search-order-html" method='GET' action='/orders'>
+    <label for="input-order_id">Search by Order ID: </label>
+    <input type="text" name="order_id" id="input-order_id-html-search">
+    <input type="submit">
+    <a href='/orders'><button>Reset</button></a>
+    </fieldset>
+</form>
+    <br></br>
+
+
+
+    <table>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+            </tr>
+    
+        </thead>
+    
+        {{!-- Body section --}}
+        <tbody>
+    
+            {{!-- For each row, print the information in order --}}
+            {{#each data}}
+            <tr>
+                <td>{{this.[Order ID]}}</td>
+                <td>{{this.[Order Date]}}</td>
+                <td>{{this.Street}}</td>
+                <td>{{this.Unit}}</td>
+                <td>{{this.City}}</td>
+                <td>{{this.State}}</td>
+                <td>{{this.[Zip Code]}}</td>
+                <td>{{this.Country}}</td>
+                <td>{{this.Total}}</td>
+                <td>{{this.[Order Status]}}</td>
+                <td>{{this.Driver}}</td>
+                <td>{{this.Customer}}</td>
+            </tr>
             {{/each}}
-        </tr>
-
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the information in order --}}
-        {{#each data}}
-        <tr>
-            <td>{{this.[Order ID]}}</td>
-            <td>{{this.[Order Date]}}</td>
-            <td>{{this.Street}}</td>
-            <td>{{this.Unit}}</td>
-            <td>{{this.City}}</td>
-            <td>{{this.State}}</td>
-            <td>{{this.[Zip Code]}}</td>
-            <td>{{this.Country}}</td>
-            <td>{{this.Total}}</td>
-            <td>{{this.[Order Status]}}</td>
-            <td>{{this.Driver}}</td>
-            <td>{{this.Customer}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    
 
 <!-- /views/index.hbs -->
-
-
-
 <br></br>
 {{!-- Form to add a record to the table --}}
-<form id="add-product-form-ajax">
+<form id="add-order-form-ajax">
     <fieldset>
         <legend>Add Order Status</legend>
         <p>To add new order status , please enter their information below and click 'Submit'!</p>
-        <label for="input-name">Order Status: </label>
-        <input type="text" name="input-orderStatus" id="input-orderStatus">
 
-        <label for="input-description">Description: </label>
-        <input type="text" name="input-description" id="input-description">
+        <label for="input-order_date">Order Date: </label>
+        <input type="date" name="input-order_date" id="input-order_date">
+
+        <label for="input-address1">Street: </label>
+        <input type="text" name="input-address1" id="input-address1">
+    
+        <label for="input-address2">Unit: </label>
+        <input type="text" name="input-address2" id="input-address2">
+    
+        <label for="input-city">City: </label>
+        <input type="text" name="input-city" id="input-city">
+    
+        <label for="input-state">State: </label>
+        <input type="text" name="input-state" id="input-state">
+    
+        <label for="input-zipcode">Zip Code: </label>
+        <input type="text" name="input-zipcode" id="input-zipcode">
+    
+        <label for="input-country">Country: </label>
+        <input type="text" name="input-country" id="input-country">
+    
+        <label for="input-total">Total: </label>
+        <input type="text" name="input-total" id="input-total">
+
+        <label for="input-orderStatus">Order Status: </label>
+        <input type="text" name="input-orderStatus" id="input-orderStatus">
+    
+        <label for="input-driver">Driver: </label>
+        <input type="text" name="input-driver" id="input-driver">
+
+        <label for="input-customer">Customer: </label>
+        <input type="text" name="input-customer" id="input-customer">
+
 
         <input type="submit">
     </fieldset>
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_orderStatus.js"></script>
+<script src="./js/add_order.js"></script>

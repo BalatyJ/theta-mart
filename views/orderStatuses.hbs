@@ -50,5 +50,20 @@
     </fieldset>
 </form>
 
+<br>
+<form id="update-orderStatus-form-ajax">
+    <fieldset>
+    <legend>Update a Product</legend>
+    <p>Use the following fields to update a product information.</p>
+    <label for="input-update-orderStatus">Order Status </label>
+        <select name="input-update-orderStatus" id="select-update-orderStatus">
+            <option value="">Select an Order Status</option>
+            {{#each data}}
+            <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
+            {{/each}}
+        </select>
+</select>
+
+
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_orderStatus.js"></script>

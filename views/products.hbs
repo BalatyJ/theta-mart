@@ -78,5 +78,20 @@
     </fieldset>
 </form>
 
+<br>
+<form id="update-product-form-ajax">
+    <fieldset>
+    <legend>Update a Product</legend>
+    <p>Use the following fields to update a product information.</p>
+    <label for="input-update-product_id">Product ID: </label>
+        <select name="input-update-product_id" id="select-update-product_id">
+            <option value="">Select a Product</option>
+            {{#each data}}
+            <option value="{{this.product_id}}">{{this.product_id}}</option>
+            {{/each}}
+        </select>
+</select>
+
+
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_product.js"></script>

@@ -64,45 +64,7 @@
 </table>
 
 
-
-    <table>
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <thead>
-            <tr>
-                {{#each data.[0]}}
-                <th>{{@key}}</th>
-                {{/each}}
-            </tr>
-    
-        </thead>
-    
-        {{!-- Body section --}}
-        <tbody>
-    
-            {{!-- For each row, print the information in order --}}
-            {{#each data}}
-            <tr>
-                <td>{{this.[Order ID]}}</td>
-                <td>{{this.[Order Date]}}</td>
-                <td>{{this.Street}}</td>
-                <td>{{this.Unit}}</td>
-                <td>{{this.City}}</td>
-                <td>{{this.State}}</td>
-                <td>{{this.[Zip Code]}}</td>
-                <td>{{this.Country}}</td>
-                <td>{{this.Total}}</td>
-                <td>{{this.[Order Status]}}</td>
-                <td>{{this.Driver}}</td>
-                <td>{{this.Customer}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-    
-
-<!-- /views/index.hbs -->
-<br></br>
+<br>
 {{!-- Form to add a record to the table --}}
 <form id="add-order-form-ajax">
     <fieldset>
@@ -143,7 +105,39 @@
     </fieldset>
 </form>
 
+<br>
+
+
+<form id="update-order-form-ajax">
+<fieldset>
+<legend>Update an Order</legend>
+<p>Use the following fields to update an order information.</p>
+<label for="input-update-order_id">Order ID: </label>
+    <select name="input-update-order_id" id="select-update-order_id">
+        <option value="">Select an Order</option>
+        {{#each data}}
+        <option value="{{this.[Order ID]}}">{{this.[Order ID]}}</option>
+        {{/each}}
+    </select>
+    <label for="input-update-orderStatus">Order Status: </label>
+    <select name="input-update-orderStatus" id="update_orderStatus">
+        <option value="">Select an Order Status</option>
+        {{#each orderStatuses}}
+        <option value="{{this.orderstatus_id}}">{{this.name}}</option>
+        {{/each}}
+        </select>
+    </select>
+
+
+
+    <input type="submit">
+</fieldset>
+</form>
+
+</form>
+
+
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_order.js"></script>
+<script src="./js/update_order.js"></script>
 <script src="./js/delete_order.js"></script>
-

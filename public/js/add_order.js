@@ -149,4 +149,11 @@ addRowToTable = (data) => {
 
     // Add the row to the table
     currentTable.appendChild(row);
+
+    let selectMenu = document.getElementById("select-update-orderid");
+    let option = document.createElement("update_orderStatus");
+    option.text = newRow.name;
+    option.value = newRow.orderstatus_id;
+    selectMenu.add(option);
+
 }

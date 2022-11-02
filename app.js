@@ -362,7 +362,9 @@ app.get('/orders', function (req, res) {
         })                                                           // an object where 'data' is equal to the 'rows' we
     });
 
-    app.post('/add-order-ajax', function (req, res) {
+
+// Orders - insert
+app.post('/orders/:add-order-ajax', function (req, res) {
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
         console.log(data)
@@ -404,7 +406,7 @@ app.get('/orders', function (req, res) {
 
 
 // Orders - delete
-app.delete('/delete-order-ajax/', function (req, res, next) {
+app.delete('/orders/:delete-order-ajax/', function (req, res, next) {
         let data = req.body;
         let orderID = parseInt(data.id);
         let deleteOrderProduct = `DELETE FROM OrderProducts WHERE order_id = ?`;
@@ -434,6 +436,43 @@ app.delete('/delete-order-ajax/', function (req, res, next) {
             }
         })
     });
+
+
+// Orders - update
+app.put('/orders/:put-order-ajax', function(req,res,next){
+    let data = req.body;
+
+    let order = parseInt(data.order_id);
+    let orderStatus = parseInt(data.orderstatus_id);
+
+    let queryUpdateOrder = `UPDATE Orders SET orderstatus_id = ? WHERE order_id = ?`;
+    let selectOrders = `SELECT * FROM Orders WHERE order_id = ?`
+
+    // Run the 1st query
+    db.pool.query(queryUpdateOrder, [order, orderStatus], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+            // Run the second query
+            db.pool.query(selectOrders, [orderStatus], function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 // Order Products - get
 app.get('/orderProducts', function (req, res) {

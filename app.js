@@ -50,7 +50,7 @@ app.get('/customers', function(req, res)
         
         else 
         {
-            query1 = `SELECT * FROM Customers WHERE lname LIKE "${req.query.lname}%"`
+            query1 = `SELECT * FROM Customers WHERE lname LIKE "${req.query.lname}%";`
         }
 
         // Run the 1st query
@@ -242,6 +242,85 @@ app.get('/orderStatuses', function(req, res)
             res.render('orderStatuses', {data: orderStatus});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });     
+
+
+app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+    
+        // Create the query and run it on the database
+        query1 = `INSERT INTO OrderStatuses (orderstatus_id, description) VALUES ('${data.orderstatus_id}', '${data.description}')`;
+        db.pool.query(query1, function (error, rows, fields) {
+            // Check to see if there was an error
+            if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+            else {
+                // If there was no error, perform a SELECT * on Customers
+                query2 = `SELECT * FROM OrderStatuses;`;
+                db.pool.query(query2, function (error, rows, fields) {
+    
+                    // If there was an error on the second query, send a 400
+                    if (error) {
+    
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    // If all went well, send the results of the query back.
+                    else {
+                        res.send(rows);
+                    }
+                })
+            }
+        })
+    });
+
+
+app.get('/orders', function(req, res)
+    {  
+        // Declare Query 1 - Customers
+        let query1;
+        if (req.query.order_id === undefined)
+        {
+            query1 = "SELECT * FROM Orders;";               // Define our query
+        }
+        else 
+        {
+            query1 = `SELECT * FROM Orders WHERE order_id = "${req.query.order_id};"`
+        }
+
+        // Run the 1st query
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            let order = rows;
+            
+            /*
+            db.pool.query(query2, (error, rows, fields) => {
+
+                let customers = rows;
+
+                let customermap = {}
+                customers.map(customer => {
+                    let id = parseInt(customer.customer_id, 10);
+                    
+                    customer[id] = CONCAT(customer["fname"] + customer["lname"])
+                })
+                customer = customer.map(person => {
+                    return Object.assign(person, {customer_id: customermap[person.customer_id]})
+                })
+            })
+
+            res.render('orders', {data: order, customers: customers});                  // Render the index.hbs file, and also send the renderer
+        })
+        */
+        res.render('orders', {data: order});  
+    })                                                
+    });    
+
 
 app.listen(PORT, function(){
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')

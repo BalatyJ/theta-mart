@@ -66,21 +66,22 @@
 <p>Use the following fields to update an orderproduct's information.</p>
 <form id="update-orderproduct-form-ajax">
 
-    <label for="input-fullname">Full name: </label>
-    <select name="input-fullname" id="mySelect">
-        <option value="test">Select a Person</option>
+    <label for="input-update-orderproduct_id">OrderProduct ID: </label>
+    <select name="input-update-orderproduct_id" id="select-update-productid">
+        <option value="">Select a Product ID</option>
         {{#each data}}
-        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+        <option value="{{this.orderproduct_id}}">{{this.orderproduct_id}}</option>
         {{/each}}
     </select>
 
-    <label for="input-homeworld">Homeworld: </label>
-    <select name="input-homeworld" id="input-homeworld-update">
-        <option>Select a Planet</option>
-        {{#each planets}}
-        <option value="{{this.id}}">{{this.name}}</option>
+    <label for="input-update-orderproduct_id">OrderProduct ID: </label>
+    <select name="input-update-productname" id="update_productid">
+        <option value="">Select a Product ID</option>
+        {{#each data}}
+        <option value="{{this.product_id}}">{{this.name}}</option>
         {{/each}}
     </select>
+
     <input type="submit">
 
 </form>
@@ -125,3 +126,4 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_orderProduct.js"></script>
 <script src="./js/delete_orderProduct.js"></script>
+<script src="./js/update_orderProduct.js"></script>

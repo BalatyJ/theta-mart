@@ -9,7 +9,7 @@ var app = express();
 // app.js - SETUP section
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-PORT =57205;
+PORT =57206;
 
 // Database
 var db = require('./database/db-connector');
@@ -297,6 +297,181 @@ app.get('/orders', function(req, res){
     })                                                           // an object where 'data' is equal to the 'rows' we
 }); 
 
+
+app.post('/add-order-ajax', function (req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(data)
+    console.log("I'm running!")
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Orders (order_date, address1, address2, city, state, zipcode, country, total, orderstatus_id, driver_id,  customer_id) 
+    VALUES ('${data.street}', '${data.street}', '${data.unit}', '${data.city}', '${data.state}', '${data.zipcode}', '${data.country}', 0, 
+    '${data.orderstatusid}', '${data.driverid}', '${data.customerid}')`;
+
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * FROM Orders;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.delete('/delete-order-ajax/', function (req, res, next) {
+    let data = req.body;
+    let orderID = parseInt(data.id);
+    let deleteOrderProduct = `DELETE FROM OrderProducts WHERE order_id = ?`;
+    let deleteOrder = `DELETE FROM Orders WHERE order_id = ?`;
+
+
+    // Run the 1st query
+    db.pool.query(deleteOrderProduct, [orderID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        else {
+            // Run the second query
+            db.pool.query(deleteOrder, [orderID], function (error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.sendStatus(204);
+                }
+            })
+        }
+    })
+});
+
+app.get('/orderProducts', function (req, res) {
+    // Declare Query 1 - Orders
+
+    let query1
+
+    if (req.query.orderid === undefined || req.query.orderid === '') {
+        query1 = `SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
+        Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
+        FROM  OrderProducts 
+            INNER JOIN Products 
+            ON Products.product_id=OrderProducts.product_id;`              // Define our query
+    }
+    else {
+        query1 = `SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
+        Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
+        FROM  OrderProducts 
+            INNER JOIN Products 
+            ON Products.product_id=OrderProducts.product_id
+        WHERE OrderProducts.order_id=${req.query.orderid};`
+    }
+
+    let query2 = `SELECT * FROM Products;`
+    let query3 = `SELECT * FROM Orders;`
+    // Run the 1st query
+    db.pool.query(query1, function (error, rows, fields) {    // Execute the query
+
+        let orderproducts = rows;
+
+        db.pool.query(query2, function (error, rows, fields) {
+            let product_rows = rows;
+
+            db.pool.query(query3, function (error, rows, fields) {
+                let order_ids = rows;
+                res.render('orderProducts', { data: orderproducts, products: product_rows, orders: order_ids });                  // Render the index.hbs file, and also send the renderer
+
+            })
+
+
+        })
+    })                                                           // an object where 'data' is equal to the 'rows' we
+});
+
+app.post('/add-orderproduct-ajax', function (req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    let orderid = parseInt(data.orderid)
+    let productid = parseInt(data.productid)
+    let quantity = parseInt(data.quantity)
+    let unitprice = parseInt(data.unitprice)
+    // Create the query and run it on the database
+    query1 = `INSERT INTO OrderProducts (order_id, product_id, quantity, unit_price, subtotal) VALUES ('${orderid}', '${productid}','${quantity}', '${unitprice}','${unitprice * quantity}');`;
+
+    db.pool.query(query1, function (error, rows, fields) {
+
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT orderproduct_id, order_id, 
+            Products.name, quantity, unit_price, subtotal
+            FROM  OrderProducts 
+                INNER JOIN Products 
+                ON Products.product_id=OrderProducts.product_id;`;
+
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
+    let data = req.body;
+    let productOrderID = parseInt(data.id);
+    let deleteOrderProduct = `DELETE FROM OrderProducts WHERE orderproduct_id = ?;`;
+
+
+
+    // Run the 1st query
+    db.pool.query(deleteOrderProduct, [productOrderID], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+    })
+});
 
 app.listen(PORT, function(){
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')

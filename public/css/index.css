@@ -7,8 +7,11 @@
 }
 
 nav a {
-    border: 5px solid black;
+    border: 1px solid blue;
+    border-radius: 5%;
     margin: 5px;
+    padding: 0 5px;
+    text-decoration: None;
 }
 
 .navbar-nav li {
@@ -35,4 +38,10 @@ legend {
 
 input {
     margin: .4rem;
+}
+
+td,
+th,
+table {
+    border: 1px solid black;
 }

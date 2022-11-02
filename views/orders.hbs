@@ -13,9 +13,23 @@
 {{!-- Create a table --}}
 
 <table id="orders-table">
+
+<thead>
+    <form id="search-order-html" method='GET' action='/orders'>
+    <fieldset>
+        <legend>Search Order</legend>
+    <p>Search by last name using the field below. Partial last names are OK too!</p>
+    <form id="search-order-html" method='GET' action='/orders'>
+    <label for="input-order_id">Search by Order ID: </label>
+    <input type="text" name="order_id" id="input-order_id-html-search">
+    <input type="submit">
+    <a href='/orders'><button>Reset</button></a>
+
+    </fieldset>
+    </form>
+      <br></br>
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
-    <thead>
         <tr>
             {{#each data.[0]}}
             <th>{{@key}}</th>

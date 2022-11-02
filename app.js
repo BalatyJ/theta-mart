@@ -9,7 +9,7 @@ var app = express();
 // app.js - SETUP section
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-PORT = 57205;
+PORT = 57299;
 
 // Database
 var db = require('./database/db-connector');
@@ -69,7 +69,9 @@ app.post('/customers/:add-person-ajax', function (req, res) {
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Customers (fname, lname, phone, address1, address2, city, state, zipcode, country) VALUES ('${data.fname}', '${data.lname}', '${data.phone}', '${data.address1}', '${address2}', '${data.city}', '${data.state}', '${data.zipcode}', '${data.country}')`;
+    query1 = `INSERT INTO Customers (fname, lname, phone, address1, address2, city, state, zipcode, country) 
+    VALUES ('${data.fname}', '${data.lname}', '${data.phone}', '${data.address1}', 
+    '${address2}', '${data.city}', '${data.state}', '${data.zipcode}', '${data.country}')`;
     db.pool.query(query1, function (error, rows, fields) {
         // Check to see if there was an error
         if (error) {
@@ -227,9 +229,8 @@ app.get('/orderStatuses', function (req, res) {
 app.get('/orders', function (req, res) {
     // Declare Query 1 - Orders
 
-    if (req.)
 
-        let query1 = `SELECT order_id AS 'Order ID', DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
+    let query1 = `SELECT order_id AS 'Order ID', DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
     Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
     Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
     CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, CONCAT(Customers.fname, " ", Customers.lname) AS Customer 

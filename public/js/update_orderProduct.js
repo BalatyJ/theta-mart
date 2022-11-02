@@ -40,7 +40,7 @@ updatePersonForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, fullNameValue);
+            updateRow(xhttp.response, product);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -57,7 +57,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 function updateRow(data, personID) {
     let parsedData = JSON.parse(data);
 
-    let table = document.getElementById("people-table");
+    let table = document.getElementById("orderproducts-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
         //iterate through rows

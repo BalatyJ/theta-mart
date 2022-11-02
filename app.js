@@ -165,6 +165,7 @@ app.get('/drivers', function(req, res)
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query                                  
 
+
 app.post('/drivers/:add-person-ajax', function(req, res){
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
@@ -202,7 +203,40 @@ app.post('/drivers/:add-person-ajax', function(req, res){
         })
     });
 
-
+app.put('/drivers/:put-person-ajax', function(req,res,next){
+        let data = req.body;
+      
+        let available = parseInt(data.available);
+        let person = parseInt(data.fullname);
+      
+        let queryUpdateAvailable = `UPDATE Drivers SET available = ? WHERE driver.driver_id = ?`;
+        let selectAvailability = `SELECT * FROM Drivers WHERE driver_id= ?`
+      
+              // Run the 1st query
+              db.pool.query(queryUpdateAvailable, [available, person], function(error, rows, fields){
+                  if (error) {
+      
+                  // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                  console.log(error);
+                  res.sendStatus(400);
+                  }
+      
+                  // If there was no error, we run our second query and return that data so we can use it to update the people's
+                  // table on the front-end
+                  else
+                  {
+                      // Run the second query
+                      db.pool.query(selectAvailability, [available], function(error, rows, fields) {
+      
+                          if (error) {
+                              console.log(error);
+                              res.sendStatus(400);
+                          } else {
+                              res.send(rows);
+                          }
+                      })
+                  }
+      })});
 
 app.get('/products', function(req, res)
     {  

@@ -78,9 +78,10 @@
     <input type="submit">
     </fieldset>
 </form>
-
-
-<h2>Updating A Driver's Availability</h2>
+<br>
+<form id="update-driver-form-ajax"></form>
+<fieldset>
+<legend>Updating Driver's Availability</legend>
 
     <label for="input-fullname">Full name: </label>
     <select name="input-fullname" id="mySelect">
@@ -90,15 +91,15 @@
         {{/each}}
     </select>
 
-    <label for="input-available">Availability: </label>
-    <select name="input-homeavailableworld" id="input-available-update">
+    <label for="input-available-update">Availability: </label>
+    <select name="input-available-update" id="input-available-update">
         <option>Select Availability</option>
         {{#each available}}
         <option value="{{this.driver_id}}">{{this.name}}</option>
         {{/each}}
     </select>
     <input type="submit">
-
+</fieldset>
 </form>
 
 

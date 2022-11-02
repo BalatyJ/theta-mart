@@ -114,7 +114,7 @@ app.put('/customers/:put-customer-ajax', function(req,res,next){
     let person = parseInt(data.fullname);
     let phone = parseInt(data.phone);
   
-    let queryUpdateCustomer = `UPDATE Customers SET phone = ? WHERE Customers.customer_id = ?`;
+    let queryUpdateCustomer = `UPDATE Customers SET phone = ? WHERE customer_id = ?`;
     let selectCustomer = `SELECT * FROM Customers WHERE customer_id = ?`
   
           // Run the 1st query

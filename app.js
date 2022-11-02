@@ -280,46 +280,22 @@ app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
     });
 
 
-app.get('/orders', function(req, res)
-    {  
-        // Declare Query 1 - Customers
-        let query1;
-        if (req.query.order_id === undefined)
-        {
-            query1 = "SELECT * FROM Orders;";               // Define our query
-        }
-        else 
-        {
-            query1 = `SELECT * FROM Orders WHERE order_id = "${req.query.order_id};"`
-        }
+app.get('/orders', function(req, res){
+    
+    let query1 = `SELECT order_id AS 'Order ID', DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
+    Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
+    Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
+    CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, CONCAT(Customers.fname, " ", Customers.lname) AS Customer 
+    FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
+    ON Customers.customer_id=Orders.customer_id;`
+    // Run the 1st query
+    db.pool.query(query1, function (error, rows, fields) {    // Execute the query
 
-        // Run the 1st query
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-            let order = rows;
-            
-            /*
-            db.pool.query(query2, (error, rows, fields) => {
-
-                let customers = rows;
-
-                let customermap = {}
-                customers.map(customer => {
-                    let id = parseInt(customer.customer_id, 10);
-                    
-                    customer[id] = CONCAT(customer["fname"] + customer["lname"])
-                })
-                customer = customer.map(person => {
-                    return Object.assign(person, {customer_id: customermap[person.customer_id]})
-                })
-            })
-
-            res.render('orders', {data: order, customers: customers});                  // Render the index.hbs file, and also send the renderer
-        })
-        */
-        res.render('orders', {data: order});  
-    })                                                
-    });    
+        let order = rows;
+        console.log(order);
+        res.render('orders', { data: order });                  // Render the index.hbs file, and also send the renderer
+    })                                                           // an object where 'data' is equal to the 'rows' we
+}); 
 
 
 app.listen(PORT, function(){

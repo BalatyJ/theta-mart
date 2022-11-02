@@ -18,7 +18,7 @@ addorderStatusForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        orderStatus: orderStatusValue,
+        orderstatus_id: orderStatusValue,
         description: descriptionValue,
     }
 

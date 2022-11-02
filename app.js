@@ -136,7 +136,7 @@ app.post('/drivers/:add-person-ajax', function (req, res) {
         }
         else {
             // If there was no error, perform a SELECT * on Customers
-            query2 = `SELECT * FROM Drivers;`;
+            query2 = `SELECT driver_id, fname, lname, phone, IF(available=0, "No", "Yes") AS available FROM Drivers;`;
             db.pool.query(query2, function (error, rows, fields) {
 
                 // If there was an error on the second query, send a 400
@@ -283,7 +283,7 @@ app.post('/add-order-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            // If there was no error, perform a SELECT * on bsg_people
+            // If there was no error, perform a SELECT * on Orders
             query2 = `SELECT * FROM Orders;`;
             db.pool.query(query2, function (error, rows, fields) {
 
@@ -395,7 +395,7 @@ app.post('/add-orderproduct-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            // If there was no error, perform a SELECT * on bsg_people
+            // If there was no error, perform a SELECT * on OrderProducts and Products.
             query2 = `SELECT orderproduct_id, order_id, 
             Products.name, quantity, unit_price, subtotal
             FROM  OrderProducts 

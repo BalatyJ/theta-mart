@@ -40,10 +40,10 @@ addProductForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            document.getElementById("input-orderid").value = '';
-            document.getElementById("input-productid").value = '';
-            document.getElementById("input-quantity").value = '';
-            document.getElementById("input-unitprice").value = '';
+            document.getElementById("input-orderid-op").value = '';
+            document.getElementById("input-productid-op").value = '';
+            document.getElementById("input-quantity-op").value = '';
+            document.getElementById("input-unitprice-op").value = '';
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -107,6 +107,12 @@ addRowToTable = (data) => {
 
     // Add a row attribute so the deleteRow function can find a newly added row
     row.setAttribute('data-value', newRow.id);
+
+    let selectMenu = document.getElementById("select-update-orderproductid");
+    let option = document.createElement("update_productid");
+    option.text = newRow.name;
+    option.value = newRow.product_id;
+    selectMenu.add(option);
 
     // Add the row to the table
     currentTable.appendChild(row);

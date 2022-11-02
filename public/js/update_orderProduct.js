@@ -40,7 +40,7 @@ updatePersonForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, product);
+            updateRow(xhttp.response, inputProductIDValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -54,7 +54,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, personID) {
+function updateRow(data, orderproductID) {
     let parsedData = JSON.parse(data);
 
     let table = document.getElementById("orderproducts-table");
@@ -62,7 +62,7 @@ function updateRow(data, personID) {
     for (let i = 0, row; row = table.rows[i]; i++) {
         //iterate through rows
         //rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].getAttribute("data-value") == personID) {
+        if (table.rows[i].getAttribute("data-value") == orderproductID) {
 
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];

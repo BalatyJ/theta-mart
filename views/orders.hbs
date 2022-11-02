@@ -63,10 +63,45 @@
     </tbody>
 </table>
 
+
+
+    <table>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+            </tr>
+    
+        </thead>
+    
+        {{!-- Body section --}}
+        <tbody>
+    
+            {{!-- For each row, print the information in order --}}
+            {{#each data}}
+            <tr>
+                <td>{{this.[Order ID]}}</td>
+                <td>{{this.[Order Date]}}</td>
+                <td>{{this.Street}}</td>
+                <td>{{this.Unit}}</td>
+                <td>{{this.City}}</td>
+                <td>{{this.State}}</td>
+                <td>{{this.[Zip Code]}}</td>
+                <td>{{this.Country}}</td>
+                <td>{{this.Total}}</td>
+                <td>{{this.[Order Status]}}</td>
+                <td>{{this.Driver}}</td>
+                <td>{{this.Customer}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    
+
 <!-- /views/index.hbs -->
-
-
-
 <br></br>
 {{!-- Form to add a record to the table --}}
 <form id="add-order-form-ajax">
@@ -111,3 +146,4 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_order.js"></script>
 <script src="./js/delete_order.js"></script>
+

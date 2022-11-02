@@ -1,4 +1,6 @@
 <!-- index.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h1>Orders</h1>
 <nav>
     <a href="/#">HomePage</a> <a href="/customers">Customers</a>
@@ -10,7 +12,7 @@
 <br></br>
 {{!-- Create a table --}}
 
-<table>
+<table id="orders-table">
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
     <thead>
@@ -18,6 +20,7 @@
             {{#each data.[0]}}
             <th>{{@key}}</th>
             {{/each}}
+            <th>Delete</th>
         </tr>
 
     </thead>
@@ -27,7 +30,7 @@
 
         {{!-- For each row, print the information in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.[Order ID]}}>
             <td>{{this.[Order ID]}}</td>
             <td>{{this.[Order Date]}}</td>
             <td>{{this.Street}}</td>
@@ -40,6 +43,7 @@
             <td>{{this.[Order Status]}}</td>
             <td>{{this.Driver}}</td>
             <td>{{this.Customer}}</td>
+            <td><button onclick="deleteOrder({{this.[Order ID]}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -51,19 +55,45 @@
 
 <br></br>
 {{!-- Form to add a record to the table --}}
-<form id="add-product-form-ajax">
+<form id="add-order-form-ajax">
     <fieldset>
-        <legend>Add Order Status</legend>
-        <p>To add new order status , please enter their information below and click 'Submit'!</p>
-        <label for="input-name">Order Status: </label>
-        <input type="text" name="input-orderStatus" id="input-orderStatus">
+        <legend>Add Order</legend>
+        <p>To add new order, please enter the information below and click 'Submit'!</p>
 
-        <label for="input-description">Description: </label>
-        <input type="text" name="input-description" id="input-description">
+        <label for="input-orderdate">Order Date: </label>
+        <input type="date" required="required" name="input-orderdate" id="input-orderdate-o">
+        
+        <label for="input-street">Street: </label>
+        <input type="text" required="required" name="input-street" id="input-street-o">
+        
+        <label for="input-unit">Unit: </label>
+        <input type="text" name="input-unit" id="input-unit-o">
+        
+        <label for="input-city">City: </label>
+        <input type="text" required="required" name="input-city" id="input-city-o">
+        
+        <label for="input-state">State: </label>
+        <input type="text" required="required" name="input-state" id="input-state-o">
+        
+        <label for="input-zipcode">Zip Code: </label>
+        <input type="text" required="required" name="input-zipcode" id="input-zipcode-o">
+        
+        <label for="input-country">Country: </label>
+        <input type="text" required="required" name="input-country" id="input-country-o">
+
+                <label for="input-country">Order Status: </label>
+        <input type="text" required="required" name="input-country" id="input-orderstatusid-o">
+
+                <label for="input-country">Driver: </label>
+        <input type="text" required="required" name="input-country" id="input-driverid-o">
+
+                <label for="input-country">Customer: </label>
+        <input type="text" required="required" name="input-country" id="input-customerid-o">
 
         <input type="submit">
     </fieldset>
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_orderStatus.js"></script>
+<script src="./js/add_order.js"></script>
+<script src="./js/delete_order.js"></script>

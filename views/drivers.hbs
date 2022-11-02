@@ -1,4 +1,6 @@
 <!-- index.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h1>Drivers</h1>
 <nav>
     <a href="/#">HomePage</a>   <a href="/customers">Customers</a>
@@ -25,7 +27,7 @@
     </form>
         <br></br>
 
-    <table>
+    <table id="drivers-table">
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
         <tr>
@@ -33,7 +35,8 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Phone</th>
-            <th>Availability</th>        
+            <th>Available</th>  
+            <th>Delete</th>      
         </tr>
     </thead>
 
@@ -42,12 +45,13 @@
 
         {{!-- For each row, print the information in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.driver_id}}>
           <td>{{this.driver_id}}</td>
           <td>{{this.fname}}</td>
           <td>{{this.lname}}</td>
           <td>{{this.phone}}</td>
           <td>{{this.available}}</td>
+          <td><button onclick="deleteDriver({{this.driver_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -72,7 +76,7 @@
     <label for="input-phone">Phone: </label>
     <input type="text" name="input-phone-d" id="input-phone-d">
 
-    <label for="input-available">Availability: </label>
+    <label for="input-available">Availabile: </label>
     <input type="text" name="input-available" id="input-available">
 
     <input type="submit">
@@ -81,3 +85,4 @@
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_driver.js"></script>
+<script src="./js/delete_driver.js"></script>

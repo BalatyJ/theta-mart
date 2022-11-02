@@ -54,15 +54,20 @@ VALUES (:driver_fname_input, :driver_lname_input,
 
 
 -- Retrieves all drivers.
-SELECT driver_id AS 'Driver ID', fname AS 'First Name', lname AS 'Last Name', 
-phone AS 'Phone', IF(available=0, "No", "Yes") AS Availability 
+SELECT driver_id, fname, lname, 
+phone, IF(available=0, "No", "Yes") AS available
 FROM Drivers; 
+
+-- Retrieves all drivers based on last name entered.
+SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes')  AS available
+        FROM Drivers 
+        WHERE lname LIKE :input_lname;
 
 
 -- Display a driver's name in the delete form.
 SELECT driver_id, CONCAT(fname, ' ', lname) AS Name
 FROM Drivers
-WHERE driver_id=:delete_driver_id
+WHERE driver_id=:delete_driver_id;
 
 -- Deletes a driver.
 DELETE 
@@ -211,28 +216,24 @@ VALUES (:orderproduct_order_id_input, :orderproduct_product_id_input,
 
 
 -- Display all OrderProducts.
-SELECT orderproduct_id AS 'Order Product ID', order_id AS 'Order ID', 
-Products.name AS 'Product Name', quantity AS Quantity, 
-unit_price AS 'Unit Price', subtotal AS Subtotal 
-FROM OrderProducts 
-    INNER JOIN Products 
-    ON Products.product_id = OrderProducts.product_id; 
+SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
+    Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
+    FROM  OrderProducts 
+        INNER JOIN Products 
+        ON Products.product_id=OrderProducts.product_id 
+    WHERE orderproduct_id=:update_orderproduct_id;
 
-
--- Populate data for Product Name drop down
-SELECT name
-FROM Products;
 
 
 -- Delete an OrderProduct.
 DELETE
 FROM OrderProducts
-WHERE :delete_orderproduct_id=OrderProducts.orderproduct_id;
+WHERE :delete_orderproduct_id=orderproduct_id;
 
 
 -- Display an OrderProduct to update.
-SELECT orderproduct_id, order_id, OrderProducts, 
-Products.name, quantity, unit_price, subtotal 
+SELECT orderproduct_id, order_id, 
+Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS 'Subtotal'
 FROM  OrderProducts 
 	INNER JOIN Products 
 	ON Products.product_id=OrderProducts.product_id 

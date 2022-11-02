@@ -62,7 +62,7 @@
         {{/each}}
     </tbody>
 </table>
-
+<br>
 <!-- /views/index.hbs -->
 
 {{!-- Form to add a record to the table  --}}
@@ -99,6 +99,25 @@
     <input type="submit">
     </fieldset>
 </form>
+
+<br>
+<form id="update-person-form-ajax">
+    <fieldset>
+    
+    <legend>Update Customer</legend>
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Customer</option>
+        {{#each data}}
+        <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+    <label for="input-phone-update">Phone: </label>
+    <input type="text" name="input-phone-update" id="input-phone-update">
+    <input type="submit">
+</form>
+
+<script src="./js/update_person.js"></script>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_customer.js"></script>

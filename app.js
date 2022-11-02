@@ -8,8 +8,8 @@ var app = express();
 
 // app.js - SETUP section
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-PORT = 57205;
+app.use(express.urlencoded({extended: true}))
+PORT =57206;
 
 // Database
 var db = require('./database/db-connector');
@@ -35,6 +35,7 @@ app.use(express.static('public'));
 app.get('/', function (req, res) { res.render('index'); });
 
 
+// Customers - get
 app.get('/customers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
@@ -56,8 +57,7 @@ app.get('/customers', function (req, res) {
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                         // received back from the query                                  
 
-// app.js
-
+// Customers - insert
 app.post('/customers/:add-person-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -98,8 +98,44 @@ app.post('/customers/:add-person-ajax', function (req, res) {
     })
 });
 
-// Drivers
+// Customers - update
+app.put('/customers/:put-customer-ajax', function(req,res,next){
+    let data = req.body;
+  
+    let person = parseInt(data.fullname);
+    let phone = parseInt(data.phone);
+  
+    let queryUpdateCustomer = `UPDATE Customers SET phone = ? WHERE customer_id = ?`;
+    let selectCustomer = `SELECT * FROM Customers WHERE customer_id = ?`
+  
+          // Run the 1st query
+          db.pool.query(queryUpdateCustomer, [person], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectCustomer, [phone] , function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+})});
 
+
+// Drivers - get
 app.get('/drivers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
@@ -116,8 +152,9 @@ app.get('/drivers', function (req, res) {
         let driver = rows;
         res.render('drivers', { data: driver });                  // Render the index.hbs file, and also send the renderer
     })                                                      // an object where 'data' is equal to the 'rows' we
-});                                                         // received back from the query                                  
-
+});            
+                                             // received back from the query                                  
+// Drivers - insert
 app.post('/drivers/:add-person-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -138,11 +175,11 @@ app.post('/drivers/:add-person-ajax', function (req, res) {
     })
 });
 
+// Drivers - delete
 app.delete('/delete-driver-ajax/', function (req, res, next) {
     let data = req.body;
     let driverID = parseInt(data.id);
     let deleteDriver = `DELETE FROM Drivers WHERE Drivers.driver_id = ?;`;
-
 
     // Run the 1st query
     db.pool.query(deleteDriver, [driverID], function (error, rows, fields) {
@@ -155,6 +192,44 @@ app.delete('/delete-driver-ajax/', function (req, res, next) {
     })
 });
 
+// Drivers - update
+app.put('/drivers/:put-person-ajax', function(req,res,next){
+    let data = req.body;
+  
+    let available = parseInt(data.available);
+    let person = parseInt(data.fullname);
+  
+    let queryUpdateAvailable = `UPDATE Drivers SET available = ? WHERE driver.driver_id = ?`;
+    let selectAvailability = `SELECT * FROM Drivers WHERE driver_id= ?`
+  
+          // Run the 1st query
+          db.pool.query(queryUpdateAvailable, [available, person], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectAvailability, [available], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+})});
+
+
+// Products - get
 app.get('/products', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
@@ -176,12 +251,68 @@ app.get('/products', function (req, res) {
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                         // received back from the query                                  
 
-app.post('/add-product-ajax', function (req, res) {
+// Products - insert
+app.post('/products/:add-product-ajax', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     // Create the query and run it on the database
     query1 = `INSERT INTO Products (name, description, price, stock) VALUES ('${data.name}', '${data.description}', '${data.price}', '${data.stock}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on Customers
+            query2 = `SELECT * FROM Products;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+                                
+
+// Order Status - get
+app.get('/orderStatuses', function(req, res)
+    {  
+        // Declare Query 1 - Customers
+        let query1 = `SELECT * FROM OrderStatuses;`
+        
+
+        // Run the 1st query
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            let orderStatus = rows;
+
+            res.render('orderStatuses', {data: orderStatus});                  // Render the index.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });     
+
+// Order Status - insert
+app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO OrderStatuses (orderstatus_id, description) VALUES ('${data.orderstatus_id}', '${data.description}')`;
     db.pool.query(query1, function (error, rows, fields) {
         // Check to see if there was an error
         if (error) {
@@ -190,108 +321,31 @@ app.post('/add-product-ajax', function (req, res) {
             console.log(error)
             res.sendStatus(400);
         }
-
         else {
-            query1 = `SELECT * FROM Products WHERE name LIKE "${req.query.name}%"`
+            // If there was no error, perform a SELECT * on Customers
+            query2 = `SELECT * FROM OrderStatuses;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
         }
-
-        // Run the 1st query
-        db.pool.query(query1, function (error, rows, fields) {    // Execute the query
-
-            let product = rows;
-
-            res.render('products', { data: product });                  // Render the index.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query                                  
-
-    app.post('/products/:add-product-ajax', function (req, res) {
-        // Capture the incoming data and parse it back to a JS object
-        let data = req.body;
-
-        // Create the query and run it on the database
-        query1 = `INSERT INTO Products (name, description, price, stock) VALUES ('${data.name}', '${data.description}', '${data.price}', '${data.stock}')`;
-        db.pool.query(query1, function (error, rows, fields) {
-            // Check to see if there was an error
-            if (error) {
-
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error)
-                res.sendStatus(400);
-            }
-            else {
-                // If there was no error, perform a SELECT * on Customers
-                query2 = `SELECT * FROM Products;`;
-                db.pool.query(query2, function (error, rows, fields) {
-
-                    // If there was an error on the second query, send a 400
-                    if (error) {
-
-                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                        console.log(error);
-                        res.sendStatus(400);
-                    }
-                    // If all went well, send the results of the query back.
-                    else {
-                        res.send(rows);
-                    }
-                })
-            }
-        })
-    });
+    })
+});
 
 
-    app.get('/orderStatuses', function (req, res) {
-        // Declare Query 1 - Customers
-        let query1 = `SELECT * FROM OrderStatuses;`
+// Orders - get
 
-
-        // Run the 1st query
-        db.pool.query(query1, function (error, rows, fields) {    // Execute the query
-
-            let orderStatus = rows;
-
-            res.render('orderStatuses', { data: orderStatus });                  // Render the index.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });
-
-
-    app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
-        // Capture the incoming data and parse it back to a JS object
-        let data = req.body;
-
-        // Create the query and run it on the database
-        query1 = `INSERT INTO OrderStatuses (orderstatus_id, description) VALUES ('${data.orderstatus_id}', '${data.description}')`;
-        db.pool.query(query1, function (error, rows, fields) {
-            // Check to see if there was an error
-            if (error) {
-
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error)
-                res.sendStatus(400);
-            }
-            else {
-                // If there was no error, perform a SELECT * on Customers
-                query2 = `SELECT * FROM OrderStatuses;`;
-                db.pool.query(query2, function (error, rows, fields) {
-
-                    // If there was an error on the second query, send a 400
-                    if (error) {
-
-                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                        console.log(error);
-                        res.sendStatus(400);
-                    }
-                    // If all went well, send the results of the query back.
-                    else {
-                        res.send(rows);
-                    }
-                })
-            }
-        })
-    });
-
-
-    app.get('/orders', function (req, res) {
+app.get('/orders', function (req, res) {
 
         let query1 = `SELECT order_id AS 'Order ID', DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
     Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
@@ -348,7 +402,9 @@ app.post('/add-product-ajax', function (req, res) {
         })
     });
 
-    app.delete('/delete-order-ajax/', function (req, res, next) {
+
+// Orders - delete
+app.delete('/delete-order-ajax/', function (req, res, next) {
         let data = req.body;
         let orderID = parseInt(data.id);
         let deleteOrderProduct = `DELETE FROM OrderProducts WHERE order_id = ?`;
@@ -379,7 +435,8 @@ app.post('/add-product-ajax', function (req, res) {
         })
     });
 
-    app.get('/orderProducts', function (req, res) {
+// Order Products - get
+app.get('/orderProducts', function (req, res) {
         // Declare Query 1 - Orders
 
         let query1
@@ -421,6 +478,8 @@ app.post('/add-product-ajax', function (req, res) {
         })                                                           // an object where 'data' is equal to the 'rows' we
     });
 
+
+// Order Products - insert
     app.post('/add-orderproduct-ajax', function (req, res) {
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
@@ -466,7 +525,8 @@ app.post('/add-product-ajax', function (req, res) {
     });
 
 
-    app.put('/put-update-orderproduct-ajax', function (req, res, next) {
+// Order Products - update    
+app.put('/put-update-orderproduct-ajax', function (req, res, next) {
         let data = req.body;
 
         let orderproduct = parseInt(data.orderproductid);
@@ -501,13 +561,8 @@ app.post('/add-product-ajax', function (req, res) {
         })
     });
 
-
-    app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
-        let data = req.body;
-        let productOrderID = parseInt(data.id);
-        let deleteOrderProduct = `DELETE FROM OrderProducts WHERE orderproduct_id = ?;`;
-
-        app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
+// Order Products - delete
+app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
             let data = req.body;
             let productOrderID = parseInt(data.id);
             let deleteOrderProduct = `DELETE FROM OrderProducts WHERE orderproduct_id = ?;`;
@@ -526,6 +581,6 @@ app.post('/add-product-ajax', function (req, res) {
         });
 
 
-        app.listen(PORT, function () {
+app.listen(PORT, function () {
             console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
         });

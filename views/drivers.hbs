@@ -82,7 +82,35 @@
     <input type="submit">
     </fieldset>
 </form>
+<br>
+<form id="update-driver-form-ajax"></form>
+<fieldset>
+<legend>Updating Driver's Availability</legend>
+
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Person</option>
+        {{#each data}}
+        <option value="{{this.driver_id}}">{{this.fname}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-available-update">Availability: </label>
+    <select name="input-available-update" id="input-available-update">
+        <option>Select Availability</option>
+        {{#each available}}
+        <option value="{{this.driver_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</fieldset>
+</form>
+
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_driver.js"></script>
+<<<<<<< HEAD
 <script src="./js/delete_driver.js"></script>
+=======
+<script src="./js/update_driver.js"></script>
+>>>>>>> xzBranch

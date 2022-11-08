@@ -58,7 +58,7 @@ app.get('/customers', function (req, res) {
 });                                                         // received back from the query                                  
 
 // Customers - insert
-app.post('/customers/:add-person-ajax', function (req, res) {
+app.post('/add-customer-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
@@ -99,40 +99,54 @@ app.post('/customers/:add-person-ajax', function (req, res) {
 });
 
 // Customers - update
-app.put('/customers/:put-customer-ajax', function(req,res,next){
+app.put('/put-customer-ajax', function(req,res,next){
     let data = req.body;
-  
-    let person = parseInt(data.fullname);
+
     let phone = parseInt(data.phone);
+    let customer = parseInt(data.fullname);
+
   
-    let queryUpdateCustomer = `UPDATE Customers SET phone = ? WHERE customer_id = ?`;
-    let selectCustomer = `SELECT * FROM Customers WHERE customer_id = ?`
-  
+    queryUpdateCustomer = `UPDATE Customers SET phone = ? WHERE customer_id = ?;`;
+    selectCustomer = `SELECT phone * FROM Customers WHERE customer_id =?;`
           // Run the 1st query
-          db.pool.query(queryUpdateCustomer, [person], function(error, rows, fields){
+          db.pool.query(queryUpdateCustomer, [phone,customer], function(error, rows, fields){
               if (error) {
   
               // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
               console.log(error);
               res.sendStatus(400);
               }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
               else
-              {
-                  // Run the second query
-                  db.pool.query(selectCustomer, [phone] , function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
+            {
+                // Run the second query
+                db.pool.query(selectCustomer, [phone], function(error, rows, fields) {
+        
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.send(rows);
+                    }
+                })
+            }
 })});
+
+app.delete('/customers/:delete-customer-ajax', function(req,res,next){
+    let data = req.body;
+    let customerID = parseInt(data.id);
+    let deleteCustomers = `DELETE FROM Customers WHERE customer_id = ?;`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteCustomers, [customerID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+            }
+        })
+    });
 
 
 // Drivers - get
@@ -155,7 +169,7 @@ app.get('/drivers', function (req, res) {
 });            
                                              // received back from the query                                  
 // Drivers - insert
-app.post('/drivers/:add-person-ajax', function (req, res) {
+app.post('/drivers/:add-driver-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
@@ -176,13 +190,13 @@ app.post('/drivers/:add-person-ajax', function (req, res) {
 });
 
 // Drivers - delete
-app.delete('/delete-driver-ajax/', function (req, res, next) {
+app.delete('/drivers/:delete-driver-ajax', function (req, res, next) {
     let data = req.body;
     let driverID = parseInt(data.id);
-    let deleteDriver = `DELETE FROM Drivers WHERE Drivers.driver_id = ?;`;
+    let deleteDrivers = `DELETE FROM Drivers WHERE driver_id = ?;`;
 
     // Run the 1st query
-    db.pool.query(deleteDriver, [driverID], function (error, rows, fields) {
+    db.pool.query(deleteDrivers, [driverID], function (error, rows, fields) {
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -193,17 +207,21 @@ app.delete('/delete-driver-ajax/', function (req, res, next) {
 });
 
 // Drivers - update
-app.put('/drivers/:put-person-ajax', function(req,res,next){
+app.put('/drivers/:put-driver-ajax', function(req,res,next){
     let data = req.body;
+    console.log(data);
+     
+    let availability = parseInt(data.available);
+    let phone = parseInt(data.phone);
+    let fname = parseInt(data.fname);
+    let lname = parseInt(data.lname);
+    let driver = parseInt(data.driverID);
   
-    let available = parseInt(data.available);
-    let person = parseInt(data.fullname);
-  
-    let queryUpdateAvailable = `UPDATE Drivers SET available = ? WHERE driver.driver_id = ?`;
-    let selectAvailability = `SELECT * FROM Drivers WHERE driver_id= ?`
+    let queryUpdateAvailable = `UPDATE Drivers SET available = ? WHERE driver_id = ?;`;
+    let selectAvailability = `SELECT * FROM Drivers WHERE driver_id= ?;`
   
           // Run the 1st query
-          db.pool.query(queryUpdateAvailable, [available, person], function(error, rows, fields){
+          db.pool.query(queryUpdateAvailable, [availability, driver], function(error, rows, fields){
               if (error) {
   
               // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -216,7 +234,7 @@ app.put('/drivers/:put-person-ajax', function(req,res,next){
               else
               {
                   // Run the second query
-                  db.pool.query(selectAvailability, [available], function(error, rows, fields) {
+                  db.pool.query(selectAvailability, [availability], function(error, rows, fields) {
   
                       if (error) {
                           console.log(error);
@@ -227,7 +245,6 @@ app.put('/drivers/:put-person-ajax', function(req,res,next){
                   })
               }
 })});
-
 
 // Products - get
 app.get('/products', function (req, res) {

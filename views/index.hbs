@@ -1,43 +1,53 @@
 <!-- index.hbs -->
-<h1>Theta Mart</h1>
-<nav>
-    <a href="/#">HomePage</a>
-    <a href="/customers">Customers</a>
-    <a href="/drivers">Drivers</a>
-    <a href="/orders">Orders</a>
-    <a href="/orderProducts">Order Products</a>
-    <a href="/products">Products</a>
-    <a href="/orderStatuses">Order Statuses</a>
+<nav class="theta-mart-nav">
+  <ul>
+    <li><a href="/#">Theta Mart</a></li>
+    <li><a href="/customers">Customers</a></li>
+    <li><a href="/drivers">Drivers</a></li>
+    <li><a href="/orders">Orders</a></li>
+    <li><a href="/orderProducts">Order Products</a></li>
+    <li><a href="/products">Products</a></li>
+    <li><a href="/orderStatuses">Order Statuses</a></li>
+  </ul>
 </nav>
 
-<p>Theta Mart allows customers to create an order on our website to have products
-    delivered to them by one of our drivers from our store in Las Vegas within a
-    20-mile radius. The Theta mart database records each order and tracks the status
-    from when the order’s placed to delivery. Theta Mart takes 3,000 orders per year
-    and has 5 drivers currently active. Customers can place Orders for Products that
-    will be delivered by Drivers.
-</p>
 
-Site Functionality:
-<ul>
-    <p> <b>Customers:</b>
-        Can add and update existing customers.</p>
-    <p> <b>Drivers:</b>
-        Add, update, retrieve, or delete Drivers.</p>
 
-    <p> <b>Orders:</b>
-        Allows an order to be placed for a Customer, as well as retrieves
-        orders, or updates existing orders.</p>
+  <div class="welcome">Welcome to Theta Mart!</div>
+  <div class="description">
+    <p>Theta Mart allows customers to create an order on our website to have
+      products delivered to them by one of our drivers from our store in Las
+      Vegas within a 20-mile radius. The Theta mart database records each order
+      and tracks the status from when the order’s placed to delivery. Theta Mart
+      takes 3,000 orders per year and has 5 drivers currently active. Customers
+      can place Orders for Products that will be delivered by Drivers.</p>
+    <p>Site Functionality:
+      <ul>
+        <p>
+          <b>Customers:</b>
+          Can add and update existing customers.</p>
+        <p>
+          <b>Drivers:</b>
+          Add, update, retrieve, or delete Drivers.</p>
 
-    <p> <b>OrderProducts:</b>
-        Retrieves products that are a part of various orders. It can also
-        update specific OrderProducts for orders, add new OrderProducts to existing orders,
-        as well as delete OrderProducts.</p>
+        <p>
+          <b>Orders:</b>
+          Allows an order to be placed for a Customer, as well as retrieves
+          orders, or updates existing orders.</p>
 
-    <p><b>Products:</b>
-        Retrieves all products and allows searching functionality for a specific product.
-        Also adds new products, and updates existing products.
-    </p>
-    <b>OrderStatuses:</b>
-    Allows retrieval, updates, and insertion of new OrderStatuses.
-</ul>
+        <p>
+          <b>OrderProducts:</b>
+          Retrieves products that are a part of various orders. It can also
+          update specific OrderProducts for orders, add new OrderProducts to
+          existing orders, as well as delete OrderProducts.</p>
+
+        <p><b>Products:</b>
+          Retrieves all products and allows searching functionality for a
+          specific product. Also adds new products, and updates existing
+          products.
+        </p>
+        <b>OrderStatuses:</b>
+        Allows retrieval, updates, and insertion of new OrderStatuses.
+      </ul></p>
+  </div>
+</div>

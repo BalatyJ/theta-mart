@@ -1,115 +1,140 @@
 <!-- drivers.hbs -->
-<h1>Drivers</h1>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+></script>
 
-<nav>
-    <a href="/#">HomePage</a>   <a href="/customers">Customers</a>
-    <a href="/drivers">Drivers</a>   <a href="/orders">Orders</a>
-    <a href="/orderProducts">Order Products</a>   <a href="/products">Products</a>  
-    <a href="/orderStatuses">Order Statuses</a>
-  </nav>
+<nav class="theta-mart-nav">
+  <ul>
+    <li><a href="/#">Theta Mart</a></li>
+    <li><a href="/customers">Customers</a></li>
+    <li><a href="/drivers">Drivers</a></li>
+    <li><a href="/orders">Orders</a></li>
+    <li><a href="/orderProducts">Order Products</a></li>
+    <li><a href="/products">Products</a></li>
+    <li><a href="/orderStatuses">Order Statuses</a></li>
+  </ul>
+</nav>
 
-  <br></br>
-{{!-- Create a table --}}
+{{! Search Customer }}
+<form id="search-person-html" method="GET" action="/drivers">
+  <div class="textbox-label">Search Driver</div>
+  <input
+    type="text"
+    class="textbox"
+    name="lname"
+    id="input-lname-html-search"
+    placeholder="Type Last Name..."
+  />
+  <input type="submit" />
+  <a href="/drivers"><button>Reset</button></a>
+</form>
+<br />
 
-    {{!-- Header section --}}
-    <thead>
-        <form id="search-person-html" method='GET' action='/drivers'>
-        <fieldset>
-            <legend>Search Driver</legend>
-        <p>Search by last name using the field below. Partial last names are OK too!</p>
-        <form id="search-person-html" method='GET' action='/drivers'>
-        <label for="input-lname">Search by Last Name: </label>
-        <input type="text" name="lname" id="input-lname-html-search">
-        <input type="submit">
-        <a href='/drivers'><button>Reset</button></a>
-        </fieldset>
-    </form>
-        <br></br>
-
-    <table id="drivers-table">
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            <th>Driver ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Available</th>  
-            <th>Delete</th>      
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the information in order --}}
-        {{#each data}}
-        <tr data-value={{this.driver_id}}>
-          <td>{{this.driver_id}}</td>
-          <td>{{this.fname}}</td>
-          <td>{{this.lname}}</td>
-          <td>{{this.phone}}</td>
-          <td>{{this.available}}</td>
-          <td><button onclick="deleteDriver({{this.driver_id}})">Delete</button></td>
-        </tr>
-        {{/each}}
-    </tbody>
+{{! Create a table }}
+<table id="drivers-table">
+  {{! Header section }}
+  <thead>
+    <tr>
+      <th>Driver ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Available</th>
+      <th></th>
+    </tr>
+  </thead>
+  {{! Body section }}
+  <tbody>
+    {{#each data}}
+      <tr>
+        <td>{{this.driver_id}}</td>
+        <td>{{this.fname}}</td>
+        <td>{{this.lname}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.available}}</td>
+        <td><button
+            onclick="deleteDriver({{this.driver_id}})"
+          >Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
 </table>
 
-<!-- /views/index.hbs -->
+<!-- Add a new table -->
 
+<div class="form-style">
+  <h4>CREATE DRIVER</h4>
+  <form id="add-driver-form-ajax">
+    <input
+      type="text"
+      name="input-fname"
+      id="input-fname"
+      placeholder="First Name"
+    />
+    <input
+      type="text"
+      name="input-lname"
+      id="input-lname"
+      placeholder="Last Name"
+    />
+    <input
+      type="text"
+      name="input-phone"
+      id="input-phone"
+      placeholder="Phone"
+    />
+    <input
+      type="text"
+      name="input-availability"
+      id="input-availability"
+      placeholder="Availability"
+    />
+    <input type="submit" />
+  </form>
+</div>
+<br />
 
+<!--Update Driver Table -->
 
-<br></br>
-{{!-- Form to add a record to the table  --}}
-<form id="add-driver-form-ajax">
-    <fieldset>
-    <legend>Add driver</legend>
-    <p>To add a new driver, please enter their information below and click 'Submit'!</p>
-    <label for="input-fname">First Name: </label>
-    <input type="text" name="input-fname-d" id="input-fname-d">
-    
-    <label for="input-lname">Last Name: </label>
-    <input type="text" name="input-lname-d" id="input-lname-d">
+<div class="form-style">
+  <h4>UPDATE DRIVER</h4>
+  <form id="update-driver-form-ajax">
 
-    <label for="input-phone">Phone: </label>
-    <input type="text" name="input-phone-d" id="input-phone-d">
-
-    <label for="input-available">Availabile: </label>
-    <input type="text" name="input-available" id="input-available">
-
-    <input type="submit">
-    </fieldset>
-</form>
-<br>
-
-
-<form id="update-driver-form-ajax"></form>
-<fieldset>
-<legend>Updating Driver's Availability</legend>
-
-    <label for="input-fullname">Full name: </label>
     <select name="input-fullname" id="mySelect">
-        <option value="test">Select a Person</option>
-        {{#each data}}
-        <option value="{{this.driver_id}}">{{this.fname}} {{this.lname}}</option>
-        {{/each}}
+      <option value="test">Select a Driver</option>
+      {{#each data}}
+        <option value="{{this.driver_id}}">{{this.driver_id}}</option>
+      {{/each}}
     </select>
+    <input
+      type="text"
+      name="input-fname"
+      id="input-fname-update"
+      placeholder="First Name"
+    />
+    <input
+      type="text"
+      name="input-lname"
+      id="input-lname-update"
+      placeholder="Last Name"
+    />
+    <input
+      type="text"
+      name="input-phone"
+      id="input-phone-update"
+      placeholder="Phone"
+    />
+    <input
+      type="text"
+      name="input-availability"
+      id="input-availability-update"
+      placeholder="Availability"
+    />
+    <input type="submit" value="Update" />
+  </form>
+</div>
 
-    <label for="input-available-update">Availability: </label>
-    <select name="input-available-update" id="input-available-update">
-        <option>Select Availability</option>
-        {{#each available}}
-        <option value="{{this.driver_id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-    <input type="submit">
-</fieldset>
-</form>
-
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+{{! Embed our javascript to handle the DOM manipulation and AJAX request }}
 <script src="./js/add_driver.js"></script>
 <script src="./js/delete_driver.js"></script>
 <script src="./js/update_driver.js"></script>

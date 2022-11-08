@@ -1,123 +1,161 @@
-<!-- index.hbs -->
-<h1>Customers</h1>
-<nav>
-    <a href="/#">HomePage</a> <a href="/customers">Customers</a>
-    <a href="/drivers">Drivers</a> <a href="/orders">Orders</a>
-    <a href="/orderProducts">Order Products</a> <a href="/products">Products</a>
-    <a href="/orderstatuses">Order Statuses</a>
-  </nav>
+<!-- Navigation Bar -->
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+></script>
 
-  <br></br>
+<nav class="theta-mart-nav">
+  <ul>
+    <li><a href="/#">Theta Mart</a></li>
+    <li><a href="/customers">Customers</a></li>
+    <li><a href="/drivers">Drivers</a></li>
+    <li><a href="/orders">Orders</a></li>
+    <li><a href="/orderProducts">Order Products</a></li>
+    <li><a href="/products">Products</a></li>
+    <li><a href="/orderStatuses">Order Statuses</a></li>
+  </ul>
+</nav>
+
+{{!-- Search Customer --}}
+<form id="search-person-html" method="GET" action="/customers">
+  <div class="textbox-label">Search Customer</div>
+  <input
+    type="text"
+    class="textbox"
+    name="lname"
+    id="input-lname-html-search"
+    placeholder="Type Last Name..."
+  />
+  <input type="submit" />
+  <a href="/customers"><button>Reset</button></a>
+</form>
+<br />
+
 {{!-- Create a table --}}
-
+<table id="customers-table">
     {{!-- Header section --}}
     <thead>
-        <form id="search-person-html" method='GET' action='/customers'>
-        <fieldset>
-            <legend>Search Customer</legend>
-        <p>Search by last name using the field below. Partial last names are OK too!</p>
-        <form id="search-person-html" method='GET' action='/customers'>
-        <label for="input-lname">Search by Last Name: </label>
-        <input type="text" name="lname" id="input-lname-html-search">
-        <input type="submit">
-        <a href='/customers'><button>Reset</button></a>
-        </fieldset>
-    </form>
-        <br></br>
+      <tr>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Street</th>
+      <th>Unit</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip Code</th>
+      <th>Country</th>
+      <th></th>
+    </tr>
+  </thead>
 
-    <table>
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            <th>Customer ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Street</th>
-            <th>Unit</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip Code</th>
-            <th>Country</th>
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the information in order --}}
-        {{#each data}}
-        <tr>
-          <td>{{this.customer_id}}</td>
-          <td>{{this.fname}}</td>
-          <td>{{this.lname}}</td>
-          <td>{{this.phone}}</td>
-          <td>{{this.address1}}</td>
-          <td>{{this.address2}}</td>
-          <td>{{this.city}}</td>
-          <td>{{this.state}}</td>
-          <td>{{this.zipcode}}</td>
-          <td>{{this.country}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
+{{!-- Body section --}}
+  <tbody>
+    {{#each data}}
+      <tr>
+        <td>{{this.customer_id}}</td>
+        <td>{{this.fname}}</td>
+        <td>{{this.lname}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.address1}}</td>
+        <td>{{this.address2}}</td>
+        <td>{{this.city}}</td>
+        <td>{{this.state}}</td>
+        <td>{{this.zipcode}}</td>
+        <td>{{this.country}}</td>
+        <td><button
+            onclick="deleteCustomer({{this.customer_id}})"
+          >Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
 </table>
-<br>
-<!-- /views/index.hbs -->
 
-{{!-- Form to add a record to the table  --}}
-<form id="add-customer-form-ajax">
-    <fieldset>
-    <legend>Add Customer</legend>
-    <label for="input-fname">First Name: </label>
-    <input type="text" name="input-fname" id="input-fname">
-    
-    <label for="input-lname">Last Name: </label>
-    <input type="text" name="input-lname" id="input-lname">
+<!-- Add a new table -->
 
-    <label for="input-phone">Phone: </label>
-    <input type="text" name="input-phone" id="input-phone">
+<div class="form-style">
+  <h4>CREATE CUSTOMER</h4>
+  <form id="add-customer-form-ajax">
+    <input
+      type="text"
+      name="input-fname"
+      id="input-fname"
+      placeholder="First Name"
+    />
+    <input
+      type="text"
+      name="input-lname"
+      id="input-lname"
+      placeholder="Last Name"
+    />
+    <input
+      type="text"
+      name="input-phone"
+      id="input-phone"
+      placeholder="Phone"
+    />
+    <input
+      type="text"
+      name="input-address1"
+      id="input-address1"
+      placeholder="Street"
+    />
+    <input
+      type="text"
+      name="input-address2"
+      id="input-address2"
+      placeholder="Unit"
+    />
+    <input type="text" name="input-city" id="input-city" placeholder="City" />
+    <input
+      type="text"
+      name="input-state"
+      id="input-state"
+      placeholder="State"
+    />
+    <input
+      type="text"
+      name="input-zipcode"
+      id="input-zipcode"
+      placeholder="Zip Code"
+    />
+    <input
+      type="text"
+      name="input-country"
+      id="input-country"
+      placeholder="Country"
+    />
+    <input type="submit" />
+  </form>
+</div>
+<br />
 
-    <label for="input-address1">Street: </label>
-    <input type="text" name="input-address1" id="input-address1">
+<!--Update Customer Table -->
 
-    <label for="input-address2">Unit: </label>
-    <input type="text" name="input-address2" id="input-address2">
-
-    <label for="input-city">City: </label>
-    <input type="text" name="input-city" id="input-city">
-
-    <label for="input-state">State: </label>
-    <input type="text" name="input-state" id="input-state">
-
-    <label for="input-zipcode">Zip Code: </label>
-    <input type="text" name="input-zipcode" id="input-zipcode">
-
-    <label for="input-country">Country: </label>
-    <input type="text" name="input-country" id="input-country">
-
-    <input type="submit">
-    </fieldset>
-</form>
-
-<br>
-<form id="update-person-form-ajax">
-    <fieldset>
-    
-    <legend>Update Customer</legend>
+<form id="update-customer-form-ajax">
+  <div class="form-style">
+  <h4>UPDATE CUSTOMER</h4>
+  <form id="update-customer-form-ajax">
     <label for="input-fullname">Full name: </label>
     <select name="input-fullname" id="mySelect">
-        <option value="test">Select a Customer</option>
-        {{#each data}}
-        <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
-        {{/each}}
+      <option value="test">Select a Customer</option>
+      {{#each data}}
+      <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
+      {{/each}}
     </select>
-    <label for="input-phone-update">Phone: </label>
-    <input type="text" name="input-phone-update" id="input-phone-update">
+
+    <label for="input-phone">Phone: </label>
+    <select name="input-phone" id="input-phone-update">
+      <option> Select a Phone Number</option>
+      {{#each data}}
+        <option value="{{this.customer_id}}">{{this.phone}}</option>
+      {{/each}}
+    </select>
     <input type="submit">
-</form>
+  </form>
+</div>
 
-<script src="./js/update_person.js"></script>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+{{! Embed our javascript to handle the DOM manipulation and AJAX request }}
 <script src="./js/add_customer.js"></script>
+<script src="./js/update_customer.js"></script>
+<script src="./js/delete_customer.js"></script>

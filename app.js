@@ -101,35 +101,26 @@ app.post('/add-customer-ajax', function (req, res) {
 // Customers - update
 app.put('/put-customer-ajax', function(req,res,next){
     let data = req.body;
-
-    let phone = parseInt(data.phone);
-    let customer = parseInt(data.fullname);
-
   
-    queryUpdateCustomer = `UPDATE Customers SET phone = ? WHERE customer_id = ?;`;
-    selectCustomer = `SELECT phone * FROM Customers WHERE customer_id =?;`
+    let queryUpdateCustomer = `UPDATE Customers SET fname= ?, lname= ?, phone= ?, address1= ?, address2= ?, city= ?, state= ?, zipcode= ?, country= ? WHERE customer_id= ?;` ;
+
           // Run the 1st query
-          db.pool.query(queryUpdateCustomer, [phone,customer], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-              else
-            {
-                // Run the second query
-                db.pool.query(selectCustomer, [phone], function(error, rows, fields) {
-        
-                    if (error) {
-                        console.log(error);
-                        res.sendStatus(400);
-                    } else {
-                        res.send(rows);
-                    }
-                })
+          db.pool.query(queryUpdateCustomer, [data['fname'], data['lname'], data['phone'], data['address1'],data['address2'], data['city'], data['state'], data['zipcode'], data['country'], data['customer_id']], function(error, rows, fields){
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
             }
-})});
+    
+            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // table on the front-end
+            else {
+                    res.send(rows);
+                }
+            }
+          );
+        });
 
 app.delete('/customers/:delete-customer-ajax', function(req,res,next){
     let data = req.body;
@@ -169,7 +160,7 @@ app.get('/drivers', function (req, res) {
 });            
                                              // received back from the query                                  
 // Drivers - insert
-app.post('/drivers/:add-driver-ajax', function (req, res) {
+app.post('/add-driver-ajax', function (req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
@@ -339,7 +330,7 @@ app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            // If there was no error, perform a SELECT * on Customers
+            // If there was no error, perform a SELECT * on OrderStatuses
             query2 = `SELECT * FROM OrderStatuses;`;
             db.pool.query(query2, function (error, rows, fields) {
 
@@ -358,6 +349,33 @@ app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
         }
     })
 });
+
+
+// Order Status - update
+app.put('/orderStatuses/:put-orderStatus-ajax', function(req,res,next){
+    let data = req.body;
+
+    let queryUpdateOrderStatus = `UPDATE OrderStatuses SET description = ? WHERE orderstatus_id = ?`;
+  
+    // Run the 1st query
+    db.pool.query(queryUpdateOrderStatus, [data['description'], data['orderstatus_id']], function (error, rows, fields) {
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else {
+                res.send(rows);
+            }
+        }
+      );
+    });
+
+
 
 
 // Orders - get

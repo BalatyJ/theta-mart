@@ -8,13 +8,29 @@ updateCustomerForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputFullName = document.getElementById("mySelect");
-    let inputPhone = document.getElementById("input-phone-update");
+    let inputFullName = document.getElementById("update-fullname");
+    let inputFirstName = document.getElementById("update-fname");
+    let inputLastName = document.getElementById("update-lname");
+    let inputPhone = document.getElementById("update-phone");
+    let inputStreet = document.getElementById("update-address1");
+    let inputUnit = document.getElementById("update-address2");
+    let inputCity = document.getElementById("update-city");
+    let inputState = document.getElementById("update-state");
+    let inputZipCode = document.getElementById("update-zipcode");
+    let inputCountry = document.getElementById("update-country");
 
 
     // Get the values from the form fields
     let fullNameValue = inputFullName.value;
+    let firstNameValue = inputFirstName.value;
+    let lastNameValue = inputLastName.value;
     let phoneValue = inputPhone.value;
+    let streetValue = inputStreet.value;
+    let unitValue = inputUnit.value;
+    let cityValue = inputCity.value;
+    let stateValue = inputState.value;
+    let zipcodeValue = inputZipCode.value;
+    let countryValue = inputCountry.value;
     
     if (isNaN(phoneValue)) 
     {
@@ -24,10 +40,19 @@ updateCustomerForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        fullname: fullNameValue,
+        customer_id: fullNameValue,
+        fname: firstNameValue,
+        lname: lastNameValue,
         phone: phoneValue,
+        address1: streetValue,
+        address2: unitValue,
+        city: cityValue,
+        state: stateValue,
+        zipcode: zipcodeValue,
+        country: countryValue
     }
-    
+
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-customer-ajax", true);
@@ -52,15 +77,15 @@ updateCustomerForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, personID){
+function updateRow(data, customerID){
     let parsedData = JSON.parse(data);
     
-    let table = document.getElementById("people-table");
+    let table = document.getElementById("customers-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == customer_id) {
+       if (table.rows[i].getAttribute("data-value") == customerID) {
 
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];

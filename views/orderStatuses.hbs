@@ -14,7 +14,7 @@
 
 {{!-- Create a table --}}
 
-<table>
+<table id ="orderstatus-table" class="order-status">
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
     <tr>
@@ -36,38 +36,42 @@
     </tbody>
 </table>
 
-<!-- /views/index.hbs -->
 
-<br></br>
-{{!-- Form to add a record to the table --}}
-<form id="add-orderStatus-form-ajax">
-    <fieldset>
-        <legend>Add Order Status</legend>
-        <p>To add new order status , please enter their information below and click 'Submit'!</p>
-        <label for="input-orderStatus">Order Status: </label>
-        <input type="text" name="input-orderStatus" id="input-orderStatus">
+<!-- Add a new table -->
 
-        <label for="input-description-o">Description: </label>
-        <input type="text" name="input-description-o" id="input-description-o">
+<div class="form-style">
+    <h4>CREATE ORDER STATUS</h4>
+    <form id="add-orderStatus-form-ajax">
+      <input type="text" 
+        name="input-orderStatus" 
+        id="input-orderStatus"
+        placeholder="Order Status"
+      />
+      <input type="text" 
+        name="input-description-o" 
+        id="input-description-o"
+        placeholder="Description"
+      />
+      <input type="submit" />
+    </form>
+  </div>
+  <br>
 
-        <input type="submit">
-    </fieldset>
-</form>
-
-<br>
-<form id="update-orderStatus-form-ajax">
-    <fieldset>
-    <legend>Update a Product</legend>
-    <p>Use the following fields to update a product information.</p>
-    <label for="input-update-orderStatus">Order Status </label>
-        <select name="input-update-orderStatus" id="select-update-orderStatus">
-            <option value="">Select an Order Status</option>
+  <div class="form-style">
+    <h4>UPDATE ORDER STATUS</h4>
+    <form id="update-orderStatus-form-ajax">
+        <select name="update-orderStatus" id="update-orderStatus" placeholder="Select Order Status" required>
+            <option value="test">Select a Order Status</option>
             {{#each data}}
             <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
             {{/each}}
-        </select>
-</select>
-
+            </select> 
+    
+    <Input type="text" name="update-description" id="update-description" required placeholder="Description">
+    <input type="submit">
+    </form>
+</div>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_orderStatus.js"></script>
+<script src="./js/update_orderStatus.js"></script>

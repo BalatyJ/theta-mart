@@ -45,7 +45,7 @@ addCustomerForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/customers/:add-person-ajax", true);
+    xhttp.open("POST", "/add-customer-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -132,7 +132,7 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
-    let selectMenu = document.getElementById("mySelect");
+    let selectMenu = document.getElementById("update-fullname");
     let option = document.createElement("option");
     option.text = newRow.fname + ' ' +  newRow.lname;
     option.value = newRow.customer_id;

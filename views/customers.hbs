@@ -15,7 +15,7 @@
   </ul>
 </nav>
 
-{{!-- Search Customer --}}
+{{! Search Customer }}
 <form id="search-person-html" method="GET" action="/customers">
   <div class="textbox-label">Search Customer</div>
   <input
@@ -30,11 +30,11 @@
 </form>
 <br />
 
-{{!-- Create a table --}}
+{{! Create a table }}
 <table id="customers-table">
-    {{!-- Header section --}}
-    <thead>
-      <tr>
+  {{! Header section }}
+  <thead>
+    <tr>
       <th>Customer ID</th>
       <th>First Name</th>
       <th>Last Name</th>
@@ -49,7 +49,7 @@
     </tr>
   </thead>
 
-{{!-- Body section --}}
+  {{! Body section }}
   <tbody>
     {{#each data}}
       <tr>
@@ -63,9 +63,7 @@
         <td>{{this.state}}</td>
         <td>{{this.zipcode}}</td>
         <td>{{this.country}}</td>
-        <td><button
-            onclick="deleteCustomer({{this.customer_id}})"
-          >Delete</button></td>
+        <td><button onclick="deleteCustomer({{this.customer_id}})">Delete</button></td>
       </tr>
     {{/each}}
   </tbody>
@@ -125,35 +123,35 @@
       id="input-country"
       placeholder="Country"
     />
-    <input type="submit" />
+    <input type="submit">
   </form>
 </div>
 <br />
 
 <!--Update Customer Table -->
 
-<form id="update-customer-form-ajax">
-  <div class="form-style">
+<div class="form-style">
   <h4>UPDATE CUSTOMER</h4>
   <form id="update-customer-form-ajax">
-    <label for="input-fullname">Full name: </label>
-    <select name="input-fullname" id="mySelect">
+    <select name="update-fullname" id="update-fullname">
       <option value="test">Select a Customer</option>
       {{#each data}}
-      <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
+        <option value="{{this.customer_id}}">{{this.fname}}
+          {{this.lname}}</option>
       {{/each}}
     </select>
-
-    <label for="input-phone">Phone: </label>
-    <select name="input-phone" id="input-phone-update">
-      <option> Select a Phone Number</option>
-      {{#each data}}
-        <option value="{{this.customer_id}}">{{this.phone}}</option>
-      {{/each}}
-    </select>
+    <Input type="text" name="update-fname" id="update-fname" required placeholder="First Name">
+    <Input type="text" name="update-lname" id="update-lname" required placeholder="Last Name">
+    <Input type="text" name="update-phone" id="update-phone" required placeholder="Phone">
+    <Input type="text" name="update-address1" id="update-address1" required placeholder="Street">
+    <Input type="text" name="update-address2" id="update-address2" required placeholder="Unit">
+    <Input type="text" name="update-city" id="update-city" required placeholder="City">
+    <Input type="text" name="update-state" id="update-state" required placeholder="State">
+    <Input type="text" name="update-zipcode" id="update-zipcode" required placeholder="Zip Code">
+    <Input type="text" name="update-country" id="update-country" required placeholder="Country">  
     <input type="submit">
-  </form>
-</div>
+    </form>
+  </div>
 
 {{! Embed our javascript to handle the DOM manipulation and AJAX request }}
 <script src="./js/add_customer.js"></script>

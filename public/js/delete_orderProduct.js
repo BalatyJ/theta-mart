@@ -10,6 +10,7 @@ function deleteOrderProduct(orderProductID) {
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         success: function (result) {
+            window.location.reload(true);
             deleteRow(orderProductID);
         }
     });

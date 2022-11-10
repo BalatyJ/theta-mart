@@ -1,14 +1,10 @@
-<!-- products.hbs -->
-<nav class="theta-mart-nav">
-  <ul>
-    <li><a href="/#">Theta Mart</a></li>
-    <li><a href="/customers">Customers</a></li>
-    <li><a href="/drivers">Drivers</a></li>
-    <li><a href="/orders">Orders</a></li>
-    <li><a href="/orderProducts">Order Products</a></li>
-    <li><a href="/products">Products</a></li>
-    <li><a href="/orderStatuses">Order Statuses</a></li>
-  </ul>
+<!-- index.hbs -->
+<h1>Products</h1>
+<nav>
+    <a href="/#">HomePage</a> <a href="/customers">Customers</a>
+    <a href="/drivers">Drivers</a> <a href="/orders">Orders</a>
+    <a href="/orderProducts">Order Products</a> <a href="/products">Products</a>
+    <a href="/orderStatuses">Order Statuses</a>
 </nav>
 
 <br></br>
@@ -28,7 +24,7 @@
     </form>
     <br></br>
 
-    <table>
+    <table id="product-table">
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
         <tr>
@@ -83,19 +79,33 @@
 </form>
 
 <br>
+<br>
+
 <form id="update-product-form-ajax">
     <fieldset>
-    <legend>Update a Product</legend>
-    <p>Use the following fields to update a product information.</p>
-    <label for="input-update-product_id">Product ID: </label>
-        <select name="input-update-product_id" id="select-update-product_id">
+        <legend>Update Product</legend>
+        <p>To update an existing product, please enter their information below and click 'Submit'!</p>
+        <label for="input-product">Product Name: </label>
+        <select name="input-product" id="input-updateproduct-p" required>
             <option value="">Select a Product</option>
             {{#each data}}
-            <option value="{{this.product_id}}">{{this.product_id}}</option>
+            <option value="{{this.product_id}}">{{this.name}}</option>
             {{/each}}
         </select>
-</select>
 
+        <label for="input-description">Description: </label>
+        <input type="text" name="input-description" id="input-updatedescription-p">
+
+        <label for="input-price">Price: </label>
+        <input type="number" min="0.00" max="999999.99" step="0.01" name="input-price" id="input-updateprice-p">
+
+        <label for="input-stock">Stock: </label>
+        <input type="number" name="input-stock" id="input-updatestock-p">
+
+        <input type="submit">
+    </fieldset>
+</form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_product.js"></script>
+<script src="./js/update_product.js"></script>

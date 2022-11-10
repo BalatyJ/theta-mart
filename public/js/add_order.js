@@ -78,6 +78,10 @@ addOrderForm.addEventListener("submit", function (e) {
         }
     }
 
+    xhttp.onload = function () {
+        location.reload();
+    };
+
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 
@@ -96,10 +100,10 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    console.log(parsedData);
+
 
     let newRow = parsedData[parsedData.length - 1]
-    console.log(parsedData)
+
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");

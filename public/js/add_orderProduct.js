@@ -50,7 +50,11 @@ addProductForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.")
         }
     }
-    console.log("About to send the request.")
+
+    xhttp.onload = function () {
+        location.reload();
+    };
+
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 

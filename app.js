@@ -459,18 +459,19 @@ app.post('/add-order-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            if (data.driverid !== '') {
-                query3 = `UPDATE Drivers SET available=0 WHERE ${data.driverid}=Drivers.driver_id;`
+            // I'm not going to implement right now, but may after some consideration.
+            // if (data.driverid !== '') {
+            //     query3 = `UPDATE Drivers SET available=0 WHERE ${data.driverid}=Drivers.driver_id;`
 
-                db.pool.query(query3, function (error, rows, fields) {
-                    if (error) {
+            //     db.pool.query(query3, function (error, rows, fields) {
+            //         if (error) {
 
-                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                        console.log(error)
-                        res.sendStatus(400);
-                    }
-                })
-            }
+            //             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            //             console.log(error)
+            //             res.sendStatus(400);
+            //         }
+            //     })
+            // }
 
 
             query2 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS OrderDate, 
@@ -755,9 +756,12 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
         }
     })
 });
+
 
 
 

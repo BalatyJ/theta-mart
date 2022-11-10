@@ -179,6 +179,9 @@ orderstatus_id AS 'Order Status', CONCAT(Drivers.fname,
 FROM Orders 
 WHERE order_id=:update_order_id; 
 
+-- Displays driver's name for the Add Order form.
+SELECT driver_id, CONCAT(Drivers.fname, ' ', Drivers.lname) AS Driver FROM Drivers WHERE Drivers.available=1;
+
 -- Populate data for the driver drop down where the Driver is in available or the driver is already selected.
 SELECT CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, driver_id, available
 FROM Drivers

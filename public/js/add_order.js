@@ -1,23 +1,23 @@
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('add-person-form-ajax');
+let addOrderForm = document.getElementById('add-order-form-ajax');
 
 // Modify the objects we need
-addPersonForm.addEventListener("submit", function (e) {
+addOrderForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputOrderDate = document.getElementById("input-orderdate-o");
-    let inputStreet = document.getElementById("input-street-o");
-    let inputUnit = document.getElementById("input-unit-o");
-    let inputCity = document.getElementById("input-city-o");
-    let inputState = document.getElementById("input-state-o");
-    let inputZipcode = document.getElementById("input-zipcode-o");
-    let inputCountry = document.getElementById("input-country-o");
-    let inputOrderStatusID = document.getElementById("input-orderstatusid-o");
-    let inputDriverID = document.getElementById("input-driverid-o");
-    let inputCustID = document.getElementById("input-customerid-o");
+    let inputOrderDate = document.getElementById("input-addorderdate-o");
+    let inputStreet = document.getElementById("input-addstreet-o");
+    let inputUnit = document.getElementById("input-addunit-o");
+    let inputCity = document.getElementById("input-addcity-o");
+    let inputState = document.getElementById("input-addstate-o");
+    let inputZipcode = document.getElementById("input-addzipcode-o");
+    let inputCountry = document.getElementById("input-addcountry-o");
+    let inputOrderStatusID = document.getElementById("input-addorderstatus-o");
+    let inputDriverID = document.getElementById("input-adddriver-o");
+    let inputCustID = document.getElementById("input-addcustomer-o");
 
 
     // Get the values from the form fields
@@ -31,6 +31,8 @@ addPersonForm.addEventListener("submit", function (e) {
     let OrderStatusIDValue = inputOrderStatusID.value
     let DriverIDValue = inputDriverID.value
     let CustIDValue = inputCustID.value
+
+    console.log(orderDateValue)
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -94,10 +96,11 @@ addRowToTable = (data) => {
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
-
+    console.log(parsedData)
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
+    let CustomerCell = document.createElement("TD");
     let orderDateCell = document.createElement("TD");
     let streetCell = document.createElement("TD");
     let unitCell = document.createElement("TD");
@@ -105,26 +108,28 @@ addRowToTable = (data) => {
     let stateCell = document.createElement("TD");
     let zipcodeCell = document.createElement("TD");
     let countryCell = document.createElement("TD");
+    let totalCell = document.createElement("TD");
     let orderStatusIdCell = document.createElement("TD");
     let DriverCell = document.createElement("TD");
-    let CustomerCell = document.createElement("TD");
+
 
     let deleteCell = document.createElement("TD");
 
 
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.order_id;
-    orderDateCell.innerText = newRow.order_date;
-    streetCell.innerText = newRow.address1;
-    unitCell.innerText = newRow.address2;
-    cityCell.innerText = newRow.city;
-    stateCell.innerText = newRow.state;
-    zipcodeCell.innerText = newRow.zipcode;
-    countryCell.innerText = newRow.country;
-    orderStatusIdCell.innerText = newRow.orderstatus_id;
-    DriverCell.innerText = newRow.driver_id;
-    CustomerCell.innerText = newRow.customer_id;
+    idCell.innerText = newRow.OrderID;
+    orderDateCell.innerText = newRow.OrderDate;
+    streetCell.innerText = newRow.Street;
+    unitCell.innerText = newRow.Unit;
+    cityCell.innerText = newRow.City;
+    stateCell.innerText = newRow.State;
+    zipcodeCell.innerText = newRow.ZipCode;
+    countryCell.innerText = newRow.Country;
+    totalCell.innerText = newRow.Total;
+    orderStatusIdCell.innerText = newRow.OrderStatus;
+    DriverCell.innerText = newRow.Driver;
+    CustomerCell.innerText = newRow.Customer;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
@@ -134,6 +139,7 @@ addRowToTable = (data) => {
 
     // Add the cells to the row 
     row.appendChild(idCell);
+    row.appendChild(CustomerCell);
     row.appendChild(orderDateCell);
     row.appendChild(streetCell);
     row.appendChild(unitCell);
@@ -141,9 +147,11 @@ addRowToTable = (data) => {
     row.appendChild(stateCell);
     row.appendChild(zipcodeCell);
     row.appendChild(countryCell);
+    row.appendChild(totalCell);
     row.appendChild(orderStatusIdCell);
     row.appendChild(DriverCell);
-    row.appendChild(CustomerCell);
+    row.appendChild(deleteCell);
+
 
     row.setAttribute('data-value', newRow.id);
 

@@ -108,12 +108,14 @@ addRowToTable = (data) => {
     // Add a row attribute so the deleteRow function can find a newly added row
     row.setAttribute('data-value', newRow.id);
 
-    let selectMenu = document.getElementById("select-update-orderproductid");
-    let option = document.createElement("update_productid");
+    currentTable.appendChild(row);
+
+    let selectMenu = document.getElementById("input-productid-op");
+    let option = document.createElement("option");
     option.text = newRow.name;
     option.value = newRow.product_id;
     selectMenu.add(option);
 
     // Add the row to the table
-    currentTable.appendChild(row);
+
 }

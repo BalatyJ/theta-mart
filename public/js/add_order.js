@@ -20,6 +20,7 @@ addOrderForm.addEventListener("submit", function (e) {
     let inputCustID = document.getElementById("input-addcustomer-o");
 
 
+
     // Get the values from the form fields
     let orderDateValue = inputOrderDate.value
     let StreetValue = inputStreet.value
@@ -32,7 +33,17 @@ addOrderForm.addEventListener("submit", function (e) {
     let DriverIDValue = inputDriverID.value
     let CustIDValue = inputCustID.value
 
-    console.log(orderDateValue)
+    // Clear the input fields for another transaction
+    inputOrderDate.value = '';
+    inputStreet.value = '';
+    inputUnit.value = '';
+    inputCity.value = '';
+    inputState.value = '';
+    inputZipcode.value = '';
+    inputCountry.value = '';
+    inputOrderStatusID.value = '';
+    inputDriverID.value = '';
+    inputCustID.value = '';
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -60,17 +71,7 @@ addOrderForm.addEventListener("submit", function (e) {
             // Add the new data to the table
             addRowToTable(xhttp.response);
 
-            // Clear the input fields for another transaction
-            inputOrderDate.value = '';
-            inputStreet.value = '';
-            inputUnit.value = '';
-            inputCity.value = '';
-            inputState.value = '';
-            inputZipcode.value = '';
-            inputCountry.value = '';
-            inputOrderStatusID.value = '';
-            inputDriverID.value = '';
-            inputCustID.value = '';
+
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -95,6 +96,8 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
+    console.log(parsedData);
+
     let newRow = parsedData[parsedData.length - 1]
     console.log(parsedData)
     // Create a row and 4 cells
@@ -131,8 +134,10 @@ addRowToTable = (data) => {
     DriverCell.innerText = newRow.Driver;
     CustomerCell.innerText = newRow.Customer;
 
-    deleteCell = document.createElement("button");
-    deleteCell.innerHTML = "Delete";
+
+    let deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
+    deleteCell.appendChild(deleteButton);
     deleteCell.onclick = function () {
         deleteOrderProduct(newRow.id);
     };
@@ -154,7 +159,7 @@ addRowToTable = (data) => {
 
 
     row.setAttribute('data-value', newRow.id);
-
+    console.log(row)
     // Add the row to the table
     currentTable.appendChild(row);
 

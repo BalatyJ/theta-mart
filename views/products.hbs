@@ -24,7 +24,7 @@
     </form>
     <br></br>
 
-    <table>
+    <table id="product-table">
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
         <tr>
@@ -78,5 +78,34 @@
     </fieldset>
 </form>
 
+<br>
+<br>
+
+<form id="update-product-form-ajax">
+    <fieldset>
+        <legend>Update Product</legend>
+        <p>To update an existing product, please enter their information below and click 'Submit'!</p>
+        <label for="input-product">Product Name: </label>
+        <select name="input-product" id="input-updateproduct-p" required>
+            <option value="">Select a Product</option>
+            {{#each data}}
+            <option value="{{this.product_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <label for="input-description">Description: </label>
+        <input type="text" name="input-description" id="input-updatedescription-p">
+
+        <label for="input-price">Price: </label>
+        <input type="number" min="0.00" max="999999.99" step="0.01" name="input-price" id="input-updateprice-p">
+
+        <label for="input-stock">Stock: </label>
+        <input type="number" name="input-stock" id="input-updatestock-p">
+
+        <input type="submit">
+    </fieldset>
+</form>
+
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_product.js"></script>
+<script src="./js/update_product.js"></script>

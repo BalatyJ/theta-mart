@@ -262,4 +262,9 @@ SET order_id=:order_id_selected_from_dropdown_input,
 product_id=:product_id_selected_from_dropdown_input, quantity=:input_quantity, 
 unit_price=:input_unit_price, subtotal=:input_subtotal 
 WHERE orderproduct_id=:update_orderproduct_id; 
- 
+
+-- Update an Order's total based on updated OrderProduct lines.
+UPDATE Orders
+    SET Orders.total=(SELECT SUM(OrderProducts.subtotal) 
+    FROM OrderProducts WHERE OrderProducts.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct))
+    WHERE Orders.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct);

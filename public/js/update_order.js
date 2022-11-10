@@ -15,12 +15,6 @@ updateOrderForm.addEventListener("submit", function (e) {
     let inputorderIDValue = inputorderID.value;
     let inputorderStatusValue = inputorderStatusID.value;
 
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-    if (isNaN(inputorderStatusValue)) {
-        return;
-    }
 
     let data = {
         order_id: inputorderIDValue,
@@ -31,7 +25,7 @@ updateOrderForm.addEventListener("submit", function (e) {
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/put-update-order-ajax", true);
+    xhttp.open("PUT", "/orders/put-update-order-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
 

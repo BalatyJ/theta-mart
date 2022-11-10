@@ -53,8 +53,8 @@
 
         {{!-- For each row, print the information in order --}}
         {{#each data}}
-        <tr data-value={{this.[Order ID]}}>
-            <td>{{this.[Order ID]}}</td>
+        <tr data-value={{this.OrderID}}>
+            <td>{{this.OrderID}}</td>
             <td>{{this.Customer}}</td>
             <td>{{this.[Order Date]}}</td>
             <td>{{this.Street}}</td>
@@ -66,7 +66,7 @@
             <td>{{this.Total}}</td>
             <td>{{this.[Order Status]}}</td>
             <td>{{this.Driver}}</td>
-            <td><button onclick="deleteOrder({{this.[Order ID]}})">Delete</button></td>
+            <td><button onclick="deleteOrder({{this.OrderID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -119,7 +119,7 @@
 
         <label for="input-driver">Driver: </label>
         <select name="input-driver" id="input-adddriver-o">
-            <option value="">Select an Available Driver</option>
+            <option value="null">Select an Available Driver</option>
             {{#each drivers}}
             <option value="{{this.driver_id}}">{{this.driver_id}}: {{this.Driver}}</option>
             {{/each}}
@@ -137,17 +137,17 @@
 <legend>Update an Order</legend>
 <p>Use the following fields to update an order information.</p>
 <label for="input-update-order_id">Order ID: </label>
-    <select name="input-update-order_id" id="select-update-order_id">
+    <select name="input-update-order_id" id="select-update-order_id" required>
         <option value="">Select an Order</option>
         {{#each data}}
-        <option value="{{this.[Order ID]}}">{{this.[Order ID]}}</option>
+        <option value="{{this.OrderID}}">{{this.OrderID}}</option>
         {{/each}}
     </select>
     <label for="input-update-orderStatus">Order Status: </label>
-    <select name="input-update-orderStatus" id="update_orderStatus">
+    <select name="input-update-orderStatus" id="update_orderStatus" required>
         <option value="">Select an Order Status</option>
-        {{#each orderStatuses}}
-        <option value="{{this.orderstatus_id}}">{{this.name}}</option>
+        {{#each orderstatuses}}
+        <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
         {{/each}}
         </select>
     </select>

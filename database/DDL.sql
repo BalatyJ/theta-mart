@@ -45,8 +45,8 @@ INSERT INTO Drivers (driver_id, fname, lname, phone, available) VALUES
 (1, 'Amil', 'Forenso', '7026789212', 1),
 (2, 'Ihsan', 'Akbar', '7758301238', 0),
 (3, 'Abraham', 'Storm', '7027381238', 0),
-(4, 'Leaf', 'Wizard', '7257382712', 0),
-(5, 'King', 'Dede', '7259209283', 0);
+(4, 'Leaf', 'Wizard', '7257382712', 1),
+(5, 'King', 'Dede', '7259209283', 1);
 
 
 CREATE TABLE Products (

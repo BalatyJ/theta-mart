@@ -46,11 +46,13 @@
         name="input-orderStatus" 
         id="input-orderStatus"
         placeholder="Order Status"
+        required
       />
       <input type="text" 
         name="input-description-o" 
         id="input-description-o"
         placeholder="Description"
+        required
       />
       <input type="submit" />
     </form>
@@ -60,7 +62,7 @@
   <div class="form-style">
     <h4>UPDATE ORDER STATUS</h4>
     <form id="update-orderStatus-form-ajax">
-        <select name="update-orderStatus" id="update-orderStatus" placeholder="Select Order Status" required>
+        <select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onchange="autofill(this)">
             <option value="test">Select a Order Status</option>
             {{#each data}}
             <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
@@ -75,3 +77,4 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_orderStatus.js"></script>
 <script src="./js/update_orderStatus.js"></script>
+

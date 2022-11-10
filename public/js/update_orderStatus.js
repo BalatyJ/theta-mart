@@ -56,3 +56,14 @@ function updateOrderStatusRow (data, orderStatusID) {
   }
 }
 
+function autofill(data) {
+  let order_status = document.getElementById("update-orderStatus");
+  let order_status_id = order_status.options[order_status.selectedIndex].value;
+  for (let elm in data) {
+		if (data[elm].orderstatus_id == order_status_id) {
+			document.getElementById('update-description').value =
+				data[elm].description;
+      }
+    }
+    return;
+  }

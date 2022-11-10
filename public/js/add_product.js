@@ -50,6 +50,10 @@ addProductForm.addEventListener("submit", function (e) {
         }
     }
 
+    xhttp.onload = function () {
+        location.reload();
+    };
+
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 
@@ -61,7 +65,7 @@ addProductForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("people-table");
+    let currentTable = document.getElementById("product-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -93,6 +97,7 @@ addRowToTable = (data) => {
     row.appendChild(priceCell);
     row.appendChild(stockCell);
 
+    row.setAttribute('data-value', newRow.product_id)
 
     // Add the row to the table
     currentTable.appendChild(row);

@@ -17,12 +17,11 @@ VALUES (:customer_fname_input, :customer_lname_input,
 
 
 -- Displays all customers.
-SELECT customer_id AS 'Customer ID', fname AS 'First Name',
-lname AS 'Last Name', phone AS Phone, address1 AS Street, 
-address2 AS Unit, city AS City, 
-state AS State, zipcode AS 'Zip Code', 
-country AS Country 
-FROM Customers; 
+SELECT * FROM Customers;
+
+-- Searches for a customer based on their last name.
+SELECT * FROM Customers WHERE lname LIKE :inputlastname;
+
 
 -- Displays a customer's information in the update form.
 SELECT customer_id AS 'Customer ID', fname AS 'First Name',  
@@ -31,7 +30,7 @@ address2 AS Unit, city AS City,
 state AS State, zipcode AS 'Zip Code', 
 country AS Country 
 FROM Customers; 
-WHERE ID=:update_customer_id;
+WHERE 'Customer ID'=:update_customer_id;
 
 -- Updates a customer's information.
 UPDATE Customers 
@@ -72,10 +71,10 @@ WHERE driver_id=:delete_driver_id;
 -- Deletes a driver.
 DELETE 
 FROM Drivers
-WHERE :delete_driver_id=Drivers.driver_id; 
+WHERE Drivers.driver_id=:delete_driver_id; 
 
 
--- Displays a driver's information
+-- Displays a driver's information based on ID.
 SELECT driver_id, fname, lname, phone, available 
 FROM  Drivers 
 WHERE driver_id=:update_driver_id; 
@@ -92,7 +91,6 @@ WHERE driver_id=:update_driver_id;
 
 -- Add a new product.
 INSERT INTO Products (name, description, price, stock) 
-
 VALUES (:input_product_name, :input_product_description, 
 :input_product_price, :input_product_stock); 
 
@@ -102,12 +100,11 @@ SELECT product_id AS 'Product ID', name AS Name, description AS Description,
 price AS Price, stock AS Stock 
 FROM Products;
 
--- Display products based on name filter. :search_input_name will be pre and appended with
--- % to find all matches that contain that phrase.
-SELECT product_id AS 'Product ID', name AS Name, description AS Description, 
-price AS Price, stock AS Stock
-FROM Products
-WHERE lower(name) LIKE :search_input_name;
+-- Another Display all products
+SELECT * FROM Products;
+
+-- Display products based on name filter.
+SELECT * FROM Products WHERE name LIKE :inputname;
 
 
 -- Display Product's information for the product form.
@@ -132,7 +129,7 @@ VALUES (:input_orderstatus_id, :input_orderstatus_description);
 
 
 -- Display all order statuses.
-SELECT orderstatus_id, description 
+SELECT *
 FROM OrderStatuses;
 
 
@@ -157,19 +154,21 @@ zipcode, country, total, orderstatus_id, driver_id,  customer_id)
 VALUES (:input_orders_orderdate, :input_orders_address1, :input_orders_address2, 
 :input_orders_city, :input_orders_zipcode, :input_orders_country, 
 :input_orders_total, :input_orders_orderstatus_id, :input_orders_driver_id, 
-:input_orders_customer_id); 
+:input_orders_customer_id);
+
+DELETE FROM Orders WHERE order_id =:inputid;
 
 
 -- Display all orders.
-SELECT order_id AS 'Order ID', DATE_TRUNC('day', order_date) AS 'Order Date', Orders.address1 AS Street, Orders.address2 AS Unit,
- Orders.city AS City, Orders.state AS State, Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, 
-orderstatus_id AS 'Order Status', CONCAT(Drivers.fname,
-" ", Drivers.lname) AS Driver, CONCAT(Customers.fname, " ", Customers.lname) AS Customer
-FROM Orders
-	LEFT JOIN Drivers
-	ON Drivers.driver_id=Orders.driver_id
-	INNER JOIN Customers
-	ON Customers.customer_id=Orders.customer_id;
+SELECT order_id AS 'Order ID', DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
+    Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
+    Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
+    CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, CONCAT(Customers.fname, " ", Customers.lname) AS Customer 
+    FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
+    ON Customers.customer_id=Orders.customer_id;
+
+-- Another way to display all orders.
+SELECT * FROM Orders;
 
 
 -- Display data for an order to be updated.
@@ -179,6 +178,9 @@ orderstatus_id AS 'Order Status', CONCAT(Drivers.fname,
 " ", Drivers.lname) AS Driver, CONCAT(Customers.fname, " ", Customers.lname) AS Customer
 FROM Orders 
 WHERE order_id=:update_order_id; 
+
+-- Displays driver's name for the Add Order form.
+SELECT driver_id, CONCAT(Drivers.fname, ' ', Drivers.lname) AS Driver FROM Drivers WHERE Drivers.available=1;
 
 -- Populate data for the driver drop down where the Driver is in available or the driver is already selected.
 SELECT CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, driver_id, available
@@ -215,7 +217,7 @@ VALUES (:orderproduct_order_id_input, :orderproduct_product_id_input,
 :orderproduct_subtotal_calculation); 
 
 
--- Display all OrderProducts.
+-- Display all OrderProducts based on search filter for product id.
 SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
     Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
     FROM  OrderProducts 
@@ -224,6 +226,20 @@ SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID',
     WHERE orderproduct_id=:update_orderproduct_id;
 
 
+-- Display all values.
+SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
+        Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
+        FROM  OrderProducts 
+            INNER JOIN Products 
+            ON Products.product_id=OrderProducts.product_id
+        WHERE OrderProducts.order_id=:inputorderid;
+
+
+-- Select values based on OrderProducts and Products
+SELECT orderproduct_id, order_id, Products.name, quantity, unit_price, subtotal
+            FROM  OrderProducts 
+                INNER JOIN Products 
+                ON Products.product_id=OrderProducts.product_id;
 
 -- Delete an OrderProduct.
 DELETE
@@ -247,3 +263,8 @@ product_id=:product_id_selected_from_dropdown_input, quantity=:input_quantity,
 unit_price=:input_unit_price, subtotal=:input_subtotal 
 WHERE orderproduct_id=:update_orderproduct_id; 
 
+-- Update an Order's total based on updated OrderProduct lines.
+UPDATE Orders
+    SET Orders.total=(SELECT SUM(OrderProducts.subtotal) 
+    FROM OrderProducts WHERE OrderProducts.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct))
+    WHERE Orders.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct);

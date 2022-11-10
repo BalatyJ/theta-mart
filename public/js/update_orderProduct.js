@@ -10,21 +10,21 @@ updatePersonForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let inputorderProductID = document.getElementById("select-update-productid");
     let inputProductID = document.getElementById("update_productid");
+    let inputOrderProductQuantity = document.getElementById("updatequantity-op");
+    let inputOrderProductUnitPrice = document.getElementById("updateunitprice-op");
 
     // Get the values from the form fields
     let inputorderProductIDValue = inputorderProductID.value;
     let inputProductIDValue = inputProductID.value;
+    let inputOrderProductQuantityValue = inputOrderProductQuantity.value;
+    let inputOrderProductUnitPriceValue = inputOrderProductUnitPrice.value;
 
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-    if (isNaN(inputProductIDValue)) {
-        return;
-    }
 
     let data = {
         orderproductid: inputorderProductIDValue,
-        productid: inputProductIDValue
+        productid: inputProductIDValue,
+        quantity: inputOrderProductQuantityValue,
+        unitprice: inputOrderProductUnitPriceValue
     }
 
 
@@ -47,6 +47,10 @@ updatePersonForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.")
         }
     }
+
+    xhttp.onload = function () {
+        location.reload();
+    };
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));

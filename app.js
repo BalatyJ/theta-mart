@@ -175,7 +175,8 @@ app.post('/add-driver-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            query2 = `SELECT * FROM Drivers;`;
+            // If there was no error, perform a SELECT * on Customers
+            query2 = `SELECT driver_id, fname, lname, phone, IF(available=0, "No", "Yes") AS available FROM Drivers;`;
             db.pool.query(query2, function (error, rows, fields) {
 
                 // If there was an error on the second query, send a 400
@@ -336,65 +337,23 @@ app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
             // If there was no error, perform a SELECT * on OrderStatuses
             query2 = `SELECT * FROM OrderStatuses;`;
             db.pool.query(query2, function (error, rows, fields) {
-=======
-            // If there was no error, update Driver's availability to 0 if data.driverid != ''.
 
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
         }
     })
 });
 
-
-// Orders - get
-app.get('/orders', function (req, res) {
-    // Declare Query 1 - Orders
-
-    let query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
-    Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-    Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
-    CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver
-    FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
-    ON Customers.customer_id=Orders.customer_id WHERE CONCAT(Customers.fname, " ", Customers.lname) LIKE "%${req.query.customer_name}%" ORDER BY OrderID ASC;`
-
-
-
-    if (req.query.customer_name === undefined || req.query.customer_name === '') {
-        query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
-        Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-        Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
-        CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver 
-        FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
-        ON Customers.customer_id=Orders.customer_id ORDER BY OrderID ASC;`
-    }
-
-    let query2 = "SELECT driver_id, CONCAT(Drivers.fname, ' ', Drivers.lname) AS Driver FROM Drivers WHERE Drivers.available=1;"
-    let query3 = "SELECT * FROM OrderStatuses"
-    let query4 = "SELECT CONCAT(Customers.fname, ' ', Customers.lname) AS Customer, customer_id FROM Customers;"
-
-    // Run the 1st query
-    db.pool.query(query1, function (error, rows, fields) {    // Execute the query
-
-        let order = rows;
-
-        db.pool.query(query2, function (error, rows, fields) {
-            let drivers = rows;
-
-            db.pool.query(query3, function (error, rows, fields) {
-
-                let orderstatuses = rows;
-
-                db.pool.query(query4, function (error, rows, fields) {
-
-                    let customers = rows;
-
-                    return res.render('orders', { data: order, drivers: drivers, orderstatuses: orderstatuses, customers: customers });
-                })
-            })
-        })
-
-    })                                                           // an object where 'data' is equal to the 'rows' we
-});
-
->>>>>>> 890761852b8bd7b1f6ce89ea471b35b8f49192fc
 
 // Orders - insert
 app.post('/add-order-ajax', function (req, res) {
@@ -463,156 +422,7 @@ app.post('/add-order-ajax', function (req, res) {
 });
 
 
-// Order Status - update
-app.put('/orderStatuses/:put-orderStatus-ajax', function(req,res,next){
-    let data = req.body;
 
-    let queryUpdateOrderStatus = `UPDATE OrderStatuses SET description = ? WHERE orderstatus_id = ?`;
-  
-    // Run the 1st query
-    db.pool.query(queryUpdateOrderStatus, [data['description'], data['orderstatus_id']], function (error, rows, fields) {
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error);
-            res.sendStatus(400);
-        }
-
-        // If there was no error, we run our second query and return that data so we can use it to update the people's
-        // table on the front-end
-        else {
-                res.send(rows);
-            }
-        }
-      );
-    });
-
-
-
-
-// Orders - get
-app.get('/orders', function (req, res) {
-    // Declare Query 1 - Orders
-
-    let query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
-    Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-    Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
-    CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver
-    FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
-    ON Customers.customer_id=Orders.customer_id WHERE CONCAT(Customers.fname, " ", Customers.lname) LIKE "%${req.query.customer_name}%" ORDER BY OrderID ASC;`
-
-
-
-    if (req.query.customer_name === undefined || req.query.customer_name === '') {
-        query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
-        Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-        Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
-        CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver 
-        FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
-        ON Customers.customer_id=Orders.customer_id ORDER BY OrderID ASC;`
-    }
-
-    let query2 = "SELECT driver_id, CONCAT(Drivers.fname, ' ', Drivers.lname) AS Driver FROM Drivers WHERE Drivers.available=1;"
-    let query3 = "SELECT * FROM OrderStatuses"
-    let query4 = "SELECT CONCAT(Customers.fname, ' ', Customers.lname) AS Customer, customer_id FROM Customers;"
-
-    // Run the 1st query
-    db.pool.query(query1, function (error, rows, fields) {    // Execute the query
-
-        let order = rows;
-
-        db.pool.query(query2, function (error, rows, fields) {
-            let drivers = rows;
-
-            db.pool.query(query3, function (error, rows, fields) {
-
-                let orderstatuses = rows;
-
-                db.pool.query(query4, function (error, rows, fields) {
-
-                    let customers = rows;
-
-                    return res.render('orders', { data: order, drivers: drivers, orderstatuses: orderstatuses, customers: customers });
-                })
-            })
-        })
-
-    })                                                           // an object where 'data' is equal to the 'rows' we
-});
-
-
-// Orders - insert
-app.post('/add-order-ajax', function (req, res) {
-    // Capture the incoming data and parse it back to a JS object
-    let data = req.body;
-
-
-    // If no driver was selected, let driver_id be null. Otherwise set the driver id to selected value.
-    if (data.driverid === '') {
-        query1 = `INSERT INTO Orders (customer_id, order_date, address1, address2, city, state, zipcode, country, total, orderstatus_id, driver_id) 
-    VALUES ('${data.customerid}', '${data.orderdate}', '${data.street}', '${data.unit}', '${data.city}', '${data.state}', '${data.zipcode}', '${data.country}', 0, 
-    '${data.orderstatusid}', NULL )`
-    }
-    else {
-        query1 = `INSERT INTO Orders (customer_id, order_date, address1, address2, city, state, zipcode, country, total, orderstatus_id, driver_id) 
-    VALUES ('${data.customerid}', '${data.orderdate}', '${data.street}', '${data.unit}', '${data.city}', '${data.state}', '${data.zipcode}', '${data.country}', 0, 
-    '${data.orderstatusid}', ${data.driverid} )`;
-    }
-    db.pool.query(query1, function (error, rows, fields) {
-
-        // Check to see if there was an error
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
-            res.sendStatus(400);
-        }
-        else {
-            // I'm not going to implement right now, but may after some consideration.
-            // if (data.driverid !== '') {
-            //     query3 = `UPDATE Drivers SET available=0 WHERE ${data.driverid}=Drivers.driver_id;`
-
-            //     db.pool.query(query3, function (error, rows, fields) {
-            //         if (error) {
-
-            //             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            //             console.log(error)
-            //             res.sendStatus(400);
-            //         }
-            //     })
-            // }
-
-
-            query2 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS OrderDate, 
-                Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-                Orders.zipcode AS ZipCode, Orders.country AS 'Country', total AS Total, orderstatus_id AS OrderStatus, 
-                CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver 
-                FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
-                ON Customers.customer_id=Orders.customer_id ORDER BY OrderID ASC;`;
-
-            db.pool.query(query2, function (error, rows, fields) {
-                // If there was an error on the second query, send a 400
-                if (error) {
-
-                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                    console.log(error);
-                    res.sendStatus(400);
-                }
-                // If all went well, send the results of the query back.
-                else {
-                    console.log(rows)
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-        else {
-            // Run the second query
-            db.pool.query(deleteOrder, [orderID], function (error, rows, fields) {
-
-<<<<<<< HEAD
 // Orders - delete
 app.delete('/delete-order-ajax/', function (req, res, next) {
     let data = req.body;
@@ -835,33 +645,6 @@ app.put('/put-update-orderproduct-ajax', function (req, res, next) {
             // Run the second query
             db.pool.query(selectProducts, [product], function (error, rows, fields) {
 
-=======
-
-    let queryUpdateProduct = `UPDATE OrderProducts SET product_id = ?, quantity=?, unit_price=?, subtotal=?  WHERE orderproduct_id = ?`;
-    let selectProducts = `SELECT * FROM Products WHERE product_id = ?`
-
-    let updateOrderTotal = `UPDATE Orders
-    SET Orders.total=(SELECT SUM(OrderProducts.subtotal) 
-    FROM OrderProducts WHERE OrderProducts.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=${orderproduct}))
-    WHERE Orders.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=${orderproduct});`
-
-
-    // Run the 1st query
-    db.pool.query(queryUpdateProduct, [product, quantity, price, quantity * price, orderproduct], function (error, rows, fields) {
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error);
-            res.sendStatus(400);
-        }
-
-        // If there was no error, we run our second query and return that data so we can use it to update the people's
-        // table on the front-end
-        else {
-            // Run the second query
-            db.pool.query(selectProducts, [product], function (error, rows, fields) {
-
->>>>>>> 890761852b8bd7b1f6ce89ea471b35b8f49192fc
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
@@ -896,11 +679,6 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
-<<<<<<< HEAD
-=======
-        } else {
-            res.sendStatus(204);
->>>>>>> 890761852b8bd7b1f6ce89ea471b35b8f49192fc
         }
     })
 });

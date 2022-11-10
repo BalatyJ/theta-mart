@@ -56,14 +56,20 @@ function updateOrderStatusRow (data, orderStatusID) {
   }
 }
 
-function autofill(data) {
-  let order_status = document.getElementById("update-orderStatus");
-  let order_status_id = order_status.options[order_status.selectedIndex].value;
-  for (let elm in data) {
-		if (data[elm].orderstatus_id == order_status_id) {
-			document.getElementById('update-description').value =
-				data[elm].description;
-      }
+function autofill() {
+  let selectElement = document.getElementById('update-orderStatus');
+  let selectElement_id = selectElement.value;
+  console.log(selectElement_id);
+  let table = document.getElementById('orderstatus-table');
+
+  for (let i = 0, row; row = table.rows[i]; i++) {
+    console.log(table.rows[0].getAttribute('data-value'))
+    if (table.rows[i].getAttribute('data-value') == selectElement_id) {
+         let updateRowIndex = table.getElementsByTagName("tr")[i];
+
+         let td = updateRowIndex.getElementsByTagName("td")[1];
+         document.getElementById('update-description').value = td.innerHTML;
+
     }
-    return;
-  }
+ }
+}

@@ -17,6 +17,7 @@
 <table id ="orderstatus-table" class="order-status">
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
+    <thead>
     <tr>
         <th>Order Status</th>
         <th>Description</th>
@@ -62,7 +63,7 @@
   <div class="form-style">
     <h4>UPDATE ORDER STATUS</h4>
     <form id="update-orderStatus-form-ajax">
-        <select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onchange="autofill(this)">
+        <select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onChange="autofill({{this.orderstatus_id}})">
             <option value="test">Select a Order Status</option>
             {{#each data}}
             <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>

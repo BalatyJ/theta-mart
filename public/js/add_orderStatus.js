@@ -43,6 +43,12 @@ addorderStatusForm.addEventListener("submit", function (e) {
         }
     }
 
+
+    xhttp.onload = function () {
+        location.reload();
+      };
+    
+
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 

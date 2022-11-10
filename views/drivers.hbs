@@ -15,7 +15,7 @@
   </ul>
 </nav>
 
-{{! Search Customer }}
+{{! Search driver }}
 <form id="search-person-html" method="GET" action="/drivers">
   <div class="textbox-label">Search Driver</div>
   <input
@@ -99,38 +99,38 @@
 <div class="form-style">
   <h4>UPDATE DRIVER</h4>
   <form id="update-driver-form-ajax">
-
-    <select name="input-fullname" id="mySelect">
+    <select name="update-fullname" id="update-fullname-driver">
       <option value="test">Select a Driver</option>
       {{#each data}}
-        <option value="{{this.driver_id}}">{{this.driver_id}}</option>
+        <option value="{{this.driver_id}}">{{this.fname}}
+          {{this.lname}}</option>
       {{/each}}
     </select>
     <input
       type="text"
-      name="input-fname"
-      id="input-fname-update"
+      name="update-fname-driver"
+      id="update-fname-driver"
       placeholder="First Name"
     />
     <input
       type="text"
-      name="input-lname"
-      id="input-lname-update"
+      name="update-lname-driver"
+      id="update-lname-driver"
       placeholder="Last Name"
     />
     <input
       type="text"
-      name="input-phone"
-      id="input-phone-update"
+      name="update-phone-driver"
+      id="update-phone-driver"
       placeholder="Phone"
     />
     <input
       type="text"
-      name="input-availability"
-      id="input-availability-update"
+      name="update-availability-driver"
+      id="update-availability-driver"
       placeholder="Availability"
     />
-    <input type="submit" value="Update" />
+    <input type="submit" />
   </form>
 </div>
 

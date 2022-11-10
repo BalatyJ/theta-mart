@@ -1,7 +1,7 @@
 function deleteDriver(driverID) {
     let link = '/delete-driver-ajax/';
     let data = {
-        driver_id: driverID
+        id: driverID
     };
 
     $.ajax({

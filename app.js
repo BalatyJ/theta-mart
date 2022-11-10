@@ -175,14 +175,55 @@ app.post('/add-driver-ajax', function (req, res) {
             res.sendStatus(400);
         }
         else {
-            query1 = `SELECT * FROM Drivers WHERE lname LIKE "${req.query.lname}%"`
+            query2 = `SELECT * FROM Drivers;`;
+            db.pool.query(query2, function (error, rows, fields) {
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else {
+                    res.send(rows);
+                }
+            })
         }
     })
 });
 
-// Drivers - delete
-app.delete('/drivers/:delete-driver-ajax', function (req, res, next) {
+
+// Drivers - update
+app.put('/put-driver-ajax', function(req,res,next){
     let data = req.body;
+ 
+    let queryUpdateDriver = `UPDATE Drivers SET fname = ?, lname = ?, phone =?, available = ? WHERE driver_id = ?;`;
+
+          // Run the 1st query
+          db.pool.query(queryUpdateDriver, [data['fname'], data['lname'], data['phone'], data['available'], data['driver_id']], function(error, rows, fields){
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+            }
+    
+            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // table on the front-end
+            else {
+                    res.send(rows);
+                }
+            }
+          );
+        });
+
+
+// Drivers - delete
+app.delete('/delete-driver-ajax', function (req, res, next) {
+    let data = req.body;
+
     let driverID = parseInt(data.id);
     let deleteDrivers = `DELETE FROM Drivers WHERE driver_id = ?;`;
 
@@ -197,45 +238,7 @@ app.delete('/drivers/:delete-driver-ajax', function (req, res, next) {
     })
 });
 
-// Drivers - update
-app.put('/drivers/:put-driver-ajax', function(req,res,next){
-    let data = req.body;
-    console.log(data);
-     
-    let availability = parseInt(data.available);
-    let phone = parseInt(data.phone);
-    let fname = parseInt(data.fname);
-    let lname = parseInt(data.lname);
-    let driver = parseInt(data.driverID);
-  
-    let queryUpdateAvailable = `UPDATE Drivers SET available = ? WHERE driver_id = ?;`;
-    let selectAvailability = `SELECT * FROM Drivers WHERE driver_id= ?;`
-  
-          // Run the 1st query
-          db.pool.query(queryUpdateAvailable, [availability, driver], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectAvailability, [availability], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-})});
+
 
 // Products - get
 app.get('/products', function (req, res) {

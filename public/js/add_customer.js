@@ -105,10 +105,12 @@ addRowToTable = (data) => {
     let zipcodeCell = document.createElement("TD");
     let countryCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.id;
-    firstNameCell.innerText = newRow.first_name;
-    lastNameCell.innerText = newRow.last_name;
+    firstNameCell.innerText = newRow.fname;
+    lastNameCell.innerText = newRow.lname;
     phoneCell.innerText = newRow.phone;
     streetCell.innerText = newRow.address1;
     unitCell.innerText = newRow.address2;
@@ -116,6 +118,12 @@ addRowToTable = (data) => {
     stateCell.innerText = newRow.state;
     zipcodeCell.innerText = newRow.zipcode;
     countryCell.innerText = newRow.country;
+
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function () {
+        deleteCustomer(newRow.id);
+    };
 
     // Add the cells to the row 
     row.appendChild(idCell);
@@ -128,6 +136,9 @@ addRowToTable = (data) => {
     row.appendChild(stateCell);
     row.appendChild(zipcodeCell);
     row.appendChild(countryCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.id);
 
     // Add the row to the table
     currentTable.appendChild(row);

@@ -267,8 +267,4 @@ WHERE orderproduct_id=:update_orderproduct_id;
 UPDATE Orders
     SET Orders.total=(SELECT SUM(OrderProducts.subtotal) 
     FROM OrderProducts WHERE OrderProducts.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct))
-<<<<<<< HEAD
     WHERE Orders.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct);
-=======
-    WHERE Orders.order_id=(SELECT order_id FROM OrderProducts WHERE orderproduct_id=:orderproduct);
->>>>>>> 890761852b8bd7b1f6ce89ea471b35b8f49192fc

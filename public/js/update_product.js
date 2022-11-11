@@ -31,7 +31,7 @@ updateProductForm.addEventListener("submit", function (e) {
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/put-product-ajax", true);
+    xhttp.open("PUT", "/products/put-product-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve

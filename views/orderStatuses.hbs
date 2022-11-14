@@ -63,7 +63,7 @@
   <div class="form-style">
     <h4>UPDATE ORDER STATUS</h4>
     <form id="update-orderStatus-form-ajax">
-        <select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onChange="autofill({{this.orderstatus_id}})">
+        <select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onChange="autofill()">
             <option value="test">Select a Order Status</option>
             {{#each data}}
             <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>

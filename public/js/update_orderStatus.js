@@ -45,7 +45,7 @@ function updateOrderStatusRow (data, orderStatusID) {
 
     for (let i = 0, row; (row = table.rows[i]); i++) {
 
-    if (table.rows[i].getAttribute('data-value') == orderStatusID) {
+    if (table.rows[i].getAttribute('data-value') === orderStatusID) {
 
         let updateRowIndex = table.getElementsByTagName('tr')[i];
       

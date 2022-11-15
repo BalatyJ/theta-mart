@@ -93,7 +93,7 @@ function autofill() {
     let table = document.getElementById('drivers-table');
 
     for (let i = 0, row; row = table.rows[i]; i++) {
-      console.log(table.rows[i].getAttribute('data-value'));
+
       if (table.rows[i].getAttribute('data-value') == selectElement_id) {
 
          let updateRowIndex = table.getElementsByTagName("tr")[i];
@@ -108,7 +108,7 @@ function autofill() {
          document.getElementById('update-phone-driver').value = td3.innerHTML;
 
          let td4 = updateRowIndex.getElementsByTagName("td")[4];
-         document.getElementById('update--availability-driver').value = td4.innerHTML;
+         document.getElementById('update-availability-driver').value = td4.innerHTML;
 
       }
     }

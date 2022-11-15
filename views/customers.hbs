@@ -31,7 +31,7 @@
 <br />
 
 {{! Create a table }}
-<table id="customers-table">
+<table id="customers-table" class="main-table">
   {{! Header section }}
   <thead>
     <tr>
@@ -71,94 +71,129 @@
 
 <!-- Add a new table -->
 
-<div class="form-style">
-  <h4>CREATE CUSTOMER</h4>
+<div class="title">
+  <h4 class="table-title">CREATE CUSTOMER</h4>
   <form id="add-customer-form-ajax">
-    <input
-      type="text"
-      name="input-fname"
-      id="input-fname"
-      placeholder="First Name"
-      required
-    />
-    <input
-      type="text"
-      name="input-lname"
-      id="input-lname"
-      placeholder="Last Name"
-      required
-    />
-    <input
-      type="text"
-      name="input-phone"
-      id="input-phone"
-      placeholder="Phone"
-      required
-    />
-    <input
-      type="text"
-      name="input-address1"
-      id="input-address1"
-      placeholder="Street"
-      required
-    />
-    <input
-      type="text"
-      name="input-address2"
-      id="input-address2"
-      placeholder="Unit"
-    />
-    <input type="text" name="input-city" id="input-city" placeholder="City" />
-    <input
-      type="text"
-      name="input-state"
-      id="input-state"
-      placeholder="State"
-      required
-    />
-    <input
-      type="text"
-      name="input-zipcode"
-      id="input-zipcode"
-      placeholder="Zip Code"
-      required
-    />
-    <input
-      type="text"
-      name="input-country"
-      id="input-country"
-      placeholder="Country"
-      required
-    />
-    <input type="submit">
+    <table class="sub-table-style">
+      <tr>
+          <td><label for="input-fname">First Name:</label></td>
+          <td><input type="text" name="input-fname" id="input-fname" required /></td> 
+          <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-lname">Last Name:</label></td>
+        <td><input type="text" name="input-lname" id="input-lname" required /></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-phone">Phone:</label></td>
+        <td><input type="text" name="input-phone" id="input-phone" required/></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-address1">Street:</label></td>
+        <td><input type="text" name="input-address1" id="input-address1" required/></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-address2"">Unit:</label></td>
+        <td><input type="text" name="input-address2" id="input-address2"/></td>
+      <tr>
+        <td><label for="input-city">City:</label></td>
+        <td><input type="text" name="input-city" id="input-city" required/></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-state">State:</label></td>
+        <td><input type="text" name="input-state" id="input-state" required/></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-zipcode">Zip Code:</label></td>
+        <td><input type="text" name="input-zipcode" id="input-zipcode" required/></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="input-country">Country:</label></td>
+        <td><input type="text" name="input-country" id="input-country" required/></td>
+        <td>*Required</td>
+      </tr>
+      </table>
+      <div class="button-style">
+        <td><input type="submit"></td>
+      </div>
+
   </form>
 </div>
 <br />
 
 <!--Update Customer Table -->
 
-<div class="form-style">
-  <h4>UPDATE CUSTOMER</h4>
+<div class="title">
+  <h4 class="table-title">UPDATE CUSTOMER</h4>
   <form id="update-customer-form-ajax">
-    <select name="update-fullname" id="update-fullname" onChange="autofill()" required>
-      <option value="test">Select a Customer</option>
-      {{#each data}}
-        <option value="{{this.customer_id}}">{{this.fname}}
-          {{this.lname}}</option>
-      {{/each}}
-    </select>
-    <Input type="text" name="update-fname" id="update-fname" required placeholder="First Name">
-    <Input type="text" name="update-lname" id="update-lname" required placeholder="Last Name">
-    <Input type="text" name="update-phone" id="update-phone" required placeholder="Phone">
-    <Input type="text" name="update-address1" id="update-address1" required placeholder="Street">
-    <Input type="text" name="update-address2" id="update-address2" placeholder="Unit">
-    <Input type="text" name="update-city" id="update-city" required placeholder="City">
-    <Input type="text" name="update-state" id="update-state" required placeholder="State">
-    <Input type="text" name="update-zipcode" id="update-zipcode" required placeholder="Zip Code">
-    <Input type="text" name="update-country" id="update-country" required placeholder="Country">  
-    <input type="submit">
-    </form>
-  </div>
+    <table class="sub-table-style">
+      <tr>
+          <td><label for="update-fullname">Select a Customer:</label></td>
+          <td><select name="update-fullname" id="update-fullname" onChange="autofill()" required>
+              <option value="test">Select a Customer</option>
+              {{#each data}}
+              <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
+              {{/each}}
+              </select></td>
+          <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-fname">First Name:</label></td>
+        <td><Input type="text" name="update-fname" id="update-fname" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-lname">Last Name:</label></td>
+        <td><Input type="text" name="update-lname" id="update-lname" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-phone">Phone:</label></td>
+        <td><Input type="text" name="update-phone" id="update-phone" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-address1">Street:</label></td>
+        <td><Input type="text" name="update-address1" id="update-address1" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-address2">Unit:</label></td>
+        <td><Input type="text" name="update-address2" id="update-address2"></td>
+      </tr>
+      <tr>
+        <td><label for="update-city">City:</label></td>
+        <td><Input type="text" name="update-city" id="update-city" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-state">State:</label></td>
+        <td><Input type="text" name="update-state" id="update-state" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-zipcode">Zip Code:</label></td>
+        <td><Input type="text" name="update-zipcode" id="update-zipcode" required></td>
+        <td>*Required</td>
+      </tr>
+      <tr>
+        <td><label for="update-country">Country:</label></td>
+        <td><Input type="text" name="update-country" id="update-country" required></td>
+        <td>*Required</td>
+      </tr>
+    </table>
+    <div class="button-style">
+        <td><input type="submit"></td>
+    </div>
+
+  </form>
+</div>
 
 {{! Embed our javascript to handle the DOM manipulation and AJAX request }}
 <script src="./js/add_customer.js"></script>

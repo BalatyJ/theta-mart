@@ -81,50 +81,53 @@ footer {
   padding-bottom: 0%;
 }
 
-table {
+.sub-table-style {
+  font: #fff 14px;
+  width: 500px;
+  background: #ffffff;
+  margin-left: 1%;
+  border: none;
+}
+
+.sub-table-style td {
+  margin-left: 1%;
+  border: none;
+}
+
+.table-title {
+  margin-left: 4%;
+}
+/* Main table style*/
+
+.main-table {
   font-size: 16px;
   margin-left: 3%;
   margin-bottom: 3%;
-  top: 8px;
-  left: 16px;
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-.order-status {
-  font-size: 16px;
-  margin-left: 3%;
-  margin-bottom: 3%;
-  margin-top: 3%;
-  top: 12px;
-  left: 16px;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-th,
+.main-table th,
 td {
   padding: 10px 15px;
 }
-th {
+.main-table th {
   background: #266150;
   border-collapse: collapse;
   font: #fff 16px;
   color: #fff;
 }
-tbody tr:nth-child(even) {
+.main-table tr:nth-child(even) {
   background: #f0f0f2;
   border-collapse: collapse;
 }
-td {
+.main-table td {
   border-bottom: 1px solid #cecfd5;
 }
 
 .textbox-label {
   margin-top: 3%;
   margin-left: 3%;
-  top: 2px;
-  left: 16px;
   text-transform: uppercase;
   font-weight: bold;
   color: #272343;
@@ -141,15 +144,22 @@ td {
   margin-top: 2%;
 }
 
-/*Add a new user*/
+.orderstatus-table {
+  font-size: 16px;
+  margin-left: 3%;
+  margin-bottom: 3%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 3%;
+}
+
+/*Add a new user
 .form-style {
   font: #fff 16px;
   width: 500px;
   padding: 30px;
   background: #ffffff;
-  margin-top: 1%;
   margin-left: 3%;
-  margin-bottom: 1%;
   border: #dbdbdb solid 2px;
   border-collapse: collapse;
   border-spacing: 0;
@@ -179,10 +189,7 @@ td {
   font: 16px Arial, Helvetica, sans-serif;
   height: 45px;
 }
-.form-style textarea {
-  resize: none;
-  overflow: hidden;
-}
+
 .form-style input[type="button"],
 .form-style input[type="submit"] {
   -moz-box-shadow: inset 0px 1px 0px 0px #45d6d6;
@@ -198,4 +205,30 @@ td {
   padding: 8px 18px;
   text-decoration: none;
   text-transform: uppercase;
+}
+*/
+.title {
+  width: 550px;
+  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 3%;
+}
+
+.title input[type="submit"] {
+  -moz-box-shadow: inset 0px 1px 0px 0px #45d6d6;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #45d6d6;
+  box-shadow: inset 0px 1px 0px 0px #45d6d6;
+  background-color: #2cbbbb;
+  border: 1px solid #27a0a0;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 14px;
+  padding: 8px 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 4%;
+  margin-left: 3%;
 }

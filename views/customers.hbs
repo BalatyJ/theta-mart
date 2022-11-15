@@ -52,7 +52,7 @@
   {{! Body section }}
   <tbody>
     {{#each data}}
-      <tr>
+      <tr data-value = {{this.customer_id}}>
         <td>{{this.customer_id}}</td>
         <td>{{this.fname}}</td>
         <td>{{this.lname}}</td>
@@ -140,7 +140,7 @@
 <div class="form-style">
   <h4>UPDATE CUSTOMER</h4>
   <form id="update-customer-form-ajax">
-    <select name="update-fullname" id="update-fullname">
+    <select name="update-fullname" id="update-fullname" onChange="autofill()" required>
       <option value="test">Select a Customer</option>
       {{#each data}}
         <option value="{{this.customer_id}}">{{this.fname}}

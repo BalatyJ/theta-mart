@@ -1,4 +1,7 @@
 <!-- orderStatuses.hbs -->
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+></script>
 <nav class="theta-mart-nav">
   <ul>
     <li><a href="/#">Theta Mart</a></li>
@@ -29,7 +32,7 @@
 
         {{!-- For each row, print the information in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value = {{this.orderstatus_id}}>
             <td>{{this.orderstatus_id}}</td>
             <td>{{this.description}}</td>
         </tr>

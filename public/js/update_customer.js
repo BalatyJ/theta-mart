@@ -105,3 +105,46 @@ function updateRow(data, customerID){
        }
     }
 }
+
+function autofill() {
+    let selectElement = document.getElementById('update-fullname');
+    let selectElement_id = selectElement.value;
+  
+    let table = document.getElementById('customers-table');
+
+    for (let i = 0, row; row = table.rows[i]; i++) {
+      console.log(table.rows[i].getAttribute('data-value'));
+      if (table.rows[i].getAttribute('data-value') == selectElement_id) {
+
+         let updateRowIndex = table.getElementsByTagName("tr")[i];
+
+         let td1 = updateRowIndex.getElementsByTagName("td")[1];
+         document.getElementById('update-fname').value = td1.innerHTML;
+
+         let td2 = updateRowIndex.getElementsByTagName("td")[2];
+         document.getElementById('update-lname').value = td2.innerHTML;
+
+         let td3 = updateRowIndex.getElementsByTagName("td")[3];
+         document.getElementById('update-phone').value = td3.innerHTML;
+
+         let td4 = updateRowIndex.getElementsByTagName("td")[4];
+         document.getElementById('update-address1').value = td4.innerHTML;
+
+         let td5 = updateRowIndex.getElementsByTagName("td")[5];
+         document.getElementById('update-address2').value = td5.innerHTML;
+
+         let td6 = updateRowIndex.getElementsByTagName("td")[6];
+         document.getElementById('update-city').value = td6.innerHTML;
+
+         let td7 = updateRowIndex.getElementsByTagName("td")[7];
+         document.getElementById('update-state').value = td7.innerHTML;
+
+         let td8 = updateRowIndex.getElementsByTagName("td")[8];
+         document.getElementById('update-zipcode').value = td8.innerHTML;
+
+         let td9 = updateRowIndex.getElementsByTagName("td")[9];
+         document.getElementById('update-country').value = td9.innerHTML;
+
+      }
+    }
+}

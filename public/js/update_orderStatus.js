@@ -38,22 +38,6 @@ updateorderStatus.addEventListener('submit', function (e) {
   })
 
 
-  function autofill() {
-      let selectElement = document.getElementById('update-orderStatus');
-      let selectElement_id = selectElement.value;
-    
-      let table = document.getElementById('orderstatus-table');
-  
-      for (let i = 0, row; row = table.rows[i]; i++) {
-        if (table.rows[i].getAttribute('data-value') == selectElement_id) {
-           let updateRowIndex = table.getElementsByTagName("tr")[i];
-           let td = updateRowIndex.getElementsByTagName("td")[1];
-           document.getElementById('update-description').value = td.innerHTML;
-        }
-      }
-  }
-
-
 function updateOrderStatusRow (data, orderStatusID) {
     let parsedData = JSON.parse(data);
 
@@ -72,3 +56,25 @@ function updateOrderStatusRow (data, orderStatusID) {
   }
 }
 
+
+function autofill() {
+  let selectElement = document.getElementById('update-orderStatus');
+  let selectElement_id = selectElement.value;
+
+  let table = document.getElementById('orderstatus-table');
+
+  for (let i = 0, row; row = table.rows[i]; i++) {
+    console.log(table.rows[i].getAttribute('data-value'));
+    if (table.rows[i].getAttribute('data-value') == selectElement_id) {
+
+       let updateRowIndex = table.getElementsByTagName("tr")[i];
+       
+
+       let td = updateRowIndex.getElementsByTagName("td")[1];
+       
+       console.log(td);
+
+       document.getElementById('update-description').value = td.innerHTML;
+    }
+  }
+}

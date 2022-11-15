@@ -86,13 +86,17 @@
       placeholder="Phone"
       required
     />
-    <input
-      type="text"
+    <select
       name="input-availability"
       id="input-availability"
       placeholder="Availability"
       required
-    />
+    >
+      <option value="">Select an Availability</option>
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+    </select>
+
     <input type="submit" />
   </form>
 </div>
@@ -143,8 +147,8 @@
       required
     >
       <option value="">Select an Availability</option>
-      <option value="1">Is Available</option>
-      <option value="0">Not Available</option>
+      <option value="1">Yes</option>
+      <option value="0">No</option>
     </select>
     <input type="submit" />
   </form>

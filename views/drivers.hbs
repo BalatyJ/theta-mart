@@ -46,7 +46,7 @@
   {{! Body section }}
   <tbody>
     {{#each data}}
-      <tr>
+      <tr data-value={{this.driver_id}}>
         <td>{{this.driver_id}}</td>
         <td>{{this.fname}}</td>
         <td>{{this.lname}}</td>
@@ -103,7 +103,12 @@
 <div class="form-style">
   <h4>UPDATE DRIVER</h4>
   <form id="update-driver-form-ajax">
-    <select name="update-fullname" id="update-fullname-driver">
+    <select
+      name="update-fullname"
+      id="update-fullname-driver"
+      onChange="autofill()"
+      required
+    >
       <option value="test">Select a Driver</option>
       {{#each data}}
         <option value="{{this.driver_id}}">{{this.fname}}

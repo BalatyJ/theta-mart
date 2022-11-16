@@ -51,7 +51,7 @@
 
         {{!-- For each row, print the information in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value = {{this.[OrderProduct ID]}}>
           <td>{{this.[OrderProduct ID]}}</td>
           <td>{{this.[Order ID]}}</td>
           <td>{{this.Product}}</td>

@@ -145,10 +145,13 @@ app.get('/drivers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
     if (req.query.lname === undefined) {
-        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available FROM Drivers;`
+        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
+        available AS Available
+         FROM Drivers;`
     }
     else {
-        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available 
+        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
+        AS Available
         FROM Drivers 
         WHERE lname LIKE "${req.query.lname}%"`
     }

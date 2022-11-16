@@ -3,7 +3,7 @@ let updateDriverForm = document.getElementById('update-driver-form-ajax');
 
 // Modify the objects we need
 updateDriverForm.addEventListener("submit", function (e) {
-   
+
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -20,7 +20,7 @@ updateDriverForm.addEventListener("submit", function (e) {
     let lastNameValue = inputLastName.value;
     let phoneValue = inputPhone.value;
     let availableValue = inputAvailable.value;
-    
+
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
 
@@ -33,7 +33,7 @@ updateDriverForm.addEventListener("submit", function (e) {
         phone: phoneValue,
         available: availableValue
     }
-    
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-driver-ajax", true);
@@ -52,11 +52,11 @@ updateDriverForm.addEventListener("submit", function (e) {
         }
     }
 
-        
+
     xhttp.onload = function () {
         location.reload();
-      };
-    
+    };
+
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
@@ -65,15 +65,15 @@ updateDriverForm.addEventListener("submit", function (e) {
 
 
 
-function updateRow(data, driverID){
+function updateRow(data, driverID) {
     let parsedData = JSON.parse(data);
-    
+
     let table = document.getElementById("drivers-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == driverID) {
+        //iterate through rows
+        //rows would be accessed using the "row" variable assigned in the for loop
+        if (table.rows[i].getAttribute("data-value") == driverID) {
 
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
@@ -81,36 +81,35 @@ function updateRow(data, driverID){
             let td = updateRowIndex.getElementsByTagName("td")[4];
 
             // Reassign homeworld to our value we updated to
-            td.innerHTML = parsedData[0].name; 
-       }
+            td.innerHTML = parsedData[0].name;
+        }
     }
 }
 
 function autofill() {
     let selectElement = document.getElementById('update-fullname-driver');
     let selectElement_id = selectElement.value;
-  
+
     let table = document.getElementById('drivers-table');
 
     for (let i = 0, row; row = table.rows[i]; i++) {
 
-      if (table.rows[i].getAttribute('data-value') == selectElement_id) {
+        if (table.rows[i].getAttribute('data-value') == selectElement_id) {
 
-         let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-         let td1 = updateRowIndex.getElementsByTagName("td")[1];
-         document.getElementById('update-fname-driver').value = td1.innerHTML;
+            let td1 = updateRowIndex.getElementsByTagName("td")[1];
+            document.getElementById('update-fname-driver').value = td1.innerHTML;
 
-         let td2 = updateRowIndex.getElementsByTagName("td")[2];
-         document.getElementById('update-lname-driver').value = td2.innerHTML;
+            let td2 = updateRowIndex.getElementsByTagName("td")[2];
+            document.getElementById('update-lname-driver').value = td2.innerHTML;
 
-         let td3 = updateRowIndex.getElementsByTagName("td")[3];
-         document.getElementById('update-phone-driver').value = td3.innerHTML;
+            let td3 = updateRowIndex.getElementsByTagName("td")[3];
+            document.getElementById('update-phone-driver').value = td3.innerHTML;
 
-         let td4 = updateRowIndex.getElementsByTagName("td")[4];
-         document.getElementById('update-availability-driver').value = td4.innerHTML;
-         console.log(td4.innerHTML);
-      }
+            let td4 = updateRowIndex.getElementsByTagName("td")[4];
+            document.getElementById('update-availability-driver').value = td4.getAttribute('value-availability');
+            console.log(td4.innerHTML);
+        }
     }
 }
- 

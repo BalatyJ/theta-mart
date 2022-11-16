@@ -51,7 +51,7 @@
         <td>{{this.fname}}</td>
         <td>{{this.lname}}</td>
         <td>{{this.phone}}</td>
-        <td>{{this.available}}</td>
+        <td value-availability={{this.Available}}>{{this.available}}</td>
         <td><button
             onclick="deleteDriver({{this.driver_id}})"
           >Delete</button></td>

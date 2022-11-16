@@ -12,8 +12,7 @@ function deleteDriver(driverID) {
     success: function (result) {
       window.location.reload(true);
       deleteRow(driverID);
-      
-    },
+    }
   });
 }
 

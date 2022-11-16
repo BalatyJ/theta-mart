@@ -45,7 +45,7 @@
 
     {{! For each row, print the information in order }}
     {{#each data}}
-      <tr>
+      <tr data-value={{this.product_id}}>
         <td>{{this.product_id}}</td>
         <td>{{this.name}}</td>
         <td>{{this.description}}</td>

@@ -100,9 +100,6 @@ function autofill() {
 
             let td3 = updateRowIndex.getElementsByTagName("td")[4];
             document.getElementById('updateunitprice-op').value = td3.innerHTML;
-
-
-
         }
     }
 }

@@ -45,12 +45,12 @@
 
 <!-- Add a new table -->
 
-<div class="title">
+<div class="title-orderstatus">
     <h4 class="table-title">CREATE ORDER STATUS</h4>
     <form id="add-orderStatus-form-ajax">
       <table class="sub-table-style">
         <tr>
-        <td><label for="input-orderStatus">Order Status: </label>
+    
         <td><input type="text" 
         name="input-orderStatus" 
         id="input-orderStatus"
@@ -59,7 +59,7 @@
       </tr>
       
         <tr>
-          <td><label for="input-description-o">Description: </label></td>
+  
       <td><input type="text" 
         name="input-description-o" 
         id="input-description-o"
@@ -69,13 +69,14 @@
     </table>
     <div class="button-style">
     <td><input type="submit"></td>
+    <td><input a href='/orderStatuses' type="reset"></td>
     </div>
 
 </form>
 </div>
   <br>
 
-  <div class="title">
+  <div class="title-orderstatus">
     <h4 class="table-title">UPDATE ORDER STATUS</h4>
     <form id="update-orderStatus-form-ajax">
       <table class="sub-table-style">
@@ -94,6 +95,7 @@
             </table>
             <div class="button-style">
             <td><input type="submit"></td>
+            <td><input a href='/orderStatuses' type="reset"></td>
             </div>
         
         </form>

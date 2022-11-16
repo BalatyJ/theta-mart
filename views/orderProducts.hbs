@@ -47,7 +47,7 @@
         <tr data-value = {{this.[OrderProduct ID]}}>
           <td>{{this.[OrderProduct ID]}}</td>
           <td>{{this.[Order ID]}}</td>
-          <td>{{this.Product}}</td>
+          <td data-product_id-op={{this.product_id}}>{{this.Product}}</td>
           <td>{{this.Quantity}}</td>
           <td>{{this.[Unit Price]}}</td>
           <td>{{this.[Subtotal]}}</td>
@@ -107,7 +107,7 @@
     <table class="sub-table-style">
     <tr>
         <td><label for="input-update-orderproduct_id">OrderProduct ID: </label></td>
-        <td><select name="input-update-orderproduct_id" id="select-update-productid">
+        <td><select name="input-update-orderproduct_id" id="select-update-productid" onclick="autofill()">
         <option value="">Select a Product Order</option>
         {{#each data}}
         <option value="{{this.[OrderProduct ID]}}">{{this.[OrderProduct ID]}}</option>

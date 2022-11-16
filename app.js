@@ -614,14 +614,14 @@ app.get('/orderProducts', function (req, res) {
     let query1
 
     if (req.query.orderid === undefined || req.query.orderid === '') {
-        query1 = `SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
+        query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
         Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
         FROM  OrderProducts 
             INNER JOIN Products 
             ON Products.product_id=OrderProducts.product_id;`              // Define our query
     }
     else {
-        query1 = `SELECT orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
+        query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
         Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
         FROM  OrderProducts 
             INNER JOIN Products 
@@ -641,6 +641,7 @@ app.get('/orderProducts', function (req, res) {
 
             db.pool.query(query3, function (error, rows, fields) {
                 let order_ids = rows;
+                console.log(orderproducts)
                 res.render('orderProducts', { data: orderproducts, products: product_rows, orders: order_ids });                  // Render the index.hbs file, and also send the renderer
 
             })

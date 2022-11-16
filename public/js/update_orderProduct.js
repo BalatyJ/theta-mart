@@ -93,7 +93,7 @@ function autofill() {
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             let td1 = updateRowIndex.getElementsByTagName("td")[2];
-            document.getElementById('update_productid').value = td1.innerHTML;
+            document.getElementById('update_productid').value = td1.getAttribute("data-product_id-op");
 
             let td2 = updateRowIndex.getElementsByTagName("td")[3];
             document.getElementById('updatequantity-op').value = td2.innerHTML;

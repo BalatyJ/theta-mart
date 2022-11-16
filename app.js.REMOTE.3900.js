@@ -145,12 +145,10 @@ app.get('/drivers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
     if (req.query.lname === undefined) {
-        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        available AS Available FROM Drivers;`
+        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available FROM Drivers;`
     }
     else {
-        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        AS Available
+        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available 
         FROM Drivers 
         WHERE lname LIKE "${req.query.lname}%"`
     }
@@ -237,11 +235,11 @@ app.delete('/delete-driver-ajax', function (req, res, next) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
-        } else {
-            res.sendStatus(204);
+         } else {
+                res.sendStatus(204);
+            }
         }
-    })
-
+    )
 });
 
 

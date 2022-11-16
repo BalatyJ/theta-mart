@@ -146,7 +146,8 @@ app.get('/drivers', function (req, res) {
     let query1;
     if (req.query.lname === undefined) {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        available AS Available FROM Drivers;`
+        available AS Available
+         FROM Drivers;`
     }
     else {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
@@ -237,11 +238,12 @@ app.delete('/delete-driver-ajax', function (req, res, next) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
-        } else {
+        }
+        else {
             res.sendStatus(204);
         }
-    })
 
+    })
 });
 
 
@@ -806,6 +808,9 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
 
     })
 });
+
+
+
 
 app.listen(PORT, function () {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')

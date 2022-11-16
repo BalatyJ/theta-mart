@@ -177,6 +177,7 @@ td {
 .title input[type="text"],
 .title input[type="date"],
 .title input[type="number"],
+.title input[type="tel"],
 .title select {
   padding-left: 8px 12px;
   width: 180px;
@@ -203,4 +204,36 @@ td {
 
 .box {
   width: 170px;
+}
+
+.title-orderstatus {
+  width: 700px;
+  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 3%;
+}
+
+.title-orderstatus input[type="submit"],
+.title-orderstatus input[type="reset"] {
+  -moz-box-shadow: inset 0px 1px 0px 0px #45d6d6;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #45d6d6;
+  box-shadow: inset 0px 1px 0px 0px #45d6d6;
+  background-color: #2cbbbb;
+  border: 1px solid #27a0a0;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 14px;
+  padding: 8px 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 4%;
+  margin-left: 3%;
+}
+
+.title-orderstatus input[type="text"] {
+  padding-left: 8px 12px;
+  width: 600px;
 }

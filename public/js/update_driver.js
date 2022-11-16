@@ -109,7 +109,7 @@ function autofill() {
 
          let td4 = updateRowIndex.getElementsByTagName("td")[4];
          document.getElementById('update-availability-driver').value = td4.innerHTML;
-
+         console.log(td4.innerHTML);
       }
     }
 }

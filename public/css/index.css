@@ -97,6 +97,19 @@ footer {
 .table-title {
   margin-left: 4%;
 }
+
+.table-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #272343;
+  background: #4f4846;
+  font: #fff 15px;
+  color: #ffffff;
+  font-weight: 100;
+  padding: 11px;
+  margin: -12px -11px 25px -11px;
+}
+
 /* Main table style*/
 
 .main-table {
@@ -153,62 +166,8 @@ td {
   margin-top: 3%;
 }
 
-/*Add a new user
-.form-style {
-  font: #fff 16px;
-  width: 500px;
-  padding: 30px;
-  background: #ffffff;
-  margin-left: 3%;
-  border: #dbdbdb solid 2px;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-.form-style h4 {
-  background: #4f4846;
-  text-transform: uppercase;
-  font: #fff 16px;
-  color: #ffffff;
-  font-weight: 100;
-  padding: 12px;
-  margin: -30px -30px 30px -30px;
-}
-.form-style input[type="text"],
-.form-style select {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  display: block;
-  width: 100%;
-  padding: 7px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  background: transparent;
-  margin-bottom: 10px;
-  font: 16px Arial, Helvetica, sans-serif;
-  height: 45px;
-}
-
-.form-style input[type="button"],
-.form-style input[type="submit"] {
-  -moz-box-shadow: inset 0px 1px 0px 0px #45d6d6;
-  -webkit-box-shadow: inset 0px 1px 0px 0px #45d6d6;
-  box-shadow: inset 0px 1px 0px 0px #45d6d6;
-  background-color: #2cbbbb;
-  border: 1px solid #27a0a0;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: sans-serif;
-  font-size: 14px;
-  padding: 8px 18px;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-*/
 .title {
-  width: 550px;
+  width: 500px;
   border: 1px solid gray;
   padding: 10px;
   margin-top: 10px;
@@ -231,4 +190,8 @@ td {
   text-transform: uppercase;
   margin-top: 4%;
   margin-left: 3%;
+}
+
+.box {
+  width: 170px;
 }

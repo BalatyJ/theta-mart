@@ -10,6 +10,7 @@ function deleteDriver(driverID) {
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         success: function (result) {
+            window.location.reload(true);
             deleteRow(driverID);
         }
     });
@@ -24,3 +25,4 @@ function deleteRow(driverID) {
         }
     }
 }
+

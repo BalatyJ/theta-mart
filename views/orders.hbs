@@ -59,7 +59,7 @@
             <td>{{this.[Zip Code]}}</td>
             <td>{{this.Country}}</td>
             <td>{{this.Total}}</td>
-            <td>{{this.[Order Status]}}</td>
+            <td data-order_status="{{this.[Order Status]}}">{{this.[Order Status]}}</td>
             <td>{{this.Driver}}</td>
             <td><button onclick="deleteOrder({{this.OrderID}})">Delete</button></td>
         </tr>
@@ -147,7 +147,7 @@
     <table class="sub-table-style">
         <tr>
         <td><label for="input-update-order_id">Order ID: </label></td>
-        <td><select name="input-update-order_id" id="select-update-order_id" required>
+        <td><select name="input-update-order_id" id="select-update-order_id" onclick="autofill()" required>
             <option value="">Select an Order</option>
             {{#each data}}
             <option value="{{this.OrderID}}">{{this.OrderID}}</option>

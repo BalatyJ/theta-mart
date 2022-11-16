@@ -106,11 +106,11 @@
     <table class="sub-table-style">
         <tr>
             <td><label for="input-product">Product Name: </label>
-            <td><select name="input-product" id="input-updateproduct-p" required>
-      <option value="">Select a Product</option>
-      {{#each data}}
-        <option value="{{this.product_id}}">{{this.name}}</option>
-      {{/each}}
+      <td><select name="input-product" id="input-updateproduct-p" required onclick="autofill()">
+        <option value="">Select a Product</option>
+        {{#each data}}
+          <option value={{this.product_id}}>{{this.name}}</option>
+        {{/each}}
     </select></td>
 
     </tr>

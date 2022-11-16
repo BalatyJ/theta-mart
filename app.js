@@ -236,6 +236,10 @@ app.delete('/delete-driver-ajax', function (req, res, next) {
             console.log(error);
             res.sendStatus(400);
         }
+        else {
+            res.sendStatus(204);
+        }
+
     })
 });
 

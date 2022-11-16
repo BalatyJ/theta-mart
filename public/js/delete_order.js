@@ -11,17 +11,6 @@ function deleteOrder(orderID) {
         contentType: "application/json; charset=utf-8",
         success: function (result) {
             window.location.reload(true);
-            deleteRow(orderID);
         }
     });
-}
-
-function deleteRow(orderID) {
-    let table = document.getElementById("orders-table");
-    for (let i = 0, row; row = table.rows[i]; i++) {
-        if (table.rows[i].getAttribute("data-value") === orderID) {
-            table.deleteRow(i);
-            break;
-        }
-    }
 }

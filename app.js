@@ -148,19 +148,20 @@ app.delete('/customers/:delete-customer-ajax', function (req, res, next) {
 app.get('/drivers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
-    if (req.query.lname === undefined) {
+    if (req.query.lname === undefined || req.query.lname === '') {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
         available AS Available FROM Drivers;`
     }
     else {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        AS Available
+        available AS Available
         FROM Drivers 
-        WHERE lname LIKE "${req.query.lname}%"`
+        WHERE lname LIKE "%${req.query.lname}%"`
     }
     // Run the 1st query
     db.pool.query(query1, function (error, rows, fields) {    // Execute the query
         let driver = rows;
+        console.log(driver)
         res.render('drivers', { data: driver });                  // Render the index.hbs file, and also send the renderer
     })                                                      // an object where 'data' is equal to the 'rows' we
 });

@@ -108,7 +108,7 @@ function autofill() {
          document.getElementById('update-phone-driver').value = td3.innerHTML;
 
          let td4 = updateRowIndex.getElementsByTagName("td")[4];
-         document.getElementById('update-availability-driver').value = td4.getAttribute("data-op");
+         document.getElementById('update-availability-driver').value = td4.getAttribute("data-value");
          console.log(td4.innerHTML);
       }
     }

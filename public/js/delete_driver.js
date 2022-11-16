@@ -17,7 +17,7 @@ function deleteDriver(driverID) {
 }
 
 function deleteRow(driverID) {
-  let table = document.getElementById("driver-table");
+  let table = document.getElementById("drivers-table");
   for (let i = 0, row; (row = table.rows[i]); i++) {
     if (table.rows[i].getAttribute("data-value") == driverID) {
       table.deleteRow(i);

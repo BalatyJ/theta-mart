@@ -14,7 +14,7 @@
 {{! Header section }}
 
 <form id="search-product-html" method="GET" action="/products">
-  <div class="textbox-label">Search Product</div>
+  <div class="textbox-label">SEARCH PRODUCTS</div>
   <input
     type="text"
     name="name"
@@ -100,42 +100,53 @@
 </div>
 <br />
 
-<form id="update-product-form-ajax">
-  <fieldset>
-    <legend>Update Product</legend>
-    <p>To update an existing product, please enter their information below and
-      click 'Submit'!</p>
-    <label for="input-product">Product Name: </label>
-    <select name="input-product" id="input-updateproduct-p" required>
+<div class="title">
+    <h4 class="table-title">UPDATE PRODUCT</h4>
+    <form id="update-product-form-ajax">
+    <table class="sub-table-style">
+        <tr>
+            <td><label for="input-product">Product Name: </label>
+            <td><select name="input-product" id="input-updateproduct-p" required>
       <option value="">Select a Product</option>
       {{#each data}}
         <option value="{{this.product_id}}">{{this.name}}</option>
       {{/each}}
-    </select>
+    </select></td>
 
-    <label for="input-description">Description: </label>
-    <input
+    </tr>
+    <tr>
+    <td><label for="input-description">Description: </label></td>
+    <td><input
       type="text"
       name="input-description"
       id="input-updatedescription-p"
-    />
+    /></td>
 
-    <label for="input-price">Price: </label>
-    <input
+</tr>
+<tr>
+    <td><label for="input-price">Price: </label></td>
+    <td><input
       type="number"
       min="0.00"
       max="999999.99"
       step="0.01"
       name="input-price"
       id="input-updateprice-p"
-    />
+    /></td>      
+    </tr>
+    <tr>
+    <td><label for="input-stock">Stock: </label></td>  
+    <td><input type="number" name="input-stock" id="input-updatestock-p" /></td> 
+    </tr>
+    </table>
+    <div class="button-style">
+    <td><input type="submit"></td>
+    </div>
 
-    <label for="input-stock">Stock: </label>
-    <input type="number" name="input-stock" id="input-updatestock-p" />
-
-    <input type="submit" />
-  </fieldset>
 </form>
+</div>
+
+<br></br>
 
 {{! Embed our javascript to handle the DOM manipulation and AJAX request }}
 <script src="./js/add_product.js"></script>

@@ -17,6 +17,8 @@
 
 {{!-- Create a table --}}
 
+<br></br>
+
 <table id ="orderstatus-table" class="main-table">
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
@@ -43,27 +45,37 @@
 
 <!-- Add a new table -->
 
-<div class="form-style">
-    <h4>CREATE ORDER STATUS</h4>
+<div class="title">
+    <h4 class="table-title">CREATE ORDER STATUS</h4>
     <form id="add-orderStatus-form-ajax">
-      <input type="text" 
+      <table class="sub-table-style">
+        <tr>
+        <td><label for="input-orderStatus">Order Status: </label>
+        <td><input type="text" 
         name="input-orderStatus" 
         id="input-orderStatus"
         placeholder="Order Status"
-        required
-      />
-      <input type="text" 
+        required/></td>
+      </tr>
+      
+        <tr>
+          <td><label for="input-description-o">Description: </label></td>
+      <td><input type="text" 
         name="input-description-o" 
         id="input-description-o"
         placeholder="Description"
         required
-      />
-      <input type="submit" />
-    </form>
-  </div>
+      /></td></tr>
+    </table>
+    <div class="button-style">
+    <td><input type="submit"></td>
+    </div>
+
+</form>
+</div>
   <br>
 
-  <div class="form-style">
+  <div class="title">
     <h4>UPDATE ORDER STATUS</h4>
     <form id="update-orderStatus-form-ajax">
         <select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onChange="autofill()">

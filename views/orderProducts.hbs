@@ -14,24 +14,17 @@
   </ul>
 </nav>
 
-  <br></br>
-<thead>
-
         <form id="search-orderproduct-html" method='GET' action='/orderproducts'>
-        <fieldset>
-            <legend>Search Order Products</legend>
-        <p>Search by Order ID using the field below!</p>
-        <form id="search-person-html" method='GET' action='/orderproducts'>
-        <label for="input-lname">Search by Order ID: </label>
-        <input type="number" name="orderid" id="input-orderid-html-search">
+            <div class="textbox-label">SEARCH ORDER PRODUCTS</div>
+        <input type="number" name="orderid" id="input-orderid-html-search" placeholder="Search by Order ID" class="textbox">
         <input type="submit">
         <a href='/orderProducts'><button>Reset</button></a>
-        </fieldset>
     </form>
-        <br></br>
+    <br />
 {{!-- Create a table --}}
+{{!-- Form to add a record to the table  --}}
 
-    <table id="orderproducts-table">
+    <table id="orderproducts-table" class="main-table">
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
         <tr>
@@ -66,74 +59,90 @@
 
 <!-- /views/index.hbs -->
 
-
-<p>Use the following fields to update an orderproduct's information.</p>
-<form id="update-orderproduct-form-ajax">
-<fieldset>
-<legend>Update a ProductOrder</legend>
-    <label for="input-update-orderproduct_id">OrderProduct ID: </label>
-    <select name="input-update-orderproduct_id" id="select-update-productid">
-        <option value="">Select a Product Order</option>
-        {{#each data}}
-        <option value="{{this.[OrderProduct ID]}}">{{this.[OrderProduct ID]}}</option>
-        {{/each}}
-    </select>
-
-    <label for="input-update-productname">Products: </label>
-    <select name="input-update-productname" id="update_productid">
-        <option value="">Select a Product</option>
-        {{#each products}}
-        <option value="{{this.product_id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <label for="input-updatequantity">Quantity: </label>
-    <input type="number" name="input-updatequantity" id="updatequantity-op">
-
-    <label for="input-updateunitprice">Unit Price: </label>
-    <input type="number" step="0.01" name="input-updateunitprice" id="updateunitprice-op">
-
-
-    <input type="submit">
-</fieldset>
-</form>
-
-
-<br></br>
-{{!-- Form to add a record to the table  --}}
-<form id="add-orderproduct-form-ajax">
-
-
-    <fieldset>
-    <legend>Add OrderProduct</legend>
-    <p>To add a new OrderProduct, please enter their information below and click 'Submit'!</p>
-    
-    <label for="input-orderid">Order ID: </label>
-        <select name="input-orderid" id="input-orderid-op">
+<div class="title">
+    <h4 class="table-title">CREATE ORDER PRODUCT</h4>
+    <form id="add-orderproduct-form-ajax">
+    <table class="sub-table-style">
+    <tr>
+        <td><label for="input-orderid">Order ID: </label></td>
+        <td><select name="input-orderid" id="input-orderid-op">
         <option value="">Select an Order</option>
         {{#each orders}}
         <option value="{{this.order_id}}">{{this.order_id}}</option>
         {{/each}}
-    </select>
+    </select></td>
+    </tr>
+
  
     
-    <label for="input-productid">Product: </label>
-  <select name="input-productid" id="input-productid-op">
+    <tr>
+        <td><label for="input-productid">Product: </label></td>
+        <td><select name="input-productid" id="input-productid-op">
         <option value="">Select a Product</option>
         {{#each products}}
         <option value="{{this.product_id}}">{{this.name}}</option>
         {{/each}}
-    </select>
-
-    <label for="input-quantity">Quantity: </label>
-    <input type="number" name="input-quantity" id="input-quantity-op">
-
-    <label for="input-unitprice">Unit Price: </label>
-    <input type="number" step="0.01" name="input-unitprice" id="input-unitprice-op">
-
-    <input type="submit">
-    </fieldset>
+    </select></td>
+</tr>
+<tr>
+    <td><label for="input-quantity">Quantity: </label></td>
+    <td><input type="number" name="input-quantity" id="input-quantity-op"></td>
+</tr>
+<tr>
+    <td><label for="input-unitprice">Unit Price: </label></td>
+    <td><input type="number" step="0.01" name="input-unitprice" id="input-unitprice-op"></td>
+</tr>
+</table>
+<div class="button-style">
+  <td><input type="submit" /></td>
+</div>
 </form>
+</div>
+<br />
+
+
+<div class="title">
+    <h4 class="table-title">UPDATE ORDER PRODUCT</h4>
+    <form id="update-orderproduct-form-ajax">
+    <table class="sub-table-style">
+    <tr>
+        <td><label for="input-update-orderproduct_id">OrderProduct ID: </label></td>
+        <td><select name="input-update-orderproduct_id" id="select-update-productid">
+        <option value="">Select a Product Order</option>
+        {{#each data}}
+        <option value="{{this.[OrderProduct ID]}}">{{this.[OrderProduct ID]}}</option>
+        {{/each}}
+    </select></td>
+    </tr>
+    <tr>
+    <td><label for="input-update-productname">Products: </label></td>
+    <td><select name="input-update-productname" id="update_productid">
+        <option value="">Select a Product</option>
+        {{#each products}}
+        <option value="{{this.product_id}}">{{this.name}}</option>
+        {{/each}}
+    </select></td>
+    </tr>
+    <tr>
+
+    <td><label for="input-updatequantity">Quantity: </label></td>
+    <td><input type="number" name="input-updatequantity" id="updatequantity-op"></td>
+    </tr>   
+    <tr>
+    <td><label for="input-updateunitprice">Unit Price: </label></td>
+    <td><input type="number" step="0.01" name="input-updateunitprice" id="updateunitprice-op"></td>
+    </tr>
+    </table>
+    <div class="button-style">
+    <td><input type="submit"></td>
+    </div>
+
+</form>
+</div>
+
+
+<br></br>
+
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_orderProduct.js"></script>

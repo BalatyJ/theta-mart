@@ -176,8 +176,10 @@ td {
 
 .title input[type="text"],
 .title input[type="date"],
+.title input[type="number"],
 .title select {
-  margin-left: 8%;
+  padding-left: 8px 12px;
+  width: 180px;
 }
 
 .title input[type="submit"] {

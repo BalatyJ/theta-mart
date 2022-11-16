@@ -117,16 +117,19 @@ legend {
 td {
   padding: 10px 15px;
 }
+
 .main-table th {
   background: #266150;
   border-collapse: collapse;
   font: #fff 16px;
   color: #fff;
 }
+
 .main-table tr:nth-child(even) {
   background: #f0f0f2;
   border-collapse: collapse;
 }
+
 .main-table td {
   border-bottom: 1px solid #cecfd5;
 }
@@ -157,6 +160,12 @@ td {
   border-collapse: collapse;
   border-spacing: 0;
   margin-top: 3%;
+}
+
+.form-alignment {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .title {

@@ -43,8 +43,8 @@
 </table>
 
 
-<!-- Add a new table -->
 
+<div class="form-alignment">
 <div class="title-orderstatus">
     <h4 class="table-title">CREATE ORDER STATUS</h4>
     <form id="add-orderStatus-form-ajax">
@@ -75,6 +75,7 @@
 </form>
 </div>
   <br>
+  
 
   <div class="title-orderstatus">
     <h4 class="table-title">UPDATE ORDER STATUS</h4>
@@ -82,7 +83,7 @@
       <table class="sub-table-style">
         <tr>
             <td><select name="update-orderStatus" id="update-orderStatus"  placeholder="Select Order Status" required onChange="autofill()">
-            <option value="test">Select a Order Status</option>
+            <option value="">Select a Order Status</option>
             {{#each data}}
             <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
             {{/each}}
@@ -97,7 +98,7 @@
             <td><input type="submit"></td>
             <td><input a href='/orderStatuses' type="reset"></td>
             </div>
-        
+        </div>
         </form>
         </div>
         

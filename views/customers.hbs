@@ -68,8 +68,8 @@
   </tbody>
 </table>
 
-<!-- Add a new table -->
 
+<div class="form-alignment">
 <div class="title">
   <h4 class="table-title">CREATE CUSTOMER</h4>
   <form id="add-customer-form-ajax">
@@ -127,6 +127,8 @@
 </div>
 <br />
 
+
+
 <!--Update Customer Table -->
 
 <div class="title">
@@ -136,7 +138,7 @@
       <tr>
           <td><label for="update-fullname">Select a Customer:</label></td>
           <td><select name="update-fullname" id="update-fullname" onChange="autofill()" required class="box">
-              <option value="test">Select a Customer</option>
+              <option value="">Select a Customer</option>
               {{#each data}}
               <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
               {{/each}}
@@ -193,7 +195,7 @@
 
   </form>
 </div>
-
+</div>
 <br></br>
 
 {{! Embed our javascript to handle the DOM manipulation and AJAX request }}

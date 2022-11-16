@@ -61,7 +61,7 @@
 </table>
 
 <!-- Add a new table -->
-
+<div class="form-alignment">
 <div class="title">
   <h4 class="table-title">CREATE DRIVER</h4>
   <form id="add-driver-form-ajax">
@@ -141,7 +141,7 @@
             required
             class="box"
           >
-            <option value="test">Select a Driver</option>
+            <option value="">Select a Driver</option>
             {{#each data}}
               <option value="{{this.driver_id}}">{{this.fname}}
                 {{this.lname}}</option>
@@ -191,7 +191,7 @@
             required
             class="box"
           >
-            <option value="none">Select an Availability</option>
+            <option value="">Select an Availability</option>
             <option value="1">Yes</option>
             <option value="0">No</option>
           </select></td>
@@ -203,6 +203,7 @@
     </div>
 
   </form>
+</div>
 </div>
 
 <br></br>

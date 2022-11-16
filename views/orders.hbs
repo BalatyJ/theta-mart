@@ -13,29 +13,19 @@
   </ul>
 </nav>
 
-
-<br></br>
 {{!-- Create a table --}}
-
-<table id="orders-table">
-
-<thead>
     <form id="search-order-html" method='GET' action='/orders'>
-    <fieldset>
-        <legend>Search Orders</legend>
-    <p>Search by customer name using the field below. Partial last or first names are OK too!</p>
-    <form id="search-order-html" method='GET' action='/orders'>
-    <label for="customer_name">Search by Customer Name: </label>
-    <input type="text" name="customer_name" id="input-customername-html-search">
+    <div class="textbox-label">Search Orders</div>    
+    <input type="text" class="textbox" name="customer_name" id="input-customername-html-search" placeholder="Search by Customer Name">
     <input type="submit">
     <a href='/orders'><button>Reset</button></a>
-
-    </fieldset>
     </form>
-      <br></br>
+    </br>
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
-        <tr>
+    <table id="orders-table" class="main-table">
+        <thead>    
+    <tr>
             <th>Order ID</th>
             <th>Customer</th>
             <th>Order Date</th>
@@ -78,92 +68,109 @@
 </table>
 
 
-<br>
-{{!-- Form to add a record to the table --}}
-<form id="add-order-form-ajax">
-    <fieldset>
-        <legend>Add Order</legend>
-        <p>To add new order, please enter the information below and click 'Submit'!</p>
-        
-        <label for="input-customer">Customer Name: </label>
-        <select name="input-customer" id="input-addcustomer-o" required>
+<div class="title">
+    <h4 class="table-title">CREATE ORDER</h4>
+    <form id="add-order-form-ajax">
+    <table class="sub-table-style">
+        <tr>
+        <td>
+        <label for="input-customer">Customer Name: </label></td>
+        <td><select name="input-customer" id="input-addcustomer-o" required class="box">
             <option value="">Select a Customer</option>
             {{#each customers}}
-            <option value="{{this.customer_id}}">{{this.customer_id}}: {{this.Customer}}</option>
+            <option value="{{this.customer_id}}">{{this.Customer}}</option>
             {{/each}}
-        </select>
-
-        <label for="input-orderdate">Order Date: </label>
-        <input type="date" required="required" name="input-orderdate" id="input-addorderdate-o">
-        
-        <label for="input-street">Street: </label>
-        <input type="text" required="required" name="input-street" id="input-addstreet-o">
-        
-        <label for="input-unit">Unit: </label>
-        <input type="text" name="input-unit" id="input-addunit-o">
-        
-        <label for="input-city">City: </label>
-        <input type="text" required="required" name="input-city" id="input-addcity-o">
-        
-        <label for="input-state">State: </label>
-        <input type="text" required="required" name="input-state" id="input-addstate-o">
-        
-        <label for="input-zipcode">Zip Code: </label>
-        <input type="text" required="required" name="input-zipcode" id="input-addzipcode-o">
-        
-        <label for="input-country">Country: </label>
-        <input type="text" required="required" name="input-country" id="input-addcountry-o">
-
-        <label for="input-orderstatus">Order Status: </label>
-        <select name="input-orderstatus" id="input-addorderstatus-o" required>
+        </select></td>
+        </tr>
+        <tr>
+        <td><label for="input-orderdate">Order Date: </label></td>
+        <td><input type="date" required="required" name="input-orderdate" id="input-addorderdate-o" class="box"></td>
+    </tr>
+    <tr>
+        <td><label for="input-street">Street: </label></td>
+        <td><input type="text" required="required" name="input-street" id="input-addstreet-o"></td>
+    </tr>
+    <tr>
+       <td><label for="input-unit">Unit: </label></td>
+       <td><input type="text" name="input-unit" id="input-addunit-o"></td>
+    </tr>
+    <tr>
+        <td><label for="input-city">City: </label></td>
+        <td><input type="text" required="required" name="input-city" id="input-addcity-o"></td>
+    </tr>
+    <tr>
+        <td><label for="input-state">State: </label></td>
+        <td><input type="text" required="required" name="input-state" id="input-addstate-o"></td>
+    </tr>
+    <tr>
+        <td>
+        <label for="input-zipcode">Zip Code: </label></td>
+        <td><input type="text" required="required" name="input-zipcode" id="input-addzipcode-o"></td>
+    </tr>
+    <tr>
+    <td><label for="input-country">Country: </label></td>
+    <td><input type="text" required="required" name="input-country" id="input-addcountry-o"></td>
+</tr>
+<tr>
+    <td>
+        <label for="input-orderstatus">Order Status: </label></td>
+        <td><select name="input-orderstatus" id="input-addorderstatus-o" class="box" required>
             <option value="">Select an Order Status</option>
             {{#each orderstatuses}}
             <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
             {{/each}}
-        </select>
-
-        <label for="input-driver">Driver: </label>
-        <select name="input-driver" id="input-adddriver-o">
+        </select></td>
+    </tr>
+    <tr>
+        <td>
+        <label for="input-driver">Driver: </label></td>
+        <td><select name="input-driver" id="input-adddriver-o">
             <option value="null">Select an Available Driver</option>
             {{#each drivers}}
-            <option value="{{this.driver_id}}">{{this.driver_id}}: {{this.Driver}}</option>
+            <option value="{{this.driver_id}}">{{this.Driver}}</option>
             {{/each}}
-        </select>
+        </select></td>
+    </tr>
+</table>
+<div class="button-style">
+    <td><input type="submit"></td>
+</div>
 
-        <input type="submit">
-    </fieldset>
 </form>
+</div>
+<br />
 
-<br>
 
-
+<div class="title">
+    <h4 class="table-title">UPDATE ORDER</h4>
 <form id="update-order-form-ajax">
-<fieldset>
-<legend>Update an Order</legend>
-<p>Use the following fields to update an order information.</p>
-<label for="input-update-order_id">Order ID: </label>
-    <select name="input-update-order_id" id="select-update-order_id" required>
-        <option value="">Select an Order</option>
-        {{#each data}}
-        <option value="{{this.OrderID}}">{{this.OrderID}}</option>
-        {{/each}}
-    </select>
-    <label for="input-update-orderStatus">Order Status: </label>
+    <table class="sub-table-style">
+        <tr>
+        <td><label for="input-update-order_id">Order ID: </label></td>
+        <td><select name="input-update-order_id" id="select-update-order_id" required>
+            <option value="">Select an Order</option>
+            {{#each data}}
+            <option value="{{this.OrderID}}">{{this.OrderID}}</option>
+            {{/each}}
+            </select></td>
+        </tr>
+    <tr>
+    <td><label for="input-update-orderStatus">Order Status: </label></td>
+    <td>
     <select name="input-update-orderStatus" id="update_orderStatus" required>
         <option value="">Select an Order Status</option>
         {{#each orderstatuses}}
         <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
         {{/each}}
-        </select>
-    </select>
-
-
-
-    <input type="submit">
-</fieldset>
-</form>
+        </select></td>
+    </tr>
+</table>
+<div class="button-style">
+    <td><input type="submit"></td>
+</div>
 
 </form>
+</div>
 
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}

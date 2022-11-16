@@ -136,7 +136,7 @@
       <tr>
           <td><label for="update-fullname">Select a Customer:</label></td>
           <td><select name="update-fullname" id="update-fullname" onChange="autofill()" required class="box">
-              <option value="test">Select a Customer</option>
+              <option value="">Select a Customer</option>
               {{#each data}}
               <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
               {{/each}}

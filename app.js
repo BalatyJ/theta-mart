@@ -53,6 +53,10 @@ app.get('/customers', function (req, res) {
 
         let customer = rows;
 
+        if (Object.keys(customer).length === 0) {
+            res.render('customers', { data: customer });
+        }
+
         res.render('customers', { data: customer });                  // Render the index.hbs file, and also send the renderer
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                         // received back from the query                                  

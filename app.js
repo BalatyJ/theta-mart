@@ -53,6 +53,10 @@ app.get('/customers', function (req, res) {
 
         let customer = rows;
 
+        if (Object.keys(customer).length === 0) {
+            res.render('customers', { data: customer });
+        }
+
         res.render('customers', { data: customer });                  // Render the index.hbs file, and also send the renderer
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                         // received back from the query                                  
@@ -144,19 +148,20 @@ app.delete('/customers/:delete-customer-ajax', function (req, res, next) {
 app.get('/drivers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
-    if (req.query.lname === undefined) {
+    if (req.query.lname === undefined || req.query.lname === '') {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
         available AS Available FROM Drivers;`
     }
     else {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        AS Available
+        available AS Available
         FROM Drivers 
-        WHERE lname LIKE "${req.query.lname}%"`
+        WHERE lname LIKE "%${req.query.lname}%"`
     }
     // Run the 1st query
     db.pool.query(query1, function (error, rows, fields) {    // Execute the query
         let driver = rows;
+        console.log(driver)
         res.render('drivers', { data: driver });                  // Render the index.hbs file, and also send the renderer
     })                                                      // an object where 'data' is equal to the 'rows' we
 });
@@ -252,11 +257,11 @@ app.get('/products', function (req, res) {
     let query1;
 
     if (req.query.name === undefined) {
-        query1 = "SELECT * FROM Products;";               // Define our query
+        query1 = "SELECT product_id, name, description, FORMAT(price,2) as price, stock FROM Products;";               // Define our query
     }
 
     else {
-        query1 = `SELECT * FROM Products WHERE name LIKE "%${req.query.name}%"`
+        query1 = `SELECT product_id, name, description, FORMAT(price,2) as price, stock FROM Products WHERE name LIKE "%${req.query.name}%"`
     }
 
     // Run the 1st query
@@ -620,7 +625,7 @@ app.get('/orderProducts', function (req, res) {
 
     if (req.query.orderid === undefined || req.query.orderid === '') {
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
-        Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
+        Products.name AS Product, quantity AS Quantity, FORMAT(unit_price, 2) AS 'Unit Price', FORMAT(subtotal,2) AS Subtotal
         FROM  OrderProducts 
             INNER JOIN Products 
             ON Products.product_id=OrderProducts.product_id;`              // Define our query
@@ -664,7 +669,7 @@ app.post('/add-orderproduct-ajax', function (req, res) {
     let orderid = parseInt(data.orderid)
     let productid = parseInt(data.productid)
     let quantity = parseInt(data.quantity)
-    let unitprice = parseInt(data.unitprice)
+    let unitprice = parseFloat(data.unitprice)
     console.log(orderid)
     // Create the query and run it on the database
     query1 = `INSERT INTO OrderProducts (order_id, product_id, quantity, unit_price, subtotal) VALUES ('${orderid}', '${productid}',${quantity}, ${unitprice},${unitprice * quantity});`;
@@ -740,7 +745,8 @@ app.put('/put-update-orderproduct-ajax', function (req, res, next) {
     let orderproduct = parseInt(data.orderproductid);
     let product = parseInt(data.productid);
     let quantity = parseInt(data.quantity);
-    let price = parseInt(data.unitprice);
+    let price = parseFloat(data.unitprice);
+    let subtotal = parseFloat((quantity * price).toFixed(2))
 
     let queryUpdateProduct = `UPDATE OrderProducts SET product_id = ?, quantity=?, unit_price=?, subtotal=?  WHERE orderproduct_id = ?`;
     let selectProducts = `SELECT * FROM Products WHERE product_id = ?`
@@ -752,7 +758,7 @@ app.put('/put-update-orderproduct-ajax', function (req, res, next) {
 
 
     // Run the 1st query
-    db.pool.query(queryUpdateProduct, [product, quantity, price, quantity * price, orderproduct], function (error, rows, fields) {
+    db.pool.query(queryUpdateProduct, [product, quantity, price, subtotal, orderproduct], function (error, rows, fields) {
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.

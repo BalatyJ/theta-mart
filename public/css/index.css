@@ -74,13 +74,6 @@ legend {
   padding: 3px 6px;
 }
 
-footer {
-  background-color: #fff;
-  text-align: center;
-  padding: 0px;
-  padding-bottom: 0%;
-}
-
 .sub-table-style {
   font: #fff 14px;
   width: 500px;
@@ -236,4 +229,13 @@ td {
 .title-orderstatus input[type="text"] {
   padding-left: 8px 12px;
   width: 600px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: center;
 }

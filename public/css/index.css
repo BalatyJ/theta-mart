@@ -182,7 +182,8 @@ td {
   width: 180px;
 }
 
-.title input[type="submit"] {
+.title input[type="submit"],
+.title input[type="reset"] {
   -moz-box-shadow: inset 0px 1px 0px 0px #45d6d6;
   -webkit-box-shadow: inset 0px 1px 0px 0px #45d6d6;
   box-shadow: inset 0px 1px 0px 0px #45d6d6;

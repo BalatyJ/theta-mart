@@ -126,6 +126,7 @@ app.put('/put-customer-ajax', function (req, res, next) {
     );
 });
 
+// Customers - delete
 app.delete('/customers/:delete-customer-ajax', function (req, res, next) {
     let data = req.body;
     let customerID = parseInt(data.id);
@@ -139,6 +140,8 @@ app.delete('/customers/:delete-customer-ajax', function (req, res, next) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
+        } else {
+            res.send(rows);
         }
     })
 });

@@ -96,7 +96,7 @@ CREATE TABLE Orders (
   PRIMARY KEY (order_id),
   FOREIGN KEY (orderstatus_id) REFERENCES OrderStatuses (orderstatus_id),
   FOREIGN KEY (driver_id) REFERENCES Drivers (driver_id) ON DELETE SET NULL,
-  FOREIGN KEY (customer_id) REFERENCES Customers (customer_id) ON DELETE CASCADE
+  FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
 );
 
 

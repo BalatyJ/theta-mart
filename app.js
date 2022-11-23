@@ -618,12 +618,15 @@ app.put('/orders/:put-order-ajax', function (req, res, next) {
 });
 
 // Order Products - get
-app.get('/orderProducts', function (req, res) {
+app.get('/orderProducts?', function (req, res) {
     // Declare Query 1 - Orders
 
     let query1
+    console.log(req.query)
 
     if (req.query.orderid === undefined || req.query.orderid === '') {
+        console.log("Executing first query.")
+
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
         Products.name AS Product, quantity AS Quantity, FORMAT(unit_price, 2) AS 'Unit Price', FORMAT(subtotal,2) AS Subtotal
         FROM  OrderProducts 
@@ -631,6 +634,9 @@ app.get('/orderProducts', function (req, res) {
             ON Products.product_id=OrderProducts.product_id;`              // Define our query
     }
     else {
+
+        console.log("Executing second query.")
+
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
         Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
         FROM  OrderProducts 
@@ -651,7 +657,6 @@ app.get('/orderProducts', function (req, res) {
 
             db.pool.query(query3, function (error, rows, fields) {
                 let order_ids = rows;
-                console.log(orderproducts)
                 res.render('orderProducts', { data: orderproducts, products: product_rows, orders: order_ids });                  // Render the index.hbs file, and also send the renderer
 
             })

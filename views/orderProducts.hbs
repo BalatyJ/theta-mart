@@ -16,7 +16,12 @@
 
         <form id="search-orderproduct-html" method='GET' action='/orderproducts'>
             <div class="textbox-label">SEARCH ORDER PRODUCTS</div>
-        <input type="number" name="orderid" id="input-orderid-html-search" placeholder="Search by Order ID" class="textbox" min="1">
+                <select name="orderid" id="search-orderid-op" class="textbox">
+                <option value=""></option>
+                {{#each orders}}
+                    <option value="{{this.order_id}}">{{this.order_id}}</option>
+                {{/each}}
+        </select>
         <input type="submit">
         <a href='/orderProducts'><button onclick="resetSearch()">Reset Search</button></a>
     </form>
@@ -29,7 +34,9 @@
         know what each column means when the page renders --}}
         <tr>
             <th>OrderProduct ID</th>
-            <th>Order ID</th>
+            <th>Order ID
+
+            </th>
             <th>Product</th>
             <th>Quantity</th>
             <th>Unit Price</th>        
@@ -108,7 +115,7 @@
     <table class="sub-table-style">
     <tr>
         <td><label for="input-update-orderproduct_id">OrderProduct ID: </label></td>
-        <td><select name="input-update-orderproduct_id" id="select-update-productid" onclick="autofill()">
+        <td><select name="input-update-orderproduct_id" id="select-update-productid" onchange="autofill()">
         <option value="">Select a Product Order</option>
         {{#each data}}
         <option value="{{this.[OrderProduct ID]}}">{{this.[OrderProduct ID]}}</option>

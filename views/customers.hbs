@@ -27,7 +27,7 @@
     placeholder="Type Last Name..."
   />
   <input type="submit" />
-  <a href="/customers"><button>Reset</button></a>
+  <a href="/customers"><button>Reset Search</button></a>
 </form>
 <br />
 
@@ -52,16 +52,7 @@
 
 
 
-<script>
-function scrollToElement(selector, callback){
-  var animation = {scrollTop: $(selector).offset().top};
-  $('html,body').animate(animation, 'slow', 'swing', function() {
-      if (typeof callback == 'function') {
-          callback();
-      }
-      callback = null;
-  });
-}</script>
+
 
   {{! Body section }}
   <tbody>
@@ -77,7 +68,7 @@ function scrollToElement(selector, callback){
         <td>{{this.state}}</td>
         <td>{{this.zipcode}}</td>
         <td>{{this.country}}</td>
-        <td><button onclick="scrollToElement('#MasterDiv');" ></td>
+        <td><button onclick="scrollToElement()" >Add</button></td>
         
       </tr>
     {{/each}}
@@ -85,7 +76,7 @@ function scrollToElement(selector, callback){
 </table>
 
 
-<div class="form-alignment" id="#MasterDiv">
+<div class="form-alignment">
 <div class="title">
   <h4 class="table-title">CREATE CUSTOMER</h4>
   <form id="add-customer-form-ajax">
@@ -218,7 +209,15 @@ function scrollToElement(selector, callback){
 </div>
 <br></br>
 
-{{! Embed our javascript to handle the DOM manipulation and AJAX request }}
+
 <script src="./js/add_customer.js"></script>
 <script src="./js/update_customer.js"></script>
 <script src="./js/delete_customer.js"></script>
+<script
+  function scrollToElement(){
+    var scrollTo = $("#add-customer-form-ajax");
+      var position = scrollTo.offset().top - container.offset().top + container.scrollTop();
+    container.animate({
+      scrollTop: position
+    });
+  }></script>

@@ -66,7 +66,7 @@
     <table class="sub-table-style">
       <tr>
         <td><label for="input-name">Product Name:</label></td>
-        <td><input type="text" name="input-name" id="input-name" /></td>
+        <td><input type="text" name="input-name" id="input-name" required/></td>
       </tr>
 
       <tr>
@@ -75,6 +75,7 @@
             type="text"
             name="input-description"
             id="input-description"
+            required
           /></td>
       </tr>
       <tr>
@@ -86,11 +87,12 @@
             step="0.01"
             name="input-price"
             id="input-price"
+            required
           /></td>
       </tr>
       <tr>
         <td><label for="input-stock">Stock:</label></td>
-        <td><input type="number" name="input-stock" id="input-stock" /></td>
+        <td><input type="number" name="input-stock" id="input-stock" min="0" required/></td>
       </tr>
     </table>
     <div class="button-style">
@@ -112,7 +114,7 @@
       <td><select name="input-product" id="input-updateproduct-p" required onclick="autofill()">
         <option value="">Select a Product</option>
         {{#each data}}
-          <option value={{this.product_id}}>{{this.name}}</option>
+          <option value={{this.product_id}}>{{this.product_id}}: {{this.name}}</option>
         {{/each}}
     </select></td>
 
@@ -123,6 +125,8 @@
       type="text"
       name="input-description"
       id="input-updatedescription-p"
+      min="0"
+      required
     /></td>
 
 </tr>
@@ -135,11 +139,12 @@
       step="0.01"
       name="input-price"
       id="input-updateprice-p"
+      required
     /></td>      
     </tr>
     <tr>
     <td><label for="input-stock">Stock: </label></td>  
-    <td><input type="number" name="input-stock" id="input-updatestock-p" /></td> 
+    <td><input type="number" name="input-stock" id="input-updatestock-p" min="0" required/></td> 
     </tr>
     </table>
     <div class="button-style">

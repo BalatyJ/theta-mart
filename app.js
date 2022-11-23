@@ -871,17 +871,11 @@ const database = 'cs340_balatyj';
 const Importer = require('mysql-import');
 const importer = new Importer({ host, user, password, database });
 
-// New onProgress method, added in version 5.0!
-importer.onProgress((progress) => {
-    var percent =
-        Math.floor((progress.bytes_processed / progress.total_bytes) * 10000) / 100;
-    console.log(`${percent}% Completed`);
-});
 
 app.get('/reload', function (req, res) {
     res.render('reload');
     importer
-        .import('database/DDL.sql')
+        .import('./database/DDL.sql')
         .then(() => {
             var files_imported = importer.getImported();
             console.log(`${files_imported.length} SQL file(s) imported.`);

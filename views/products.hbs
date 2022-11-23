@@ -1,4 +1,6 @@
-<!-- index.hbs -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <nav class="theta-mart-nav">
   <ul>
     <li><a href="/#">Theta Mart</a></li>
@@ -38,6 +40,7 @@
       <th>Description</th>
       <th>Price</th>
       <th>Stock</th>
+      <th>Delete</th>
     </tr>
   </thead>
 
@@ -52,6 +55,7 @@
         <td>{{this.description}}</td>
         <td>{{this.price}}</td>
         <td>{{this.stock}}</td>
+        <td><button onclick="deleteProduct({{this.product_id}})">Delete</button></td>
       </tr>
     {{/each}}
   </tbody>
@@ -161,3 +165,4 @@
 {{! Embed our javascript to handle the DOM manipulation and AJAX request }}
 <script src="./js/add_product.js"></script>
 <script src="./js/update_product.js"></script>
+<script src="./js/delete_product.js"></script>

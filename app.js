@@ -348,6 +348,26 @@ app.put('/products/put-product-ajax', function (req, res, next) {
     })
 });
 
+// Products - delete
+app.delete('/delete-product-ajax/', function (req, res, next) {
+    let data = req.body;
+    let productID = data.id;
+    let deleteProduct = `DELETE FROM Products WHERE product_id = ?;`;
+
+
+    db.pool.query(deleteProduct, [productID], function (error, rows, fields) {
+        if (error) {
+
+
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(rows);
+        }
+
+    })
+});
+
 
 // Order Status - get
 app.get('/orderStatuses', function (req, res) {
@@ -425,7 +445,27 @@ app.put('/orderStatuses/:put-orderStatus-ajax', function (req, res, next) {
     );
 });
 
+// Order Status - delete
+app.delete('/delete-orderStatus-ajax/', function (req, res, next) {
 
+
+    let data = req.body;
+    let statusID = data.id;
+    let deleteOrderStatus = `DELETE FROM OrderStatuses WHERE orderstatus_id = ?;`;
+
+
+    db.pool.query(deleteOrderStatus, [statusID], function (error, rows, fields) {
+        if (error) {
+
+
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(rows);
+        }
+
+    })
+});
 
 
 // Orders - get

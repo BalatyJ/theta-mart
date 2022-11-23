@@ -26,6 +26,7 @@
     <tr>
         <th>Order Status</th>
         <th>Description</th>
+        <th>Delete</th>
     </tr>
     </thead>
 
@@ -37,6 +38,7 @@
         <tr data-value = "{{this.orderstatus_id}}">
             <td>{{this.orderstatus_id}}</td>
             <td>{{this.description}}</td>
+            <td><button onclick="deleteOrderStatus('{{this.orderstatus_id}}')">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -106,4 +108,5 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_orderStatus.js"></script>
 <script src="./js/update_orderStatus.js"></script>
+<script src="./js/delete_orderStatus.js"></script>
 

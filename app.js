@@ -126,6 +126,7 @@ app.put('/put-customer-ajax', function (req, res, next) {
     );
 });
 
+// Customers - delete
 app.delete('/customers/:delete-customer-ajax', function (req, res, next) {
     let data = req.body;
     let customerID = parseInt(data.id);
@@ -139,6 +140,8 @@ app.delete('/customers/:delete-customer-ajax', function (req, res, next) {
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error);
             res.sendStatus(400);
+        } else {
+            res.send(rows);
         }
     })
 });
@@ -348,6 +351,25 @@ app.put('/products/put-product-ajax', function (req, res, next) {
     })
 });
 
+// Products - delete
+app.delete('/delete-product-ajax/', function (req, res, next) {
+    let data = req.body;
+    let productID = data.id;
+    let deleteProduct = `DELETE FROM Products WHERE product_id = ?;`;
+
+
+    db.pool.query(deleteProduct, [productID], function (error, rows, fields) {
+        if (error) {
+
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(rows);
+        }
+
+    })
+});
+
 
 // Order Status - get
 app.get('/orderStatuses', function (req, res) {
@@ -425,7 +447,27 @@ app.put('/orderStatuses/:put-orderStatus-ajax', function (req, res, next) {
     );
 });
 
+// Order Status - delete
+app.delete('/delete-orderStatus-ajax/', function (req, res, next) {
 
+
+    let data = req.body;
+    let statusID = data.id;
+    let deleteOrderStatus = `DELETE FROM OrderStatuses WHERE orderstatus_id = ?;`;
+
+
+    db.pool.query(deleteOrderStatus, [statusID], function (error, rows, fields) {
+        if (error) {
+
+
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(rows);
+        }
+
+    })
+});
 
 
 // Orders - get
@@ -618,12 +660,15 @@ app.put('/orders/:put-order-ajax', function (req, res, next) {
 });
 
 // Order Products - get
-app.get('/orderProducts', function (req, res) {
+app.get('/orderProducts?', function (req, res) {
     // Declare Query 1 - Orders
 
     let query1
+    console.log(req.query)
 
     if (req.query.orderid === undefined || req.query.orderid === '') {
+        console.log("Executing first query.")
+
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
         Products.name AS Product, quantity AS Quantity, FORMAT(unit_price, 2) AS 'Unit Price', FORMAT(subtotal,2) AS Subtotal
         FROM  OrderProducts 
@@ -631,6 +676,9 @@ app.get('/orderProducts', function (req, res) {
             ON Products.product_id=OrderProducts.product_id;`              // Define our query
     }
     else {
+
+        console.log("Executing second query.")
+
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
         Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
         FROM  OrderProducts 
@@ -651,7 +699,6 @@ app.get('/orderProducts', function (req, res) {
 
             db.pool.query(query3, function (error, rows, fields) {
                 let order_ids = rows;
-                console.log(orderproducts)
                 res.render('orderProducts', { data: orderproducts, products: product_rows, orders: order_ids });                  // Render the index.hbs file, and also send the renderer
 
             })

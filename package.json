@@ -4,6 +4,7 @@
     "express-handlebars": "^6.0.6",
     "forever": "^4.0.3",
     "mysql": "^2.18.1",
+    "mysql-import": "^5.0.26",
     "nodemon": "^2.0.20",
     "queryselector": "^0.1.0"
   },

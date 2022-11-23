@@ -1,7 +1,7 @@
-function deleteCustomer(customerID) {
-  let link = '/customers/:delete-customer-ajax/';
+function deleteOrderStatus(statusID) {
+  let link = '/delete-orderStatus-ajax/';
   let data = {
-    id: customerID
+    id: statusID
   };
 
   $.ajax({
@@ -13,7 +13,7 @@ function deleteCustomer(customerID) {
       window.location.reload();
     },
     error: function () {
-      alert("Customer could not be deleted because they have made one or more orders.")
+      alert("Could not delete. This status is used in an order, so it cannot be deleted.")
     }
   });
 }

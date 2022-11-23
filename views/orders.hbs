@@ -1,4 +1,4 @@
-<!-- index.hbs -->
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <nav class="theta-mart-nav">
@@ -79,7 +79,7 @@
         <td><select name="input-customer" id="input-addcustomer-o" required class="box">
             <option value="">Select a Customer</option>
             {{#each customers}}
-            <option value="{{this.customer_id}}">{{this.Customer}}</option>
+            <option value="{{this.customer_id}}">{{this.customer_id}}: {{this.Customer}}</option>
             {{/each}}
         </select></td>
         </tr>
@@ -129,7 +129,7 @@
         <td><select name="input-driver" id="input-adddriver-o">
             <option value="null">Select an Available Driver</option>
             {{#each drivers}}
-            <option value="{{this.driver_id}}">{{this.Driver}}</option>
+            <option value="{{this.driver_id}}">{{this.driver_id}}: {{this.Driver}}</option>
             {{/each}}
         </select></td>
     </tr>

@@ -46,7 +46,7 @@
       <th>State</th>
       <th>Zip Code</th>
       <th>Country</th>
-      <th></th>
+      <th>Delete</th>
     </tr>
   </thead>
 
@@ -68,8 +68,8 @@
         <td>{{this.state}}</td>
         <td>{{this.zipcode}}</td>
         <td>{{this.country}}</td>
-        <td><button onclick="scrollToElement()" >Add</button></td>
-        
+        <td><button onclick="deleteCustomer({{this.customer_id}})">Delete</button></td>
+        <td></td>
       </tr>
     {{/each}}
   </tbody>
@@ -149,7 +149,7 @@
           <td><select name="update-fullname" id="update-fullname" onChange="autofill()" required class="box">
               <option value="">Select a Customer</option>
               {{#each data}}
-              <option value="{{this.customer_id}}">{{this.fname}} {{this.lname}}</option>
+              <option value="{{this.customer_id}}">{{this.customer_id}}: {{this.fname}} {{this.lname}}</option>
               {{/each}}
               </select></td>
 
@@ -213,11 +213,3 @@
 <script src="./js/add_customer.js"></script>
 <script src="./js/update_customer.js"></script>
 <script src="./js/delete_customer.js"></script>
-<script
-  function scrollToElement(){
-    var scrollTo = $("#add-customer-form-ajax");
-      var position = scrollTo.offset().top - container.offset().top + container.scrollTop();
-    container.animate({
-      scrollTop: position
-    });
-  }></script>

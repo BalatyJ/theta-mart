@@ -28,7 +28,6 @@ updatePersonForm.addEventListener("submit", function (e) {
     }
 
 
-
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-update-orderproduct-ajax", true);

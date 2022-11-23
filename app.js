@@ -358,7 +358,6 @@ app.delete('/delete-product-ajax/', function (req, res, next) {
     db.pool.query(deleteProduct, [productID], function (error, rows, fields) {
         if (error) {
 
-
             console.log(error);
             res.sendStatus(400);
         } else {

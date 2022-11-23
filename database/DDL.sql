@@ -94,7 +94,7 @@ CREATE TABLE Orders (
   driver_id int,
   customer_id int NOT NULL,
   PRIMARY KEY (order_id),
-  FOREIGN KEY (orderstatus_id) REFERENCES OrderStatuses (orderstatus_id) ON DELETE CASCADE,
+  FOREIGN KEY (orderstatus_id) REFERENCES OrderStatuses (orderstatus_id),
   FOREIGN KEY (driver_id) REFERENCES Drivers (driver_id) ON DELETE SET NULL,
   FOREIGN KEY (customer_id) REFERENCES Customers (customer_id) ON DELETE CASCADE
 );
@@ -118,7 +118,7 @@ CREATE TABLE OrderProducts (
   subtotal decimal(6,2) NOT NULL,
   PRIMARY KEY (orderproduct_id),
   FOREIGN KEY (order_id) REFERENCES Orders (order_id) ON DELETE CASCADE,
-  FOREIGN KEY (product_id) REFERENCES Products (product_id) ON DELETE CASCADE
+  FOREIGN KEY (product_id) REFERENCES Products (product_id)
 );
 
 INSERT INTO OrderProducts (orderproduct_id, order_id, product_id, quantity, unit_price, subtotal) VALUES

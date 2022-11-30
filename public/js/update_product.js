@@ -69,7 +69,7 @@ function updateRow(data, productID) {
 
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-   
+
             let descriptionTD = updateRowIndex.getElementsByTagName("td")[2];
             let priceTD = updateRowIndex.getElementsByTagName("td")[3];
             let stockTD = updateRowIndex.getElementsByTagName("td")[4];
@@ -103,8 +103,16 @@ function autofill() {
                 let td1 = updateRowIndex.getElementsByTagName("td")[2];
                 document.getElementById('input-updatedescription-p').value = td1.innerHTML;
 
+
+
+                // Citation for modification of phone_num
+                // Date: 11/30/2022
+                // Adapted from:
+                // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
                 let td2 = updateRowIndex.getElementsByTagName("td")[3];
-                document.getElementById('input-updateprice-p').value = td2.innerHTML;
+                let unitprice = td2.innerHTML;
+                unitprice = unitprice.split("$").join('');
+                document.getElementById('input-updateprice-p').value = unitprice;
 
                 let td3 = updateRowIndex.getElementsByTagName("td")[4];
                 document.getElementById('input-updatestock-p').value = td3.innerHTML;

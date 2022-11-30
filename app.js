@@ -868,7 +868,7 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
 });
 
 
-
+// code reference to mysql-import 
 const host = 'classmysql.engr.oregonstate.edu';
 const user = 'cs340_balatyj';
 const password = '9338';

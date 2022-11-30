@@ -62,13 +62,13 @@ function updateRow(data, orderproductID) {
         //rows would be accessed using the "row" variable assigned in the for loop
         if (table.rows[i].getAttribute("data-value") == orderID) {
 
-            
+
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            
+
             let td = updateRowIndex.getElementsByTagName("td")[9];
 
-            
+
             td.innerHTML = parsedData[0].name;
         }
     }
@@ -80,6 +80,7 @@ function autofill() {
 
     if (selectElement_id === '') {
         document.getElementById('update_orderStatus').value = '';
+        document.getElementById('input-updatedriver-o').selectedIndex = '';
     } else {
 
 
@@ -94,6 +95,8 @@ function autofill() {
                 let td1 = updateRowIndex.getElementsByTagName("td")[10];
                 document.getElementById('update_orderStatus').value = td1.getAttribute('data-order_status');
 
+
+                document.getElementById('input-updatedriver-o').selectedIndex = '';
             }
         }
     }

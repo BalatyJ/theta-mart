@@ -1,45 +1,45 @@
 // Get the objects we need to modify
-let updatePersonForm = document.getElementById('update-orderproduct-form-ajax');
+let updateProductForm = document.getElementById('update-product-form-ajax');
 
 // Modify the objects we need
-updatePersonForm.addEventListener("submit", function (e) {
+updateProductForm.addEventListener("submit", function (e) {
 
-    // Prevent the form from submitting
+    // Prevent the form from submitting.
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputorderProductID = document.getElementById("select-update-productid");
-    let inputProductID = document.getElementById("update_productid");
-    let inputOrderProductQuantity = document.getElementById("updatequantity-op");
-    let inputOrderProductUnitPrice = document.getElementById("updateunitprice-op");
+    let inputProduct = document.getElementById("input-updateproduct-p");
+    let inputDescription = document.getElementById("input-updatedescription-p");
+    let inputPrice = document.getElementById("input-updateprice-p");
+    let inputStock = document.getElementById("input-updatestock-p");
+
 
     // Get the values from the form fields
-    let inputorderProductIDValue = inputorderProductID.value;
-    let inputProductIDValue = inputProductID.value;
-    let inputOrderProductQuantityValue = inputOrderProductQuantity.value;
-    let inputOrderProductUnitPriceValue = inputOrderProductUnitPrice.value;
+    let inputProductValue = inputProduct.value
+    let inputDescriptionValue = inputDescription.value
+    let inputPriceValue = inputPrice.value
+    let inputStockValue = inputStock.value
 
 
+    // Put our data we want to send in a javascript object
     let data = {
-        orderproductid: inputorderProductIDValue,
-        productid: inputProductIDValue,
-        quantity: inputOrderProductQuantityValue,
-        unitprice: inputOrderProductUnitPriceValue
+        product: inputProductValue,
+        description: inputDescriptionValue,
+        price: inputPriceValue,
+        stock: inputStockValue
     }
-
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/put-update-orderproduct-ajax", true);
+    xhttp.open("PUT", "/products/put-product-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
-
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, inputProductIDValue);
+            updateRow(xhttp.response, parseInt(inputProductValue));
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -57,39 +57,42 @@ updatePersonForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, orderproductID) {
+function updateRow(data, productID) {
     let parsedData = JSON.parse(data);
 
-    let table = document.getElementById("orderproducts-table");
+    let table = document.getElementById("product-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
         //iterate through rows
         //rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].getAttribute("data-value") == orderproductID) {
+        if (table.rows[i].getAttribute("data-value") === productID) {
 
-   
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-  
-            let td = updateRowIndex.getElementsByTagName("td")[3];
 
+            let descriptionTD = updateRowIndex.getElementsByTagName("td")[2];
+            let priceTD = updateRowIndex.getElementsByTagName("td")[3];
+            let stockTD = updateRowIndex.getElementsByTagName("td")[4];
 
-            td.innerHTML = parsedData[0].name;
+            descriptionTD.innerHTML = parsedData[0].description;
+            stockTD.innerHTML = parsedData[0].stock;
+            priceTD.innerHTML = parsedData[0].price;
         }
     }
 }
 
+
 function autofill() {
-    let selectElement = document.getElementById('select-update-productid');
+    let selectElement = document.getElementById('input-updateproduct-p');
     let selectElement_id = selectElement.value;
 
     if (selectElement_id === '') {
-        document.getElementById('update_productid').value = ''
-        document.getElementById('updatequantity-op').value = ''
-        document.getElementById('updateunitprice-op').value = ''
+        document.getElementById('input-updatedescription-p').value = ''
+        document.getElementById('input-updateprice-p').value = ''
+        document.getElementById('input-updatestock-p').value = ''
     } else {
 
-        let table = document.getElementById('orderproducts-table');
+        let table = document.getElementById('product-table');
 
         for (let i = 0, row; row = table.rows[i]; i++) {
             console.log(table.rows[i].getAttribute('data-value'));
@@ -98,13 +101,21 @@ function autofill() {
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
 
                 let td1 = updateRowIndex.getElementsByTagName("td")[2];
-                document.getElementById('update_productid').value = td1.getAttribute("data-product_id-op");
+                document.getElementById('input-updatedescription-p').value = td1.innerHTML;
 
+
+
+                // Citation for modification of phone_num
+                // Date: 11/30/2022
+                // Adapted from:
+                // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
                 let td2 = updateRowIndex.getElementsByTagName("td")[3];
-                document.getElementById('updatequantity-op').value = td2.innerHTML;
+                let unitprice = td2.innerHTML;
+                unitprice = unitprice.split("$").join('');
+                document.getElementById('input-updateprice-p').value = unitprice;
 
                 let td3 = updateRowIndex.getElementsByTagName("td")[4];
-                document.getElementById('updateunitprice-op').value = td3.innerHTML;
+                document.getElementById('input-updatestock-p').value = td3.innerHTML;
             }
         }
     }

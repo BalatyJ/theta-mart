@@ -267,11 +267,11 @@ app.get('/products', function (req, res) {
     let query1;
 
     if (req.query.name === undefined) {
-        query1 = "SELECT product_id, name, description, FORMAT(price,2) as price, stock FROM Products;";               // Define our query
+        query1 = "SELECT product_id, name, description, CONCAT('$', FORMAT(price,2)) as price, stock FROM Products;";               // Define our query
     }
 
     else {
-        query1 = `SELECT product_id, name, description, FORMAT(price,2) as price, stock FROM Products WHERE name LIKE "%${req.query.name}%"`
+        query1 = `SELECT product_id, name, description, CONCAT('$', FORMAT(price,2)) as price, stock FROM Products WHERE name LIKE "%${req.query.name}%"`
     }
 
     // Run the 1st query
@@ -483,7 +483,7 @@ app.get('/orders', function (req, res) {
 
     let query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
     Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-    Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
+    Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', CONCAT('$', FORMAT(total, 2)) AS Total, orderstatus_id AS 'Order Status', 
     CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver
     FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
     ON Customers.customer_id=Orders.customer_id WHERE CONCAT(Customers.fname, " ", Customers.lname) LIKE "%${req.query.customer_name}%" ORDER BY OrderID ASC;`
@@ -493,7 +493,7 @@ app.get('/orders', function (req, res) {
     if (req.query.customer_name === undefined || req.query.customer_name === '') {
         query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
         Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
-        Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', total AS Total, orderstatus_id AS 'Order Status', 
+        Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', CONCAT('$', FORMAT(total, 2)) AS Total, orderstatus_id AS 'Order Status', 
         CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver 
         FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
         ON Customers.customer_id=Orders.customer_id ORDER BY OrderID ASC;`
@@ -674,20 +674,18 @@ app.get('/orderProducts?', function (req, res) {
     console.log(req.query)
 
     if (req.query.orderid === undefined || req.query.orderid === '') {
-        console.log("Executing first query.")
 
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
-        Products.name AS Product, quantity AS Quantity, FORMAT(unit_price, 2) AS 'Unit Price', FORMAT(subtotal,2) AS Subtotal
+        Products.name AS Product, quantity AS Quantity, CONCAT('$', FORMAT(unit_price, 2)) AS 'Unit Price', CONCAT('$', FORMAT(subtotal,2)) AS Subtotal
         FROM  OrderProducts 
             INNER JOIN Products 
             ON Products.product_id=OrderProducts.product_id;`              // Define our query
     }
     else {
 
-        console.log("Executing second query.")
 
         query1 = `SELECT OrderProducts.product_id, orderproduct_id AS 'OrderProduct ID', order_id AS 'Order ID', 
-        Products.name AS Product, quantity AS Quantity, unit_price AS 'Unit Price', subtotal AS Subtotal
+        Products.name AS Product, quantity AS Quantity, CONCAT('$', FORMAT(unit_price, 2)) AS 'Unit Price', CONCAT('$', FORMAT(subtotal,2)) AS Subtotal
         FROM  OrderProducts 
             INNER JOIN Products 
             ON Products.product_id=OrderProducts.product_id
@@ -767,10 +765,10 @@ app.post('/add-orderproduct-ajax', function (req, res) {
 
                     // Also update the total for the associated orderid to reflect the new total cost.
                     query3 = `SELECT orderproduct_id, order_id, 
-            Products.name, quantity, unit_price, subtotal
-            FROM  OrderProducts 
-                INNER JOIN Products 
-                ON Products.product_id=OrderProducts.product_id;`;
+                                Products.name, quantity, unit_price, subtotal
+                                FROM  OrderProducts 
+                                INNER JOIN Products 
+                                ON Products.product_id=OrderProducts.product_id;`;
 
                     db.pool.query(query3, function (error, rows, fields) {
 

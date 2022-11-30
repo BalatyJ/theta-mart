@@ -10,15 +10,18 @@ updateOrderForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let inputorderID = document.getElementById("select-update-order_id");
     let inputorderStatusID = document.getElementById("update_orderStatus");
+    let inputdriverID = document.getElementById("input-updatedriver-o");
 
     // Get the values from the form fields
     let inputorderIDValue = inputorderID.value;
     let inputorderStatusValue = inputorderStatusID.value;
+    let inputdriverIDValue = inputdriverID.value;
 
 
     let data = {
         order_id: inputorderIDValue,
-        orderstatus_id: inputorderStatusValue
+        orderstatus_id: inputorderStatusValue,
+        driver_id: inputdriverIDValue
     }
 
 

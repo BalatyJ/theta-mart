@@ -112,7 +112,19 @@ function autofill() {
                 document.getElementById('update-lname-driver').value = td2.innerHTML;
 
                 let td3 = updateRowIndex.getElementsByTagName("td")[3];
-                document.getElementById('update-phone-driver').value = td3.innerHTML;
+
+
+                // We modify the phone number's data to extract the -s.
+
+                // Citation for modification of phone_num
+                // Date: 11/30/2022
+                // Adapted from:
+                // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
+                let phone_num = td3.innerHTML;
+                phone_num = phone_num.split("-").join('');
+
+
+                document.getElementById('update-phone-driver').value = phone_num;
 
                 let td4 = updateRowIndex.getElementsByTagName("td")[4];
                 document.getElementById('update-availability-driver').value = td4.getAttribute('value-availability');

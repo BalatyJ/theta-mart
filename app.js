@@ -152,8 +152,9 @@ app.get('/drivers', function (req, res) {
     // Declare Query 1 - Customers
     let query1;
     if (req.query.lname === undefined || req.query.lname === '') {
-        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        available AS Available FROM Drivers;`
+        query1 = `SELECT driver_id, fname, lname, 
+        CONCAT(SUBSTRING(phone, 1, 3), "-", SUBSTRING(phone, 4, 3), "-", SUBSTRING(phone, 7,4)) AS phone, 
+        IF(available=0, 'No', 'Yes') AS available, available AS Available FROM Drivers;`
     }
     else {
         query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,

@@ -41,11 +41,16 @@ app.get('/customers', function (req, res) {
     let query1;
 
     if (req.query.lname === undefined) {
-        query1 = "SELECT * FROM Customers;";               // Define our query
+        query1 = `SELECT customer_id, fname, lname, 
+        CONCAT(SUBSTRING(phone, 1, 3), "-", SUBSTRING(phone, 4, 3), "-", SUBSTRING(phone, 7,4)) AS phone, 
+        address1, address2, city, state, zipcode, country FROM Customers;`;               // Define our query
     }
 
     else {
-        query1 = `SELECT * FROM Customers WHERE lname LIKE "${req.query.lname}%";`
+        query1 = `SELECT customer_id, fname, lname, 
+        CONCAT(SUBSTRING(phone, 1, 3), "-", SUBSTRING(phone, 4, 3), "-", SUBSTRING(phone, 7,4)) AS phone, 
+        address1, address2, city, state, zipcode, country
+        FROM Customers WHERE lname LIKE "${req.query.lname}%";`
     }
 
     // Run the 1st query
@@ -157,8 +162,9 @@ app.get('/drivers', function (req, res) {
         IF(available=0, 'No', 'Yes') AS available, available AS Available FROM Drivers;`
     }
     else {
-        query1 = `SELECT driver_id, fname, lname, phone, IF(available=0, 'No', 'Yes') AS available,
-        available AS Available
+        query1 = `SELECT driver_id, fname, lname, 
+        CONCAT(SUBSTRING(phone, 1, 3), "-", SUBSTRING(phone, 4, 3), "-", SUBSTRING(phone, 7,4)) AS phone, 
+        IF(available=0, 'No', 'Yes') AS available, available AS Available
         FROM Drivers 
         WHERE lname LIKE "%${req.query.lname}%"`
     }

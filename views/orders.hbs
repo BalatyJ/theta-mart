@@ -61,7 +61,7 @@
             <td>{{this.Country}}</td>
             <td>{{this.Total}}</td>
             <td data-order_status="{{this.[Order Status]}}">{{this.[Order Status]}}</td>
-            <td>{{this.Driver}}</td>
+            <td data-driverid={{this.driver_id}}>{{this.Driver}}</td>
             <td><button onclick="deleteOrder({{this.OrderID}})">Delete</button></td>
         </tr>
         {{/each}}
@@ -166,6 +166,15 @@
         {{#each orderstatuses}}
         <option value="{{this.orderstatus_id}}">{{this.orderstatus_id}}</option>
         {{/each}}
+        </select></td></tr>
+
+    <tr>
+    <td><label for="input-update-driver">Driver: </label></td>
+        <td><select name="input-update-driver" id="input-updatedriver-o">
+            <option value="">Select an Available Driver</option>
+            {{#each drivers}}
+            <option value="{{this.driver_id}}">{{this.driver_id}}: {{this.Driver}}</option>
+            {{/each}}
         </select></td>
     </tr>
 </table>

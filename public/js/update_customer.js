@@ -95,11 +95,7 @@ function updateRow(data, customerID) {
 
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-            // Get td of phone value
             let td = updateRowIndex.getElementsByTagName("td")[3];
-
-            // Reassign phone to our value we updated to
             td.innerHTML = parsedData[0].name;
         }
     }

@@ -21,10 +21,6 @@ updateDriverForm.addEventListener("submit", function (e) {
     let phoneValue = inputPhone.value;
     let availableValue = inputAvailable.value;
 
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-
     // Put our data we want to send in a javascript object
     let data = {
         driver_id: fullNameValue,
@@ -75,12 +71,12 @@ function updateRow(data, driverID) {
         //rows would be accessed using the "row" variable assigned in the for loop
         if (table.rows[i].getAttribute("data-value") == driverID) {
 
-            // Get the location of the row where we found the matching person ID
+   
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             let td = updateRowIndex.getElementsByTagName("td")[4];
 
-            // Reassign homeworld to our value we updated to
+
             td.innerHTML = parsedData[0].name;
         }
     }

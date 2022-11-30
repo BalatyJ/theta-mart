@@ -61,13 +61,12 @@ addProductForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// bsg_people
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("product-table");
 
-    // Get the location where we should insert the new row (end of table)
+ 
     let newRowIndex = currentTable.rows.length;
 
     // Get a reference to the new row from the database query (last object)

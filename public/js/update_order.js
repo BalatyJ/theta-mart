@@ -62,13 +62,13 @@ function updateRow(data, orderproductID) {
         //rows would be accessed using the "row" variable assigned in the for loop
         if (table.rows[i].getAttribute("data-value") == orderID) {
 
-            // Get the location of the row where we found the matching person ID
+            
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+            
             let td = updateRowIndex.getElementsByTagName("td")[9];
 
-            // Reassign homeworld to our value we updated to
+            
             td.innerHTML = parsedData[0].name;
         }
     }

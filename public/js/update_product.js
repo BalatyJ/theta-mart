@@ -67,23 +67,20 @@ function updateRow(data, productID) {
         //rows would be accessed using the "row" variable assigned in the for loop
         if (table.rows[i].getAttribute("data-value") === productID) {
 
-            // Row successfully found.
-
-            // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+   
             let descriptionTD = updateRowIndex.getElementsByTagName("td")[2];
             let priceTD = updateRowIndex.getElementsByTagName("td")[3];
             let stockTD = updateRowIndex.getElementsByTagName("td")[4];
 
-            // Reassign homeworld to our value we updated to
             descriptionTD.innerHTML = parsedData[0].description;
             stockTD.innerHTML = parsedData[0].stock;
             priceTD.innerHTML = parsedData[0].price;
         }
     }
 }
+
 
 function autofill() {
     let selectElement = document.getElementById('input-updateproduct-p');

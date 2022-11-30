@@ -484,7 +484,7 @@ app.get('/orders', function (req, res) {
     let query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
     Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
     Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', CONCAT('$', FORMAT(total, 2)) AS Total, orderstatus_id AS 'Order Status', 
-    CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver
+    CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, Drivers.driver_id
     FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
     ON Customers.customer_id=Orders.customer_id WHERE CONCAT(Customers.fname, " ", Customers.lname) LIKE "%${req.query.customer_name}%" ORDER BY OrderID ASC;`
 
@@ -494,7 +494,7 @@ app.get('/orders', function (req, res) {
         query1 = `SELECT order_id AS OrderID, CONCAT(Customers.fname, " ", Customers.lname) AS Customer, DATE_FORMAT(order_date, '%c-%d-%Y') AS 'Order Date', 
         Orders.address1 AS Street, Orders.address2 AS Unit, Orders.city AS City, Orders.state AS State, 
         Orders.zipcode AS 'Zip Code', Orders.country AS 'Country', CONCAT('$', FORMAT(total, 2)) AS Total, orderstatus_id AS 'Order Status', 
-        CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver 
+        CONCAT(Drivers.fname, " ", Drivers.lname) AS Driver, Drivers.driver_id
         FROM Orders LEFT JOIN Drivers ON Drivers.driver_id=Orders.driver_id INNER JOIN Customers 
         ON Customers.customer_id=Orders.customer_id ORDER BY OrderID ASC;`
     }
@@ -635,13 +635,15 @@ app.put('/orders/:put-order-ajax', function (req, res, next) {
     let data = req.body;
 
     let order = parseInt(data.order_id);
+    let driver = parseInt(data.driver_id);
     let orderStatus = data.orderstatus_id;
 
-    let queryUpdateOrder = `UPDATE Orders SET orderstatus_id = ? WHERE order_id = ?`;
+    let queryUpdateOrder = `UPDATE Orders SET orderstatus_id = ?, driver_id = ? WHERE order_id = ?`;
     let selectOrders = `SELECT * FROM Orders WHERE order_id = ?`
+    let updateDriverAvailability = `UPDATE Drivers SET available=0 WHERE driver_id=${driver}`
 
     // Run the 1st query
-    db.pool.query(queryUpdateOrder, [orderStatus, order], function (error, rows, fields) {
+    db.pool.query(queryUpdateOrder, [orderStatus, driver, order], function (error, rows, fields) {
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -659,7 +661,17 @@ app.put('/orders/:put-order-ajax', function (req, res, next) {
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    res.send(rows);
+
+                    db.pool.query(updateDriverAvailability, function (error, rows, fields) {
+
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+
+                            res.send(rows);
+                        }
+                    })
                 }
             })
         }

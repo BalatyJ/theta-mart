@@ -127,11 +127,18 @@ legend {
 }
 
 .main-table th,
-td {
+td,
+caption {
   padding: 10px 15px;
 }
 
-.main-table th {
+.main-table caption {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.main-table th,
+caption {
   background: #266150;
   border-collapse: collapse;
   font: #fff 16px;

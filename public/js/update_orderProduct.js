@@ -1,8 +1,13 @@
+// Citation for function in updatePersonForm.addEventListener(function).
+// Date 10/25/2022
+// Adapted from:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
-let updatePersonForm = document.getElementById('update-orderproduct-form-ajax');
+let updateOrderProductForm = document.getElementById('update-orderproduct-form-ajax');
 
 // Modify the objects we need
-updatePersonForm.addEventListener("submit", function (e) {
+updateOrderProductForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();
@@ -29,7 +34,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 
 
     // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-update-orderproduct-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -48,7 +53,6 @@ updatePersonForm.addEventListener("submit", function (e) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-
 })
 
 
@@ -78,19 +82,19 @@ function autofill() {
 
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-                let td1 = updateRowIndex.getElementsByTagName("td")[2];
-                document.getElementById('update_productid').value = td1.getAttribute("data-product_id-op");
+                let productID_TD = updateRowIndex.getElementsByTagName("td")[2];
+                document.getElementById('update_productid').value = productID_TD.getAttribute("data-product_id-op");
 
-                let td2 = updateRowIndex.getElementsByTagName("td")[3];
-                document.getElementById('updatequantity-op').value = td2.innerHTML;
+                let quantityTD = updateRowIndex.getElementsByTagName("td")[3];
+                document.getElementById('updatequantity-op').value = quantityTD.innerHTML;
 
 
-                // Citation for modification of phone_num
+                // Citation for modification of unitprice.
                 // Date: 11/30/2022
                 // Adapted from:
                 // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
-                let td3 = updateRowIndex.getElementsByTagName("td")[4];
-                let unitprice = td3.innerHTML;
+                let unitpriceTD = updateRowIndex.getElementsByTagName("td")[4];
+                let unitprice = unitpriceTD.innerHTML;
                 unitprice = unitprice.split("$").join('');
 
                 document.getElementById('updateunitprice-op').value = unitprice;

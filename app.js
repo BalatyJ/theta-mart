@@ -788,7 +788,8 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
 // Citation for the data reload function:
 // Date: 11/30/2022
 // Copied from:
-// https://www.npmjs.com/package/mysql-import 
+// https://www.npmjs.com/package/mysql-import
+ 
 const host = 'classmysql.engr.oregonstate.edu';
 const user = 'cs340_balatyj';
 const password = '9338';

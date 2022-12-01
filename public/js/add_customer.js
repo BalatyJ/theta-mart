@@ -1,9 +1,10 @@
+
 // Get the objects we need to modify
 let addCustomerForm = document.getElementById('add-customer-form-ajax');
 
 // Modify the objects we need
 addCustomerForm.addEventListener("submit", function (e) {
-    
+
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -42,7 +43,7 @@ addCustomerForm.addEventListener("submit", function (e) {
         zipcode: zipcodeValue,
         country: countryValue
     }
-    
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-customer-ajax", true);
@@ -50,109 +51,18 @@ addCustomerForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-            // Add the new data to the table
-            addRowToTable(xhttp.response);
-
-            // Clear the input fields for another transaction
-            inputFirstName.value = '';
-            inputLastName.value = '';
-            inputPhone.value = '';
-            inputStreet.value = '';
-            inputUnit.value = '';
-            inputCity.value = '';
-            inputState.value = '';
-            inputZipCode.value = '';
-            inputCountry.value = '';
-
-        }
-        else if (xhttp.readyState == 4 && xhttp.status != 200) {
+        if (xhttp.readyState == 4 && xhttp.status != 201) {
             console.log("There was an error with the input.")
         }
     }
 
-    
-        xhttp.onload = function () {
-            location.reload();
-          };
-        
+    // Once we received the request, we refresh the page.
+    xhttp.onload = function () {
+        location.reload();
+    };
+
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 
-})
-
-
-// Creates a single row from an Object representing a single record from 
-// bsg_people
-addRowToTable = (data) => {
-
-    // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("person-table");
-
-    // Get the location where we should insert the new row (end of table)
-    let newRowIndex = currentTable.rows.length;
-
-    // Get a reference to the new row from the database query (last object)
-    let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
-
-    // Create a row and 9 cells
-    let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
-    let firstNameCell = document.createElement("TD");
-    let lastNameCell = document.createElement("TD");
-    let phoneCell = document.createElement("TD");
-    let streetCell = document.createElement("TD");
-    let unitCell = document.createElement("TD");
-    let cityCell = document.createElement("TD");
-    let stateCell = document.createElement("TD");
-    let zipcodeCell = document.createElement("TD");
-    let countryCell = document.createElement("TD");
-
-    let deleteCell = document.createElement("TD");
-
-    // Fill the cells with correct data
-    idCell.innerText = newRow.id;
-    firstNameCell.innerText = newRow.fname;
-    lastNameCell.innerText = newRow.lname;
-    phoneCell.innerText = newRow.phone;
-    streetCell.innerText = newRow.address1;
-    unitCell.innerText = newRow.address2;
-    cityCell.innerText = newRow.city;
-    stateCell.innerText = newRow.state;
-    zipcodeCell.innerText = newRow.zipcode;
-    countryCell.innerText = newRow.country;
-
-    deleteCell = document.createElement("button");
-    deleteCell.innerHTML = "Delete";
-    deleteCell.onclick = function () {
-        deleteCustomer(newRow.id);
-    };
-
-    // Add the cells to the row 
-    row.appendChild(idCell);
-    row.appendChild(firstNameCell);
-    row.appendChild(lastNameCell);
-    row.appendChild(phoneCell);
-    row.appendChild(streetCell);
-    row.appendChild(unitCell);
-    row.appendChild(cityCell);
-    row.appendChild(stateCell);
-    row.appendChild(zipcodeCell);
-    row.appendChild(countryCell);
-
-    // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
-
-    // Add the row to the table
-    currentTable.appendChild(row);
-
-    let selectMenu = document.getElementById("update-fullname");
-    let option = document.createElement("option");
-    option.text = newRow.fname + ' ' +  newRow.lname;
-    option.value = newRow.customer_id;
-    selectMenu.add(option);
-
-}
+});

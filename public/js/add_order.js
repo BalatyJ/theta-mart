@@ -33,18 +33,6 @@ addOrderForm.addEventListener("submit", function (e) {
     let DriverIDValue = inputDriverID.value
     let CustIDValue = inputCustID.value
 
-    // Clear the input fields for another transaction
-    inputOrderDate.value = '';
-    inputStreet.value = '';
-    inputUnit.value = '';
-    inputCity.value = '';
-    inputState.value = '';
-    inputZipcode.value = '';
-    inputCountry.value = '';
-    inputOrderStatusID.value = '';
-    inputDriverID.value = '';
-    inputCustID.value = '';
-
     // Put our data we want to send in a javascript object
     let data = {
         orderdate: orderDateValue,
@@ -66,18 +54,12 @@ addOrderForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-            // Add the new data to the table
-            addRowToTable(xhttp.response);
-
-
-        }
-        else if (xhttp.readyState == 4 && xhttp.status != 200) {
+        if (xhttp.readyState == 4 && xhttp.status != 201) {
             console.log("There was an error with the input.")
         }
     }
 
+    // Once we receive a response, we refresh the page.
     xhttp.onload = function () {
         location.reload();
     };
@@ -86,90 +68,3 @@ addOrderForm.addEventListener("submit", function (e) {
     xhttp.send(JSON.stringify(data));
 
 })
-
-
-// Creates a single row from an Object representing a single record from 
-// bsg_people
-addRowToTable = (data) => {
-
-    // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("orders-table");
-
-    // Get the location where we should insert the new row (end of table)
-    let newRowIndex = currentTable.rows.length;
-
-    // Get a reference to the new row from the database query (last object)
-    let parsedData = JSON.parse(data);
-    console.log(parsedData);
-    let newRow = parsedData[parsedData.length - 1]
-    console.log(parsedData)
-    // Create a row and 4 cells
-    let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
-    let CustomerCell = document.createElement("TD");
-    let orderDateCell = document.createElement("TD");
-    let streetCell = document.createElement("TD");
-    let unitCell = document.createElement("TD");
-    let cityCell = document.createElement("TD");
-    let stateCell = document.createElement("TD");
-    let zipcodeCell = document.createElement("TD");
-    let countryCell = document.createElement("TD");
-    let totalCell = document.createElement("TD");
-    let orderStatusIdCell = document.createElement("TD");
-    let DriverCell = document.createElement("TD");
-
-
-    let deleteCell = document.createElement("TD");
-
-
-
-    // Fill the cells with correct data
-    idCell.innerText = newRow.OrderID;
-    orderDateCell.innerText = newRow.OrderDate;
-    streetCell.innerText = newRow.Street;
-    unitCell.innerText = newRow.Unit;
-    cityCell.innerText = newRow.City;
-    stateCell.innerText = newRow.State;
-    zipcodeCell.innerText = newRow.ZipCode;
-    countryCell.innerText = newRow.Country;
-    totalCell.innerText = newRow.Total;
-    orderStatusIdCell.innerText = newRow.OrderStatus;
-    DriverCell.innerText = newRow.Driver;
-    CustomerCell.innerText = newRow.Customer;
-
-
-    let deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
-    deleteCell.appendChild(deleteButton);
-    deleteCell.onclick = function () {
-        deleteOrderProduct(newRow.id);
-    };
-
-    // Add the cells to the row 
-    row.appendChild(idCell);
-    row.appendChild(CustomerCell);
-    row.appendChild(orderDateCell);
-    row.appendChild(streetCell);
-    row.appendChild(unitCell);
-    row.appendChild(cityCell);
-    row.appendChild(stateCell);
-    row.appendChild(zipcodeCell);
-    row.appendChild(countryCell);
-    row.appendChild(totalCell);
-    row.appendChild(orderStatusIdCell);
-    row.appendChild(DriverCell);
-    row.appendChild(deleteCell);
-
-
-    row.setAttribute('data-value', newRow.id);
-    console.log(row)
-    // Add the row to the table
-    currentTable.appendChild(row);
-
-    let selectMenu = document.getElementById("select-update-orderid");
-    let option = document.createElement("update_orderStatus");
-    option.text = newRow.name;
-    option.value = newRow.orderstatus_id;
-    selectMenu.add(option);
-
-}

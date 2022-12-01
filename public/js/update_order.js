@@ -34,17 +34,12 @@ updateOrderForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-            // Add the new data to the table
-            updateRow(xhttp.response, inputProductIDValue);
-
-        }
-        else if (xhttp.readyState == 4 && xhttp.status != 200) {
+        if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
     }
 
+    // Once we've received the request, we refresh the page to show the updated display table.
     xhttp.onload = function () {
         location.reload();
     };
@@ -53,54 +48,3 @@ updateOrderForm.addEventListener("submit", function (e) {
     xhttp.send(JSON.stringify(data));
 
 })
-
-
-function updateRow(data, orderproductID) {
-    let parsedData = JSON.parse(data);
-
-    let table = document.getElementById("order-table");
-
-    for (let i = 0, row; row = table.rows[i]; i++) {
-        //iterate through rows
-        //rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].getAttribute("data-value") == orderID) {
-
-
-            let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-
-            let td = updateRowIndex.getElementsByTagName("td")[9];
-
-
-            td.innerHTML = parsedData[0].name;
-        }
-    }
-}
-
-function autofill() {
-    let selectElement = document.getElementById('select-update-order_id');
-    let selectElement_id = selectElement.value;
-
-    if (selectElement_id === '') {
-        document.getElementById('update_orderStatus').value = '';
-        document.getElementById('input-updatedriver-o').selectedIndex = '';
-    } else {
-
-
-        let table = document.getElementById('orders-table');
-
-        for (let i = 0, row; row = table.rows[i]; i++) {
-            console.log(table.rows[i].getAttribute('data-value'));
-            if (table.rows[i].getAttribute('data-value') == selectElement_id) {
-
-                let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-                let td1 = updateRowIndex.getElementsByTagName("td")[10];
-                document.getElementById('update_orderStatus').value = td1.getAttribute('data-order_status');
-
-
-                document.getElementById('input-updatedriver-o').selectedIndex = '';
-            }
-        }
-    }
-}

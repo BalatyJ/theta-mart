@@ -1,8 +1,32 @@
-// Citation for setting up node:
+// Citation for setting up node line 35-65:
 // Date: 10/15/2022
 // Adapted from:
-// https://github.com/osu-cs340-ecampus/nodejs-starter-app/
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js
 
+// Citation for Get Requests:
+// Date: 10/15/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
+
+// Citation for Search Requests:
+// Date: 10/15/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box
+
+// Citation for Post Requests:
+// Date: 10/15/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+
+// Citation for Put Requests:
+// Date: 10/15/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
+// Citation for Delete Requests:
+// Date: 10/15/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 /*
     SETUP
@@ -42,6 +66,7 @@ app.get('/', function (req, res) { res.render('index'); });
 
 
 
+
 // CUSTOMERS
 
 
@@ -74,6 +99,8 @@ app.get('/customers', function (req, res) {
         res.render('customers', { data: customer });
     })
 });
+
+
 
 // Customers - create
 app.post('/add-customer-ajax', function (req, res) {

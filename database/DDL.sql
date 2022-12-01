@@ -1,6 +1,16 @@
 -- Group 8
 -- Joseph Balaty, Xizhu Wang
 
+-- DDL.sql aligns with the schema and outline in our final draft. 
+-- We have Customers who can place Orders that consist of OrderProducts, which are lineitems 
+-- for each Product being purchased. Orders are delivered by Drivers to the address listed in the Order.
+-- Orders need to be associated with a Customer, OrderProduct, and OrderStatus, but a Driver is optional in case no drivers are available
+-- to deliver the order. 
+
+-- Drivers is in a NULLable relationship with Orders, and Orders has a M:M relationship with Products, where 
+-- OrderProducts acts as an intersection table. We have 6 entities composed of OrderProducts, Orders, 
+-- OrderStatuses, Customers, Drivers, and Products. There are also 3-5 sample pieces of data added to each entity.
+
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 

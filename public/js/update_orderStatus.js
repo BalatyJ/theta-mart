@@ -1,3 +1,8 @@
+// Citation for function in updateorderStatus.addEventListener(function).
+// Date 10/25/2022
+// Adapted from:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updateorderStatus = document.getElementById('update-orderStatus-form-ajax');
 
@@ -68,9 +73,9 @@ function autofill() {
       let updateRowIndex = table.getElementsByTagName("tr")[i];
 
 
-      let td = updateRowIndex.getElementsByTagName("td")[1];
+      let descriptionTD = updateRowIndex.getElementsByTagName("td")[1];
 
-      document.getElementById('update-description').value = td.innerHTML;
+      document.getElementById('update-description').value = descriptionTD.innerHTML;
     }
   }
 }

@@ -24,7 +24,7 @@ addProductForm.addEventListener("submit", function (e) {
         name: NameValue,
         description: descriptionValue,
         price: priceValue,
-        stock: stockValue,
+        stock: stockValue
     }
 
     // Setup our AJAX request
@@ -34,22 +34,12 @@ addProductForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-            // Add the new data to the table
-            addRowToTable(xhttp.response);
-
-            // Clear the input fields for another transaction
-            inputName.value = '';
-            inputDescription.value = '';
-            inputPrice.value = '';
-            inputStock.value = '';
-        }
-        else if (xhttp.readyState == 4 && xhttp.status != 200) {
+        if (xhttp.readyState == 4 && xhttp.status != 201) {
             console.log("There was an error with the input.")
         }
     }
 
+    // Once we receive a response, we refresh the page.
     xhttp.onload = function () {
         location.reload();
     };
@@ -58,46 +48,3 @@ addProductForm.addEventListener("submit", function (e) {
     xhttp.send(JSON.stringify(data));
 
 })
-
-
-// Creates a single row from an Object representing a single record from 
-addRowToTable = (data) => {
-
-    // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("product-table");
-
- 
-    let newRowIndex = currentTable.rows.length;
-
-    // Get a reference to the new row from the database query (last object)
-    let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
-
-    // Create a row and 9 cells
-    let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
-    let NameCell = document.createElement("TD");
-    let descriptionCell = document.createElement("TD");
-    let priceCell = document.createElement("TD");
-    let stockCell = document.createElement("TD");
-
-    // Fill the cells with correct data
-    idCell.innerText = newRow.product_id;
-    NameCell.innerText = newRow.name;
-    descriptionCell.innerText = newRow.description;
-    priceCell.innerText = newRow.price;
-    stockCell.innerText = newRow.stock;
-
-
-    // Add the cells to the row 
-    row.appendChild(idCell);
-    row.appendChild(NameCell);
-    row.appendChild(descriptionCell);
-    row.appendChild(priceCell);
-    row.appendChild(stockCell);
-
-    row.setAttribute('data-value', newRow.product_id)
-
-    // Add the row to the table
-    currentTable.appendChild(row);
-}

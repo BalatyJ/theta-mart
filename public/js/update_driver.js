@@ -37,18 +37,12 @@ updateDriverForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-            // Add the new data to the table
-            updateRow(xhttp.response, fullNameValue);
-
-        }
-        else if (xhttp.readyState == 4 && xhttp.status != 200) {
+        if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
     }
 
-
+    // Refresh the page once the request is received to display the new data.
     xhttp.onload = function () {
         location.reload();
     };
@@ -60,33 +54,15 @@ updateDriverForm.addEventListener("submit", function (e) {
 })
 
 
-
-function updateRow(data, driverID) {
-    let parsedData = JSON.parse(data);
-
-    let table = document.getElementById("drivers-table");
-
-    for (let i = 0, row; row = table.rows[i]; i++) {
-        //iterate through rows
-        //rows would be accessed using the "row" variable assigned in the for loop
-        if (table.rows[i].getAttribute("data-value") == driverID) {
-
-   
-            let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-            let td = updateRowIndex.getElementsByTagName("td")[4];
-
-
-            td.innerHTML = parsedData[0].name;
-        }
-    }
-}
-
+// When the PK is selected for the Update form, the fields in the 
+// form get automatically selected or filled out based on the PK selected.
 function autofill() {
+    // Get the ID of our update form and the value of the PK dropdown selected.
     let selectElement = document.getElementById('update-fullname-driver');
     let selectElement_id = selectElement.value;
 
     if (selectElement_id === '') {
+        // If the default option is selected, all the values should be set to the default value.
         document.getElementById('update-fname-driver').value = ''
         document.getElementById('update-lname-driver').value = ''
         document.getElementById('update-phone-driver').value = ''
@@ -95,9 +71,12 @@ function autofill() {
 
         let table = document.getElementById('drivers-table');
 
+        // Otherwise, we loop through the table, find the row corresponding to the selected PK.
         for (let i = 0, row; row = table.rows[i]; i++) {
 
             if (table.rows[i].getAttribute('data-value') == selectElement_id) {
+
+                // Then we update the update form's fields with the corresponding values from the table.
 
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
 

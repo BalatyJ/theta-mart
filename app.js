@@ -314,7 +314,7 @@ app.put('/products/put-product-ajax', function (req, res, next) {
 
     let queryUpdateProduct = `UPDATE Products SET description = ?, price = ?, stock = ? WHERE product_id = ?`;
 
-    // Execute query to update a product based on the selected product_id..
+    // Execute query to update a product based on the selected product_id.
     db.pool.query(queryUpdateProduct, [description, price, stock, product], function (error, rows, fields) {
         if (error) {
 
@@ -357,7 +357,7 @@ app.delete('/delete-product-ajax/', function (req, res, next) {
 
 // Order Status - get
 app.get('/orderStatuses', function (req, res) {
-    // Declare query to update OrderStatuses.
+    // Declare query to display OrderStatuses.
     let orderStatusesQuery = `SELECT * FROM OrderStatuses;`
 
 
@@ -399,10 +399,10 @@ app.post('/orderStatuses/:add-orderStatus-ajax', function (req, res) {
 // Order Status - update
 app.put('/orderStatuses/:put-orderStatus-ajax', function (req, res, next) {
     let data = req.body;
-    // Declare our query.
+    
     let queryUpdateOrderStatus = `UPDATE OrderStatuses SET description = ? WHERE orderstatus_id = ?`;
 
-    // Execute query.
+    // Establish query to update the order status's description based on the orderstatus id selected in the update form.
     db.pool.query(queryUpdateOrderStatus, [data['description'], data['orderstatus_id']], function (error, rows, fields) {
         if (error) {
 
@@ -428,7 +428,7 @@ app.delete('/delete-orderStatus-ajax/', function (req, res, next) {
     let deleteOrderStatus = `DELETE FROM OrderStatuses WHERE orderstatus_id = ?;`;
 
 
-    // Execute query.
+    // Execute query to delete a order status based on the orderstatus_id
     db.pool.query(deleteOrderStatus, [statusID], function (error, rows, fields) {
         if (error) {
             // If an error was found, we return an error code back.
@@ -785,8 +785,10 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
     })
 });
 
-// Data reload
-// code reference to mysql-import 
+// Citation for the data reload function:
+// Date: 11/30/2022
+// Copied from:
+// https://www.npmjs.com/package/mysql-import 
 const host = 'classmysql.engr.oregonstate.edu';
 const user = 'cs340_balatyj';
 const password = '9338';

@@ -15,6 +15,8 @@
   </ul>
 </nav>
 
+
+<!-- Search OrderProducts Field -->
         <form id="search-orderproduct-html" method='GET' action='/orderproducts'>
             <div class="textbox-label">SEARCH ORDER PRODUCTS</div>
                 <select name="orderid" id="search-orderid-op" class="textbox">
@@ -27,12 +29,15 @@
         <a href='/orderProducts'><button onclick="resetSearch()">Reset Search</button></a>
     </form>
     <br />
-{{!-- Create a table --}}
-{{!-- Form to add a record to the table  --}}
 
+
+<!-- Display OrderProducts Table -->
     <table id="orderproducts-table" class="main-table">
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
+        <caption>
+            Browse Order Products
+        </caption>
         <tr>
             <th>OrderProduct ID</th>
             <th>Order ID
@@ -66,6 +71,7 @@
 </table>
 
 
+<!-- Create OrderProducts Table -->
 <div class="form-alignment">
 <div class="title">
     <h4 class="table-title">CREATE ORDER PRODUCT</h4>
@@ -73,7 +79,7 @@
     <table class="sub-table-style">
     <tr>
         <td><label for="input-orderid">Order ID: </label></td>
-        <td><select name="input-orderid" id="input-orderid-op">
+        <td><select name="input-orderid" id="input-orderid-op" required>
         <option value="">Select an Order</option>
         {{#each orders}}
         <option value="{{this.order_id}}">{{this.order_id}}</option>
@@ -94,7 +100,7 @@
 </tr>
 <tr>
     <td><label for="input-quantity">Quantity: </label></td>
-    <td><input type="number" name="input-quantity" id="input-quantity-op" min="0" required></td>
+    <td><input type="number" name="input-quantity" id="input-quantity-op" min="1" required></td>
 </tr>
 <tr>
     <td><label for="input-unitprice">Unit Price: </label></td>
@@ -110,13 +116,14 @@
 <br />
 
 
+<!-- Update Driver Table -->
 <div class="title">
     <h4 class="table-title">UPDATE ORDER PRODUCT</h4>
     <form id="update-orderproduct-form-ajax">
     <table class="sub-table-style">
     <tr>
         <td><label for="input-update-orderproduct_id">OrderProduct ID: </label></td>
-        <td><select name="input-update-orderproduct_id" id="select-update-productid" onchange="autofill()">
+        <td><select name="input-update-orderproduct_id" id="select-update-productid" onchange="autofill()" required>
         <option value="">Select a Product Order</option>
         {{#each data}}
         <option value="{{this.[OrderProduct ID]}}">{{this.[OrderProduct ID]}}</option>
@@ -124,7 +131,7 @@
     </select></td>
     </tr>
     <tr>
-    <td><label for="input-update-productname">Products: </label></td>
+    <td><label for="input-update-productname">Product: </label></td>
     <td><select name="input-update-productname" id="update_productid">
         <option value="">Select a Product</option>
         {{#each products}}
@@ -135,7 +142,7 @@
     <tr>
 
     <td><label for="input-updatequantity">Quantity: </label></td>
-    <td><input type="number" name="input-updatequantity" id="updatequantity-op" min="0" required></td>
+    <td><input type="number" name="input-updatequantity" id="updatequantity-op" min="1" required></td>
     </tr>   
     <tr>
     <td><label for="input-updateunitprice">Unit Price: </label></td>

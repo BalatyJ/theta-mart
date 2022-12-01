@@ -1,4 +1,8 @@
 function deleteCustomer(customerID) {
+  // We set up our ajax request, where we include the customerid as data, and send a request to our app.js
+  // as a DELETE request. If the delete's successful, we refresh the page. Otherwise, we post an alert letting
+  // the user know why it failed.
+
   let link = '/customers/:delete-customer-ajax/';
   let data = {
     id: customerID

@@ -1,3 +1,4 @@
+<!-- products.hbs -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -14,8 +15,8 @@
   </ul>
 </nav>
 
-{{! Header section }}
 
+<!-- Search Products Field -->
 <form id="search-product-html" method="GET" action="/products">
   <div class="textbox-label">SEARCH PRODUCTS</div>
   <input
@@ -31,10 +32,15 @@
 </form>
 <br />
 
+
+<!-- Display Products Table -->
 <table id="product-table" class="main-table">
   {{! For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders }}
   <thead>
+        <caption>
+            Browse Products
+        </caption>
     <tr>
       <th>Product ID</th>
       <th>Name</th>
@@ -48,7 +54,6 @@
   {{! Body section }}
   <tbody>
 
-    {{! For each row, print the information in order }}
     {{#each data}}
       <tr data-value="{{this.product_id}}">
         <td>{{this.product_id}}</td>
@@ -64,7 +69,7 @@
 
 <div class="form-alignment">
 
-{{! Form to add a record to the table }}
+<!-- Create Products Table -->
 <div class="title">
   <h4 class="table-title">CREATE PRODUCT</h4>
   <form id="add-product-form-ajax">
@@ -110,6 +115,7 @@
 <br />
 
 
+<!-- Update Products Table -->
 <div class="title">
     <h4 class="table-title">UPDATE PRODUCT</h4>
     <form id="update-product-form-ajax">

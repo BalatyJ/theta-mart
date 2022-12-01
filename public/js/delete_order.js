@@ -1,4 +1,7 @@
 function deleteOrder(orderID) {
+    // We set up our ajax request, where we include the orderid as data, and send a request to our app.js
+    // as a DELETE request. Once the request has successfully returned, the webpage is refreshed.
+
     let link = '/delete-order-ajax/';
     let data = {
         id: orderID

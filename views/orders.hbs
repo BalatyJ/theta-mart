@@ -1,3 +1,4 @@
+<!-- orders.hbs -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -14,7 +15,7 @@
   </ul>
 </nav>
 
-{{!-- Create a table --}}
+<!-- Search Orders Table -->
     <form id="search-order-html" method='GET' action='/orders'>
     <div class="textbox-label">Search Orders</div>    
     <input type="text" class="textbox" name="customer_name" id="input-customername-html-search" placeholder="Search by Customer Name">
@@ -22,10 +23,14 @@
     <a href='/orders'><button>Reset Search</button></a>
     </form>
     </br>
-    {{!-- For just the first row, we print each key of the row object as a header cell so we
-    know what each column means when the page renders --}}
+
+
+    <!-- Display Orders Table -->
     <table id="orders-table" class="main-table">
-        <thead>    
+        <thead> 
+        <caption>
+            Browse Orders
+        </caption>   
     <tr>
             <th>Order ID</th>
             <th>Customer</th>
@@ -44,10 +49,8 @@
 
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the information in order --}}
         {{#each data}}
         <tr data-value={{this.OrderID}}>
             <td>{{this.OrderID}}</td>
@@ -69,6 +72,7 @@
 </table>
 
 
+<!-- Create Order Table -->
 <div class="form-alignment">
 <div class="title">
     <h4 class="table-title">CREATE ORDER</h4>
@@ -145,6 +149,7 @@
 <br />
 
 
+<!-- Update Orders Table -->
 <div class="title">
     <h4 class="table-title">UPDATE ORDER</h4>
 <form id="update-order-form-ajax">
@@ -171,7 +176,7 @@
     <tr>
     <td><label for="input-update-driver">Driver: </label></td>
         <td><select name="input-update-driver" id="input-updatedriver-o">
-            <option value="">Select an Available Driver</option>
+            <option value="null">Select an Available Driver</option>
             {{#each drivers}}
             <option value="{{this.driver_id}}">{{this.driver_id}}: {{this.Driver}}</option>
             {{/each}}

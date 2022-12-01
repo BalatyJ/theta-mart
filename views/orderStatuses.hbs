@@ -1,4 +1,5 @@
 <!-- orderStatuses.hbs -->
+
 <script
   src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
 ></script>
@@ -16,14 +17,17 @@
 </nav>
 <br />
 
-{{!-- Create a table --}}
 
 <br></br>
 
+<!-- Display OrderStatuses Table -->
 <table id ="orderstatus-table" class="main-table">
     {{!-- For just the first row, we print each key of the row object as a header cell so we
     know what each column means when the page renders --}}
     <thead>
+          <caption>
+           Display Order Statuses
+          </caption>
     <tr>
         <th>Order Status</th>
         <th>Description</th>
@@ -46,7 +50,7 @@
 </table>
 
 
-
+<!-- Create OrderStatus Table -->
 <div class="form-alignment">
 <div class="title-orderstatus">
     <h4 class="table-title">CREATE ORDER STATUS</h4>
@@ -67,6 +71,7 @@
         name="input-description-o" 
         id="input-description-o"
         placeholder="Description"
+        required
       /></td></tr>
     </table>
     <div class="button-style">
@@ -79,6 +84,7 @@
   <br>
   
 
+<!-- Update OrderStatus Table -->
   <div class="title-orderstatus">
     <h4 class="table-title">UPDATE ORDER STATUS</h4>
     <form id="update-orderStatus-form-ajax">
@@ -94,7 +100,7 @@
           </tr>
           <tr>
     
-            <td><Input type="text" name="update-description" id="update-description" placeholder="Description"></td>
+            <td><Input type="text" name="update-description" id="update-description" placeholder="Description" required></td>
             </table>
             <div class="button-style">
             <td><input type="submit"></td>

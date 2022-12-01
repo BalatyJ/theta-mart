@@ -1,3 +1,8 @@
+// Citation for code on lines 7 - 56.
+// Date 10/25/2022
+// Adapted from:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updateDriverForm = document.getElementById('update-driver-form-ajax');
 
@@ -31,7 +36,7 @@ updateDriverForm.addEventListener("submit", function (e) {
     }
 
     // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-driver-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -52,7 +57,6 @@ updateDriverForm.addEventListener("submit", function (e) {
     xhttp.send(JSON.stringify(data));
 
 })
-
 
 // When the PK is selected for the Update form, the fields in the 
 // form get automatically selected or filled out based on the PK selected.
@@ -80,13 +84,13 @@ function autofill() {
 
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-                let td1 = updateRowIndex.getElementsByTagName("td")[1];
-                document.getElementById('update-fname-driver').value = td1.innerHTML;
+                let firstNameTD = updateRowIndex.getElementsByTagName("td")[1];
+                document.getElementById('update-fname-driver').value = firstNameTD.innerHTML;
 
-                let td2 = updateRowIndex.getElementsByTagName("td")[2];
-                document.getElementById('update-lname-driver').value = td2.innerHTML;
+                let lastNameTD = updateRowIndex.getElementsByTagName("td")[2];
+                document.getElementById('update-lname-driver').value = lastNameTD.innerHTML;
 
-                let td3 = updateRowIndex.getElementsByTagName("td")[3];
+                let phoneNumberTD = updateRowIndex.getElementsByTagName("td")[3];
 
 
                 // We modify the phone number's data to extract the -s.
@@ -95,15 +99,15 @@ function autofill() {
                 // Date: 11/30/2022
                 // Adapted from:
                 // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
-                let phone_num = td3.innerHTML;
+                let phone_num = phoneNumberTD.innerHTML;
                 phone_num = phone_num.split("-").join('');
 
 
                 document.getElementById('update-phone-driver').value = phone_num;
 
-                let td4 = updateRowIndex.getElementsByTagName("td")[4];
-                document.getElementById('update-availability-driver').value = td4.getAttribute('value-availability');
-                console.log(td4.innerHTML);
+                let availableTD = updateRowIndex.getElementsByTagName("td")[4];
+                document.getElementById('update-availability-driver').value = availableTD.getAttribute('value-availability');
+                console.log(availableTD.innerHTML);
             }
         }
     }

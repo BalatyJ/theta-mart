@@ -1,3 +1,8 @@
+// Citation for code on lines 7 - 80.
+// Date 10/25/2022
+// Adapted from:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updateCustomerForm = document.getElementById('update-customer-form-ajax');
 
@@ -50,7 +55,7 @@ updateCustomerForm.addEventListener("submit", function (e) {
 
 
     // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-customer-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 

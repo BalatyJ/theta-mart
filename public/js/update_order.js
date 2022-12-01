@@ -1,3 +1,8 @@
+// Citation for code on lines 7 - 56.
+// Date 10/25/2022
+// Adapted from:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updateOrderForm = document.getElementById('update-order-form-ajax');
 
@@ -27,7 +32,7 @@ updateOrderForm.addEventListener("submit", function (e) {
 
 
     // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/orders/put-update-order-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -70,8 +75,8 @@ function autofill() {
                 // Once the correct row is found, we extract the row's data and use that with our order status, and set the driver
                 // to the default value.
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
-                let td1 = updateRowIndex.getElementsByTagName("td")[10];
-                document.getElementById('update_orderStatus').value = td1.getAttribute('data-order_status');
+                let orderStatusTD = updateRowIndex.getElementsByTagName("td")[10];
+                document.getElementById('update_orderStatus').value = orderStatusTD.getAttribute('data-order_status');
                 document.getElementById('input-updatedriver-o').selectedIndex = '';
             }
         }

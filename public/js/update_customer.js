@@ -105,13 +105,13 @@ function autofill() {
 
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-                let td1 = updateRowIndex.getElementsByTagName("td")[1];
-                document.getElementById('update-fname').value = td1.innerHTML;
+                let firstNameTD = updateRowIndex.getElementsByTagName("td")[1];
+                document.getElementById('update-fname').value = firstNameTD.innerHTML;
 
-                let td2 = updateRowIndex.getElementsByTagName("td")[2];
-                document.getElementById('update-lname').value = td2.innerHTML;
+                let lastNameTD = updateRowIndex.getElementsByTagName("td")[2];
+                document.getElementById('update-lname').value = lastNameTD.innerHTML;
 
-                let td3 = updateRowIndex.getElementsByTagName("td")[3];
+                let phoneNumberTD = updateRowIndex.getElementsByTagName("td")[3];
 
                 // We modify the phone number's data to extract the -s.
 
@@ -119,28 +119,28 @@ function autofill() {
                 // Date: 11/30/2022
                 // Adapted from:
                 // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
-                let phone_num = td3.innerHTML;
+                let phone_num = phoneNumberTD.innerHTML;
                 phone_num = phone_num.split("-").join('');
 
                 document.getElementById('update-phone').value = phone_num;
 
-                let td4 = updateRowIndex.getElementsByTagName("td")[4];
-                document.getElementById('update-address1').value = td4.innerHTML;
+                let streetTD = updateRowIndex.getElementsByTagName("td")[4];
+                document.getElementById('update-address1').value = streetTD.innerHTML;
 
-                let td5 = updateRowIndex.getElementsByTagName("td")[5];
-                document.getElementById('update-address2').value = td5.innerHTML;
+                let unitTD = updateRowIndex.getElementsByTagName("td")[5];
+                document.getElementById('update-address2').value = unitTD.innerHTML;
 
-                let td6 = updateRowIndex.getElementsByTagName("td")[6];
-                document.getElementById('update-city').value = td6.innerHTML;
+                let cityTD = updateRowIndex.getElementsByTagName("td")[6];
+                document.getElementById('update-city').value = cityTD.innerHTML;
 
-                let td7 = updateRowIndex.getElementsByTagName("td")[7];
-                document.getElementById('update-state').value = td7.innerHTML;
+                let stateTD = updateRowIndex.getElementsByTagName("td")[7];
+                document.getElementById('update-state').value = stateTD.innerHTML;
 
-                let td8 = updateRowIndex.getElementsByTagName("td")[8];
-                document.getElementById('update-zipcode').value = td8.innerHTML;
+                let zipCodeTD = updateRowIndex.getElementsByTagName("td")[8];
+                document.getElementById('update-zipcode').value = zipCodeTD.innerHTML;
 
-                let td9 = updateRowIndex.getElementsByTagName("td")[9];
-                document.getElementById('update-country').value = td9.innerHTML;
+                let countryTD = updateRowIndex.getElementsByTagName("td")[9];
+                document.getElementById('update-country').value = countryTD.innerHTML;
 
             }
         }

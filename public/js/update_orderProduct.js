@@ -4,10 +4,10 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
 
 // Get the objects we need to modify
-let updatePersonForm = document.getElementById('update-orderproduct-form-ajax');
+let updateOrderProductForm = document.getElementById('update-orderproduct-form-ajax');
 
 // Modify the objects we need
-updatePersonForm.addEventListener("submit", function (e) {
+updateOrderProductForm.addEventListener("submit", function (e) {
 
     // Prevent the form from submitting
     e.preventDefault();

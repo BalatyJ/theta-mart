@@ -17,39 +17,39 @@
 
   <div class="welcome">Welcome to Theta Mart!</div>
   <div class="description">
-    <p>Theta Mart allows customers to create an order on our website to have
-      products delivered to them by one of our drivers from our store in Las
-      Vegas within a 20-mile radius. The Theta mart database records each order
-      and tracks the status from when the order’s placed to delivery. Theta Mart
-      takes 3,000 orders per year and has 5 drivers currently active. Customers
-      can place Orders for Products that will be delivered by Drivers.</p>
+    <p>Theta Mart allows Customers to place Orders to have
+      Products delivered by one of our Drivers from our store in Las
+      Vegas within a 20-mile radius. The Theta Mart database records each order
+      and tracks the order's OrderStatus from when it's placed to delivery. Theta Mart
+      takes 3,000 orders per year. </p>
     <p>Site Functionality:
       <ul>
         <p>
           <b>Customers:</b>
-          Can add and update existing customers.</p>
+          Our Customers who place orders.
+          Can create, delete, search, and update existing customers. Customers who have existing orders cannot be deleted.</p>
         <p>
           <b>Drivers:</b>
-          Add, update, retrieve, or delete Drivers.</p>
+          Drivers deliver Orders to Customers.
+          Drivers can be created, updated, displayed, searched, or deleted.</p>
 
         <p>
           <b>Orders:</b>
-          Allows an order to be placed for a Customer, as well as retrieves
-          orders, or updates existing orders.</p>
+          Orders placed by Customers.
+          Allows an Order to be created, searched, displayed, updated, or deleted.</p>
 
         <p>
           <b>OrderProducts:</b>
-          Retrieves products that are a part of various orders. It can also
-          update specific OrderProducts for orders, add new OrderProducts to
-          existing orders, as well as delete OrderProducts.</p>
+          The products purchased for each order, including the price sold and quantity of each item. 
+          OrderProducts can be dynamically searched, displayed, updated, created, or deleted.</p>
 
         <p><b>Products:</b>
-          Retrieves all products and allows searching functionality for a
-          specific product. Also adds new products, and updates existing
-          products.
+          Products offered at our store. Can display our products, as well as search, update, create, and delete products.
+          Products must not be associated with an order to be deleted.
         </p>
         <b>OrderStatuses:</b>
-        Allows retrieval, updates, and insertion of new OrderStatuses.
+        Tracks the status of each Order.
+        Allows retrieval, update, creation, and deletion of unique OrderStatuses. An OrderStatus can't be deleted if it's being used with an order.
       </ul></p>
   </div>
 </div>

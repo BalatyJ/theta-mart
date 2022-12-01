@@ -48,3 +48,32 @@ updateOrderForm.addEventListener("submit", function (e) {
     xhttp.send(JSON.stringify(data));
 
 })
+
+
+// Autopopulate's the update form's fields when a PK is selected in the update form's drop down.
+function autofill() {
+    // Obtain the value in our selected element.
+    let selectElement = document.getElementById('select-update-order_id');
+    let selectElement_id = selectElement.value;
+
+    if (selectElement_id === '') {
+        // If the default option is selected, we set all input fields and dropdowns to the default option.
+        document.getElementById('update_orderStatus').value = '';
+        document.getElementById('input-updatedriver-o').selectedIndex = '';
+    } else {
+
+        // Otherwise we get the row's data from display table corresponding to the Order ID selected.
+        let table = document.getElementById('orders-table');
+        for (let i = 0, row; row = table.rows[i]; i++) {
+            if (table.rows[i].getAttribute('data-value') == selectElement_id) {
+
+                // Once the correct row is found, we extract the row's data and use that with our order status, and set the driver
+                // to the default value.
+                let updateRowIndex = table.getElementsByTagName("tr")[i];
+                let td1 = updateRowIndex.getElementsByTagName("td")[10];
+                document.getElementById('update_orderStatus').value = td1.getAttribute('data-order_status');
+                document.getElementById('input-updatedriver-o').selectedIndex = '';
+            }
+        }
+    }
+}

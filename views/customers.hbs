@@ -17,7 +17,7 @@
   </ul>
 </nav>
 
-{{! Search Customer }}
+{{! Search Customer Field }}
 <form id="search-person-html" method="GET" action="/customers">
   <div class="textbox-label">Search Customer</div>
   <input
@@ -32,10 +32,13 @@
 </form>
 <br />
 
-{{! Create a table }}
+{{!-- Display Customers Table --}}
 <table id="customers-table" class="main-table">
   {{! Header section }}
   <thead>
+  <caption>
+    Display Customers
+  </caption>
     <tr>
       <th>Customer ID</th>
       <th>First Name</th>
@@ -51,11 +54,6 @@
     </tr>
   </thead>
 
-
-
-
-
-  {{! Body section }}
   <tbody>
     {{#each data}}
       <tr data-value = {{this.customer_id}}>
@@ -77,6 +75,7 @@
 </table>
 
 
+<!-- Create Customer Table -->
 <div class="form-alignment">
 <div class="title">
   <h4 class="table-title">CREATE CUSTOMER</h4>

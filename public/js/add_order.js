@@ -1,5 +1,5 @@
 // Citation for adding new data:
-// Date: 11/30/2022
+// Date: 10/22/2022
 // Adapted from:
 // https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 

@@ -1,3 +1,8 @@
+// Citation for delete data:
+// Date: 10/27/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+
 function deleteProduct(productID) {
   // We set up our ajax request, where we include the productID as data, and send a request to our app.js
   // as a DELETE request. If the request successfully returns, the webpage is refreshed. Otherwise,

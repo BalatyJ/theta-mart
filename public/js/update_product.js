@@ -1,3 +1,9 @@
+// Citation for function in updateProductForm.addEventListener(function).
+// Date 10/25/2022
+// Adapted from:
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
+
 // Get the objects we need to modify
 let updateProductForm = document.getElementById('update-product-form-ajax');
 
@@ -70,29 +76,30 @@ function autofill() {
 
         // Otherwise, we loop through the table, find the row corresponding to the selected PK.
         for (let i = 0, row; row = table.rows[i]; i++) {
-            console.log(table.rows[i].getAttribute('data-value'));
+
             if (table.rows[i].getAttribute('data-value') == selectElement_id) {
 
                 // Then we update the update form's fields with the corresponding values from the table.
                 let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-                let td1 = updateRowIndex.getElementsByTagName("td")[2];
-                document.getElementById('input-updatedescription-p').value = td1.innerHTML;
+                let descriptionTD = updateRowIndex.getElementsByTagName("td")[2];
+                document.getElementById('input-updatedescription-p').value = descriptionTD.innerHTML;
 
 
 
-                // Citation for modification of phone_num
+                // Citation for modification of unitprice.
                 // Date: 11/30/2022
                 // Adapted from:
                 // https://stackoverflow.com/questions/9932957/how-can-i-remove-a-character-from-a-string-using-javascript
-                let td2 = updateRowIndex.getElementsByTagName("td")[3];
-                let unitprice = td2.innerHTML;
+                let unitPriceTD = updateRowIndex.getElementsByTagName("td")[3];
+                let unitprice = unitPriceTD.innerHTML;
                 unitprice = unitprice.split("$").join('');
                 document.getElementById('input-updateprice-p').value = unitprice;
 
-                let td3 = updateRowIndex.getElementsByTagName("td")[4];
-                document.getElementById('input-updatestock-p').value = td3.innerHTML;
+                let stockTD = updateRowIndex.getElementsByTagName("td")[4];
+                document.getElementById('input-updatestock-p').value = stockTD.innerHTML;
             }
         }
     }
 }
+

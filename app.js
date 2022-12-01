@@ -1,3 +1,9 @@
+// Citation for setting up node:
+// Date: 10/15/2022
+// Adapted from:
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/
+
+
 /*
     SETUP
 */

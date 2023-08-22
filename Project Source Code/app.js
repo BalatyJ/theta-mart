@@ -824,9 +824,9 @@ app.delete('/delete-orderproduct-ajax/', function (req, res, next) {
 // https://www.npmjs.com/package/mysql-import
  
 const host = 'classmysql.engr.oregonstate.edu';
-const user = 'cs340_balatyj';
-const password = '9338';
-const database = 'cs340_balatyj';
+const user = '';
+const password = '';
+const database = '';
 
 
 const Importer = require('mysql-import');

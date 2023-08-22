@@ -70,10 +70,10 @@ CREATE TABLE Products (
 
 INSERT INTO Products (product_id, name, description, price, stock) VALUES
 (1, 'Transdimensional Window Cleaner', 'Removes stains and sends them into the void.', '5.00', 80),
-(2, 'Pet Avocado', 'Avocado that purs and nuzzles like a cat.', '10.00', 120),
+(2, 'Pet Avocado', 'Avocado that purrs and nuzzles like a cat.', '10.00', 120),
 (3, 'Jelly Water Bottle', 'Jelly shaped like a water bottle.', '80.00', 30),
 (4, 'Lemons with eyeballs', 'Lemons which stare at you.', '15.00', 48),
-(5, 'Cereal Pillow', 'Pillow shaped like a cereal boxe.', '40.00', 5);
+(5, 'Cereal Pillow', 'Pillow shaped like a cereal box.', '40.00', 5);
 
 
 

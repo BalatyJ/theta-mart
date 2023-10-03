@@ -1,4 +1,4 @@
-As part of a term-long project in CS 340 Introduction to Databases at Oregon State University, Xizhu Wang and I, in a virtual setting, built a web application in Python using a MySQL database backend. Our team received a 99.2% score on this challenging real-world assignment. Specific accomplishments include:
+As part of a term-long project in CS 340 Introduction to Databases at Oregon State University, Xizhu Wang and me, in a virtual setting, built a web application in Python using a MySQL database backend. Our team received a 99.2% score on this challenging real-world assignment. Specific accomplishments include:
 
 * Documented the data-driven operational goals of tracking delivery orders for a retailer using narrative, ERD, and Schema models.
 

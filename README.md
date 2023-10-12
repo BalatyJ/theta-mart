@@ -10,3 +10,4 @@ As part of a term-long project in CS 340 Introduction to Databases at Oregon Sta
 
 * Wrote application code that implemented the UI front end in a third-party hosted Linux environment. I was personally responsible for coding the CRUD functionality for Products, OrderProducts, and Products, upgrading the UI and database functionality, and QAing the final DDL, DMQ and database.
 
+* Built front-end website using Python, JavaScript, and AJAX to interact with an SQL server.
